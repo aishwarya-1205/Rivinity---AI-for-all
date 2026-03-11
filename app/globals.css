@@ -1,86 +1,87 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #F7F4EC;
-  --foreground: #0A0A0A;
-  --card: #FFFFFF;
-  --card-foreground: #0A0A0A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0A0A0A;
-  --primary: #0A0A0A;
-  --primary-foreground: #FAFAFA;
-  --secondary: #F2EFE7;
-  --secondary-foreground: #0A0A0A;
-  --muted: #ECE7DD;
-  --muted-foreground: #6B6B6B;
-  --accent: #FF7A18;
-  --accent-foreground: #FFFFFF;
-  --highlight: #6C63FF;
-  --highlight-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FAFAFA;
-  --border: #E5E0D5;
-  --input: #E5E0D5;
-  --ring: #0A0A0A;
-  --chart-1: #FF7A18;
-  --chart-2: #6C63FF;
-  --chart-3: #0A0A0A;
-  --chart-4: #ECE7DD;
-  --chart-5: #F2EFE7;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafafa;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f1f3f5;
+  --muted-foreground: #6b6b6b;
+  --accent: #ff7a18;
+  --accent-foreground: #ffffff;
+  --highlight: #6c63ff;
+  --highlight-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e9ecef;
+  --input: #e9ecef;
+  --ring: #0a0a0a;
+  --chart-1: #ff7a18;
+  --chart-2: #6c63ff;
+  --chart-3: #0a0a0a;
+  --chart-4: #f1f3f5;
+  --chart-5: #f8f9fa;
   --radius: 0.75rem;
-  --sidebar: #FAFAFA;
-  --sidebar-foreground: #0A0A0A;
-  --sidebar-primary: #0A0A0A;
-  --sidebar-primary-foreground: #FAFAFA;
-  --sidebar-accent: #F2EFE7;
-  --sidebar-accent-foreground: #0A0A0A;
-  --sidebar-border: #E5E0D5;
-  --sidebar-ring: #0A0A0A;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #0a0a0a;
+  --sidebar-primary: #0a0a0a;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f8f9fa;
+  --sidebar-accent-foreground: #0a0a0a;
+  --sidebar-border: #e9ecef;
+  --sidebar-ring: #0a0a0a;
 }
 
 .dark {
-  --background: #050816;
-  --foreground: #FAFAFA;
-  --card: #0F1B4D;
-  --card-foreground: #FAFAFA;
-  --popover: #0F1B4D;
-  --popover-foreground: #FAFAFA;
-  --primary: #FAFAFA;
-  --primary-foreground: #050816;
-  --secondary: #141B3A;
-  --secondary-foreground: #FAFAFA;
-  --muted: #141B3A;
-  --muted-foreground: #A1A1AA;
-  --accent: #FF7A18;
-  --accent-foreground: #FFFFFF;
-  --highlight: #6C63FF;
-  --highlight-foreground: #FFFFFF;
-  --destructive: #7F1D1D;
-  --destructive-foreground: #FAFAFA;
-  --border: #1E2A5E;
-  --input: #1E2A5E;
-  --ring: #6C63FF;
-  --chart-1: #FF7A18;
-  --chart-2: #6C63FF;
-  --chart-3: #FAFAFA;
-  --chart-4: #141B3A;
-  --chart-5: #0F1B4D;
-  --sidebar: #0F1B4D;
-  --sidebar-foreground: #FAFAFA;
-  --sidebar-primary: #6C63FF;
-  --sidebar-primary-foreground: #FAFAFA;
-  --sidebar-accent: #141B3A;
-  --sidebar-accent-foreground: #FAFAFA;
-  --sidebar-border: #1E2A5E;
-  --sidebar-ring: #6C63FF;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafafa;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f1f3f5;
+  --muted-foreground: #6b6b6b;
+  --accent: #ff7a18;
+  --accent-foreground: #ffffff;
+  --highlight: #6c63ff;
+  --highlight-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e9ecef;
+  --input: #e9ecef;
+  --ring: #0a0a0a;
+  --chart-1: #ff7a18;
+  --chart-2: #6c63ff;
+  --chart-3: #0a0a0a;
+  --chart-4: #f1f3f5;
+  --chart-5: #f8f9fa;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #0a0a0a;
+  --sidebar-primary: #0a0a0a;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f8f9fa;
+  --sidebar-accent-foreground: #0a0a0a;
+  --sidebar-border: #e9ecef;
+  --sidebar-ring: #0a0a0a;
 }
 
 @theme inline {
-  --font-sans: 'Space Grotesk', 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans:
+    "Space Grotesk", "Geist", "Geist Fallback", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -161,7 +162,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -173,7 +173,6 @@
 }
 
 @keyframes pulse-glow {
-
   0%,
   100% {
     opacity: 0.4;
@@ -206,7 +205,8 @@
 }
 
 .animate-scroll {
-  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+  animation: scroll var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
 }
 
 .animate-spotlight {

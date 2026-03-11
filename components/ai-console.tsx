@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useState, useRef, useCallback, useEffect } from "react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import {
   ArrowUpIcon,
   Paperclip,
@@ -14,34 +14,44 @@ import {
   Database,
   Sparkles,
   Workflow,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-function useAutoResizeTextarea({ minHeight, maxHeight }: { minHeight: number; maxHeight?: number }) {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+function useAutoResizeTextarea({
+  minHeight,
+  maxHeight,
+}: {
+  minHeight: number;
+  maxHeight?: number;
+}) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const adjustHeight = useCallback(
     (reset?: boolean) => {
-      const textarea = textareaRef.current
-      if (!textarea) return
+      const textarea = textareaRef.current;
+      if (!textarea) return;
 
       if (reset) {
-        textarea.style.height = `${minHeight}px`
-        return
+        textarea.style.height = `${minHeight}px`;
+        return;
       }
 
-      textarea.style.height = `${minHeight}px`
-      const newHeight = Math.max(minHeight, Math.min(textarea.scrollHeight, maxHeight ?? Infinity))
-      textarea.style.height = `${newHeight}px`
+      textarea.style.height = `${minHeight}px`;
+      const newHeight = Math.max(
+        minHeight,
+        Math.min(textarea.scrollHeight, maxHeight ?? Infinity),
+      );
+      textarea.style.height = `${newHeight}px`;
     },
-    [minHeight, maxHeight]
-  )
+    [minHeight, maxHeight],
+  );
 
   useEffect(() => {
-    if (textareaRef.current) textareaRef.current.style.height = `${minHeight}px`
-  }, [minHeight])
+    if (textareaRef.current)
+      textareaRef.current.style.height = `${minHeight}px`;
+  }, [minHeight]);
 
-  return { textareaRef, adjustHeight }
+  return { textareaRef, adjustHeight };
 }
 
 const quickActions = [
@@ -53,15 +63,15 @@ const quickActions = [
   { icon: Layers, label: "UI Components" },
   { icon: Rocket, label: "Deploy App" },
   { icon: Sparkles, label: "Research" },
-]
+];
 
 export function AIConsole() {
-  const [message, setMessage] = useState("")
-  const [isFocused, setIsFocused] = useState(false)
+  const [message, setMessage] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
     minHeight: 56,
     maxHeight: 160,
-  })
+  });
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -70,19 +80,19 @@ export function AIConsole() {
         className={cn(
           "relative rounded-2xl border transition-all duration-300",
           "bg-card/60 dark:bg-card/40 backdrop-blur-xl",
-          isFocused 
-            ? "border-accent/50 shadow-2xl shadow-accent/10 dark:shadow-accent/5" 
-            : "border-border shadow-xl"
+          isFocused
+            ? "border-accent/50 shadow-2xl shadow-accent/10 dark:shadow-accent/5"
+            : "border-border shadow-xl",
         )}
         whileHover={{ scale: 1.005 }}
         transition={{ duration: 0.2 }}
       >
         {/* Glow Effect */}
-        <div 
+        <div
           className={cn(
             "absolute -inset-0.5 bg-gradient-to-r from-accent/20 via-highlight/20 to-accent/20 rounded-2xl blur-xl transition-opacity duration-300",
-            isFocused ? "opacity-60" : "opacity-0"
-          )} 
+            isFocused ? "opacity-60" : "opacity-0",
+          )}
         />
 
         <div className="relative">
@@ -91,8 +101,8 @@ export function AIConsole() {
             ref={textareaRef}
             value={message}
             onChange={(e) => {
-              setMessage(e.target.value)
-              adjustHeight()
+              setMessage(e.target.value);
+              adjustHeight();
             }}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -101,7 +111,7 @@ export function AIConsole() {
               "w-full px-5 py-4 resize-none border-none rounded-t-2xl",
               "bg-transparent text-foreground text-base",
               "focus:outline-none focus:ring-0",
-              "placeholder:text-muted-foreground min-h-[56px]"
+              "placeholder:text-muted-foreground min-h-[56px]",
             )}
             style={{ overflow: "hidden" }}
           />
@@ -117,9 +127,13 @@ export function AIConsole() {
                 <Paperclip className="w-4 h-4" />
               </Button>
               <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground">
-                <kbd className="px-1.5 py-0.5 bg-secondary rounded border border-border font-mono text-[10px]">⌘</kbd>
+                <kbd className="px-1.5 py-0.5 bg-secondary rounded border border-border font-mono text-[10px]">
+                  ⌘
+                </kbd>
                 <span>+</span>
-                <kbd className="px-1.5 py-0.5 bg-secondary rounded border border-border font-mono text-[10px]">K</kbd>
+                <kbd className="px-1.5 py-0.5 bg-secondary rounded border border-border font-mono text-[10px]">
+                  K
+                </kbd>
               </div>
             </div>
 
@@ -129,7 +143,7 @@ export function AIConsole() {
                 "h-9 w-9 rounded-lg transition-all",
                 message.trim()
                   ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                  : "bg-secondary text-muted-foreground cursor-not-allowed"
+                  : "bg-secondary text-muted-foreground cursor-not-allowed",
               )}
               size="icon"
             >
@@ -156,7 +170,7 @@ export function AIConsole() {
             className={cn(
               "flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all",
               "border border-border bg-card/50 dark:bg-card/30 backdrop-blur-sm",
-              "text-muted-foreground hover:text-foreground hover:bg-secondary hover:border-border/80"
+              "text-muted-foreground hover:text-foreground hover:bg-secondary hover:border-border/80",
             )}
           >
             <action.icon className="w-4 h-4" />
@@ -165,5 +179,5 @@ export function AIConsole() {
         ))}
       </motion.div>
     </div>
-  )
+  );
 }

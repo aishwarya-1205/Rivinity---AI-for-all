@@ -1,14 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   MessageSquare,
   Mic,
   Code2,
   Search,
-  Play,
+  RotateCcw,
   Sparkles,
+  Send,
+  Upload,
+  Play,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,112 +20,66 @@ const demos = [
     id: "chat",
     label: "Conversational AI",
     icon: MessageSquare,
-    title: "Experience Rivinity Chat",
-    preview: {
-      type: "chat",
-      messages: [
-        {
-          role: "user",
-          content: "मुझे भारत के टॉप 5 स्टार्टअप यूनिकॉर्न के बारे में बताओ",
-        },
-        {
-          role: "assistant",
-          content:
-            "भारत के टॉप 5 स्टार्टअप यूनिकॉर्न हैं:\n\n1. Flipkart — $37.6B valuation\n2. BYJU'S — $22B valuation\n3. Swiggy — $10.7B valuation\n4. Ola Cabs — $7.3B valuation\n5. PhonePe — $12B valuation",
-        },
-      ],
-    },
+    title: "Rivinity Chat Workspace",
   },
   {
     id: "voice",
     label: "Voice AI",
     icon: Mic,
     title: "Voice Intelligence",
-    preview: {
-      type: "voice",
-    },
   },
   {
     id: "code",
     label: "Code Generation",
     icon: Code2,
     title: "AI Code Assistant",
-    preview: {
-      type: "code",
-      code: `export async function POST(req: Request) {
-  const { prompt } = await req.json()
-
-  const response = await rivinity.chat({
-    model: "rivinity-turbo",
-    messages: [{ role: "user", content: prompt }]
-  })
-
-  return Response.json(response)
-}`,
-    },
   },
   {
     id: "search",
     label: "AI Search",
     icon: Search,
     title: "Semantic Search",
-    preview: {
-      type: "search",
-      query: "What is our refund policy for enterprise customers?",
-      results: [
-        { title: "Enterprise Refund Policy", relevance: 98 },
-        { title: "Customer Support Guidelines", relevance: 87 },
-        { title: "Billing FAQ", relevance: 76 },
-      ],
-    },
   },
 ];
 
 export function DemoShowcase() {
   const [activeDemo, setActiveDemo] = useState(demos[0]);
+  const [demoState, setDemoState] = useState(0);
+
+  const restart = () => setDemoState((p) => p + 1);
 
   return (
-    <section className="relative py-24 bg-secondary/30 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/2 top-32 -translate-x-1/2 w-[700px] h-[400px] bg-accent/20 blur-[140px] opacity-40" />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+    <section className="relative py-24 bg-secondary/30">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-sm font-medium mb-6">
-            <Sparkles className="w-4 h-4 text-accent" />
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4" />
             See it in Action
           </span>
 
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-            Experience Rivinity
-          </h2>
+          <h2 className="text-4xl font-bold mb-4">Experience Rivinity</h2>
 
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Interactive demos showcasing our AI capabilities
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Explore interactive demos that simulate real Rivinity workflows.
           </p>
-        </motion.div>
+        </div>
 
         {/* Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="flex gap-2 p-2 rounded-full bg-card border border-border shadow-sm">
+          <div className="flex gap-2 p-2 rounded-xl bg-card border border-border">
             {demos.map((demo) => (
               <button
                 key={demo.id}
-                onClick={() => setActiveDemo(demo)}
+                onClick={() => {
+                  setActiveDemo(demo);
+                  restart();
+                }}
                 className={cn(
-                  "flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all",
+                  "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition",
                   activeDemo.id === demo.id
-                    ? "bg-foreground text-background shadow"
-                    : "text-muted-foreground hover:text-foreground",
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary",
                 )}
               >
                 <demo.icon className="w-4 h-4" />
@@ -133,137 +90,229 @@ export function DemoShowcase() {
         </div>
 
         {/* Demo Window */}
-        <motion.div
-          key={activeDemo.id}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="relative bg-card/80 backdrop-blur-xl rounded-3xl border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.25)] overflow-hidden"
-        >
-          {/* gradient overlay */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-highlight/20 opacity-30 pointer-events-none" />
+        <div className="relative group">
+          {/* Gradient Glow */}
+          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-40 blur-sm transition duration-500 group-hover:blur-md group-hover:opacity-70"></div>
 
-          {/* Window header */}
-          <div className="flex items-center gap-2 px-6 py-4 border-b border-border bg-secondary/40">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
-            </div>
-
-            <div className="flex-1 text-center text-sm text-muted-foreground">
-              {activeDemo.title}
-            </div>
-
-            <button className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent hover:bg-accent/20 transition">
-              <Play className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Content */}
-          <div className="p-10 min-h-[420px]">
-            {/* CHAT */}
-            {activeDemo.preview.type === "chat" && (
-              <div className="space-y-6 max-w-2xl mx-auto">
-                {activeDemo.preview.messages?.map((msg, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.2 }}
-                    className={cn(
-                      "flex gap-4",
-                      msg.role === "user" ? "justify-end" : "justify-start",
-                    )}
-                  >
-                    {msg.role === "assistant" && (
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-highlight flex items-center justify-center text-white font-bold">
-                        R
-                      </div>
-                    )}
-
-                    <div
-                      className={cn(
-                        "max-w-md rounded-2xl px-5 py-4 text-sm",
-                        msg.role === "user"
-                          ? "bg-foreground text-background"
-                          : "bg-secondary",
-                      )}
-                    >
-                      <p className="whitespace-pre-wrap">{msg.content}</p>
-                    </div>
-
-                    {msg.role === "user" && (
-                      <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center font-bold">
-                        U
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
+          {/* Actual Window */}
+          <div className="relative bg-card border border-border rounded-2xl overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-400/50" />
+                <div className="w-3 h-3 rounded-full bg-yellow-400/50" />
+                <div className="w-3 h-3 rounded-full bg-green-400/50" />
               </div>
-            )}
 
-            {/* VOICE */}
-            {activeDemo.preview.type === "voice" && (
-              <div className="flex flex-col items-center justify-center h-[320px]">
+              <span className="text-sm text-muted-foreground">
+                {activeDemo.title}
+              </span>
+
+              <button
+                onClick={restart}
+                className="p-2 rounded-lg hover:bg-secondary"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Demo Content */}
+            <div className="h-[460px]">
+              <AnimatePresence mode="wait">
                 <motion.div
-                  animate={{ scale: [1, 1.15, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="w-28 h-28 rounded-full bg-gradient-to-br from-accent to-highlight flex items-center justify-center shadow-xl"
+                  key={`${activeDemo.id}-${demoState}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="h-full"
                 >
-                  <Mic className="w-10 h-10 text-white" />
+                  {activeDemo.id === "chat" && <ChatDemo />}
+                  {activeDemo.id === "voice" && <VoiceDemo />}
+                  {activeDemo.id === "code" && <CodeDemo />}
+                  {activeDemo.id === "search" && <SearchDemo />}
                 </motion.div>
-
-                <p className="mt-6 text-muted-foreground">
-                  Listening in Hindi...
-                </p>
-              </div>
-            )}
-
-            {/* CODE */}
-            {activeDemo.preview.type === "code" && (
-              <div className="max-w-2xl mx-auto">
-                <pre className="bg-foreground text-background rounded-xl p-6 overflow-x-auto">
-                  <code className="text-sm font-mono">
-                    {activeDemo.preview.code}
-                  </code>
-                </pre>
-              </div>
-            )}
-
-            {/* SEARCH */}
-            {activeDemo.preview.type === "search" && (
-              <div className="max-w-2xl mx-auto space-y-6">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <input
-                    value={activeDemo.preview.query}
-                    readOnly
-                    className="w-full h-14 pl-12 pr-4 rounded-xl bg-secondary border border-border"
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  {activeDemo.preview.results?.map((result, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex items-center justify-between p-4 rounded-xl bg-secondary border border-border"
-                    >
-                      <span className="font-medium">{result.title}</span>
-                      <span className="text-sm text-accent">
-                        {result.relevance}% match
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
+              </AnimatePresence>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ---------------- CHAT DEMO ---------------- */
+
+function ChatDemo() {
+  const messages = [
+    {
+      role: "user",
+      content: "मुझे भारत के टॉप 5 स्टार्टअप यूनिकॉर्न के बारे में बताओ",
+    },
+    {
+      role: "assistant",
+      content:
+        "भारत के टॉप 5 स्टार्टअप यूनिकॉर्न हैं:\n\n1. Flipkart — $37.6B valuation\n2. BYJU'S — $22B valuation\n3. Swiggy — $10.7B valuation\n4. Ola Cabs — $7.3B valuation\n5. PhonePe — $12B valuation",
+    },
+  ];
+
+  const [visible, setVisible] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVisible((v) => (v < messages.length ? v + 1 : v));
+    }, 1200);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        {messages.slice(0, visible).map((msg, i) => (
+          <div
+            key={i}
+            className={cn(
+              "flex gap-4",
+              msg.role === "user" ? "justify-end" : "",
+            )}
+          >
+            {msg.role === "assistant" && (
+              <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
+                R
+              </div>
+            )}
+
+            <div
+              className={cn(
+                "max-w-md rounded-xl px-4 py-3 text-sm",
+                msg.role === "user"
+                  ? "bg-foreground text-background"
+                  : "bg-secondary border border-border",
+              )}
+            >
+              {msg.content}
+            </div>
+
+            {msg.role === "user" && (
+              <div className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-sm">
+                U
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Input */}
+      <div className="border-t border-border p-4 flex items-center gap-3">
+        <div className="flex-1 bg-secondary border border-border rounded-lg px-4 py-2 text-sm text-muted-foreground">
+          Ask Rivinity something...
+        </div>
+
+        <button className="p-2 rounded-lg bg-accent text-white">
+          <Send className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- VOICE DEMO ---------------- */
+
+function VoiceDemo() {
+  return (
+    <div className="flex flex-col h-full justify-between p-8">
+      <div className="flex flex-col items-center justify-center flex-1 text-center gap-6">
+        <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center">
+          <Mic className="w-10 h-10 text-accent" />
+        </div>
+
+        <p className="text-lg font-medium">Enable mic access or upload audio</p>
+
+        <p className="text-sm text-muted-foreground max-w-md">
+          Record your voice or upload an audio sample to generate speech in
+          different voices.
+        </p>
+      </div>
+
+      <div className="flex justify-end gap-3 border-t pt-6">
+        <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg">
+          <Upload className="w-4 h-4" />
+          Upload Audio
+        </button>
+
+        <button className="flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-lg">
+          <Mic className="w-4 h-4" />
+          Start Recording
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- CODE DEMO ---------------- */
+
+function CodeDemo() {
+  const code = `const response = await rivinity.chat({
+  model: "rivinity-turbo",
+  messages: [{ role: "user", content: prompt }]
+})`;
+
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      setText(code.slice(0, i));
+      i++;
+      if (i > code.length) clearInterval(timer);
+    }, 20);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-auto p-6 font-mono text-sm bg-secondary">
+        <pre>{text}</pre>
+      </div>
+
+      <div className="border-t border-border px-6 py-3 text-xs text-muted-foreground">
+        Rivinity Turbo Model Active
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- SEARCH DEMO ---------------- */
+
+function SearchDemo() {
+  const results = [
+    "Enterprise Refund Policy",
+    "Customer Support Guidelines",
+    "Billing FAQ",
+  ];
+
+  return (
+    <div className="flex flex-col h-full p-6 space-y-6">
+      <div className="flex items-center border border-border rounded-xl px-4 py-3 gap-3 bg-secondary">
+        <Search className="w-4 h-4 text-muted-foreground" />
+        <span className="text-sm text-muted-foreground">
+          What is our refund policy for enterprise customers?
+        </span>
+      </div>
+
+      <div className="space-y-3">
+        {results.map((r, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-between p-4 border border-border rounded-xl hover:bg-secondary transition"
+          >
+            <span>{r}</span>
+            <Play className="w-4 h-4 text-accent" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

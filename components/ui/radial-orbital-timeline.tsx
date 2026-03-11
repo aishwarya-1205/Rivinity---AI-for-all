@@ -156,9 +156,9 @@ export default function RadialOrbitalTimeline({
       case "in-progress":
         return "text-white bg-highlight border-highlight";
       case "pending":
-        return "text-white/80 bg-white/10 border-white/30";
+        return "text-foreground bg-secondary border-border";
       default:
-        return "text-white/80 bg-white/10 border-white/30";
+        return "text-foreground bg-secondary border-border";
     }
   };
 
@@ -179,9 +179,9 @@ export default function RadialOrbitalTimeline({
         >
           {/* Center Core */}
           <div className="absolute w-20 h-20 rounded-full bg-gradient-to-br from-accent via-highlight to-accent animate-pulse flex items-center justify-center z-10">
-            <div className="absolute w-24 h-24 rounded-full border border-white/20 animate-ping opacity-70"></div>
+            <div className="absolute w-24 h-24 rounded-full border border-accent/20 animate-ping opacity-70"></div>
             <div
-              className="absolute w-28 h-28 rounded-full border border-white/10 animate-ping opacity-50"
+              className="absolute w-28 h-28 rounded-full border border-highlight/20 animate-ping opacity-50"
               style={{ animationDelay: "0.5s" }}
             ></div>
             <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center">
@@ -190,8 +190,8 @@ export default function RadialOrbitalTimeline({
           </div>
 
           {/* Orbit Ring */}
-          <div className="absolute w-[360px] h-[360px] md:w-[400px] md:h-[400px] rounded-full border border-white/10"></div>
-          <div className="absolute w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-full border border-white/5"></div>
+          <div className="absolute w-[360px] h-[360px] md:w-[400px] md:h-[400px] rounded-full border border-border/50"></div>
+          <div className="absolute w-[280px] h-[280px] md:w-[320px] md:h-[320px] rounded-full border border-border/30"></div>
 
           {timelineData.map((item) => {
             const isExpanded = expandedItems[item.id];
@@ -240,7 +240,7 @@ export default function RadialOrbitalTimeline({
                       ? "border-accent shadow-lg shadow-accent/30"
                       : isRelated
                       ? "border-highlight animate-pulse"
-                      : "border-white/20"
+                      : "border-border"
                   }
                   transition-all duration-300 transform backdrop-blur-sm
                   ${isExpanded ? "scale-125" : "hover:scale-110"}
@@ -254,7 +254,7 @@ export default function RadialOrbitalTimeline({
                   absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
                   text-xs font-semibold tracking-wider
                   transition-all duration-300
-                  ${isExpanded ? "text-white scale-110" : "text-white/70"}
+                  ${isExpanded ? "text-accent scale-110" : "text-foreground/70"}
                 `}
                 >
                   {item.title}

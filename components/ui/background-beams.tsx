@@ -5,15 +5,19 @@ import { motion, useInView } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
-  const [beams] = useState(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 10,
-      x1: `${Math.random() * 100}%`,
-      x2: `${Math.random() * 100}%`,
-    }))
-  )
+  const [beams, setBeams] = useState<{ id: number; duration: number; delay: number; x1: string; x2: string }[]>([])
+
+  useEffect(() => {
+    setBeams(
+      Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        duration: Math.random() * 10 + 10,
+        delay: Math.random() * 10,
+        x1: `${Math.random() * 100}%`,
+        x2: `${Math.random() * 100}%`,
+      }))
+    )
+  }, [])
 
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { margin: "200px" })

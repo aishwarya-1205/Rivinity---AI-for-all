@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1"
+import { motion } from "framer-motion";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 const testimonials = [
   {
@@ -57,7 +57,7 @@ const testimonials = [
     image: "AP",
     name: "Amit Patel",
     role: "VP Engineering at Infosys AI Labs",
-  }
+  },
 ];
 
 const firstColumn = testimonials.slice(0, 3);
@@ -86,15 +86,24 @@ export function TestimonialsSection() {
             What our users say
           </h2>
           <p className="text-lg text-muted-foreground text-balance">
-            See how organizations across Bharat trust Rivinity to build population-scale AI applications.
+            See how organizations across Bharat trust Rivinity to build
+            population-scale AI applications.
           </p>
         </motion.div>
 
         {/* Animated Testimonial Columns */}
         <div className="flex justify-center gap-6 mt-16 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] h-[600px] xl:h-[700px] overflow-hidden relative">
           <TestimonialsColumn testimonials={firstColumn} duration={25} />
-          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={35} />
-          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={28} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={35}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={28}
+          />
         </div>
       </div>
     </section>

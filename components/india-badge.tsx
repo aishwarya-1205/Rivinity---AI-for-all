@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export function IndiaBadge() {
   return (
@@ -26,5 +26,5 @@ export function IndiaBadge() {
         <span className="text-sm font-semibold text-foreground">India</span>
       </div>
     </motion.div>
-  )
+  );
 }

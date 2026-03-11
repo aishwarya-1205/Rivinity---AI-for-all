@@ -66,8 +66,6 @@ export function Footer() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 relative z-10">
             <div className="flex flex-col gap-8">
-
-
               <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
                 <span>A product by</span>
                 <div className="flex items-center gap-1.5 grayscale opacity-70">
@@ -75,7 +73,6 @@ export function Footer() {
                   <span className="font-bold tracking-tight">BharatTech</span>
                 </div>
               </div>
-
 
               <div>
                 <p className="text-sm font-bold text-foreground mb-3 tracking-wide uppercase opacity-80">
@@ -132,7 +129,6 @@ export function Footer() {
                     className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-muted-foreground/40"
                   />
                 </div>
-
               </div>
 
               <div className="flex items-center gap-5 pt-2">
@@ -159,5 +155,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
