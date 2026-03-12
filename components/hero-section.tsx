@@ -6,7 +6,6 @@ import { AIConsole } from "./ai-console";
 import { IndiaBadge } from "./india-badge";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import HeroDotMountain from "./hero-dot-mountain";
-import { Spotlight } from "./ui/spotlight";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
 
 const trustedLogos = [
@@ -23,7 +22,7 @@ const trustedLogos = [
 export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden pt-20 bg-background text-foreground">
-      <div className="absolute inset-0 z-0 flex items-end translate-y-[-160px]">
+      <div className="absolute inset-0 z-0 flex items-end translate-y-[-180px]">
         <HeroDotMountain />
       </div>
 
@@ -38,7 +37,6 @@ export function HeroSection() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24">
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
