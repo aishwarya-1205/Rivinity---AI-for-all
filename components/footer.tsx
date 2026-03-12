@@ -173,8 +173,8 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-10 mb-6 text-center">
-          <p className="text-[10px] sm:text-xs text-gray-400 font-medium tracking-wide">
+        <div className="mt-4 mb-[-1rem] text-center">
+          <p className="text-[15px] sm:text-s text-gray-400 font-medium tracking-wide">
             © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.
           </p>
         </div>
