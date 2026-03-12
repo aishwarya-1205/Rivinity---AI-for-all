@@ -1,21 +1,22 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { 
-  BookOpen, 
-  FileText, 
-  Users, 
+import { motion } from "framer-motion";
+import {
+  BookOpen,
+  FileText,
+  Users,
   Calendar,
   ArrowRight,
   ArrowUpRight,
   Sparkles,
   Brain,
   Globe,
-  Mic
-} from "lucide-react"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
+  Mic,
+} from "lucide-react";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Component } from "@/components/ui/grid-background";
 
 const researchPapers = [
   {
@@ -23,7 +24,8 @@ const researchPapers = [
     authors: ["Dr. Priya Sharma", "Arjun Mehta", "Dr. Kavita Rao"],
     date: "February 2026",
     category: "Language Models",
-    description: "We present Rivinity-LLM, a family of large language models trained on 2 trillion tokens of Indic language data, achieving state-of-the-art performance on 22 Indian languages.",
+    description:
+      "We present Rivinity-LLM, a family of large language models trained on 2 trillion tokens of Indic language data, achieving state-of-the-art performance on 22 Indian languages.",
     citations: 234,
     icon: BookOpen,
   },
@@ -32,7 +34,8 @@ const researchPapers = [
     authors: ["Vikram Singh", "Dr. Ananya Patel", "Rahul Kumar"],
     date: "January 2026",
     category: "Speech & Audio",
-    description: "A novel approach to voice synthesis supporting 50+ Indian regional accents with just 3 seconds of reference audio, enabling personalized voice experiences at scale.",
+    description:
+      "A novel approach to voice synthesis supporting 50+ Indian regional accents with just 3 seconds of reference audio, enabling personalized voice experiences at scale.",
     citations: 156,
     icon: Mic,
   },
@@ -41,7 +44,8 @@ const researchPapers = [
     authors: ["Dr. Sanjay Gupta", "Neha Krishnan", "Amit Verma"],
     date: "December 2025",
     category: "Infrastructure",
-    description: "Technical deep-dive into our distributed inference architecture that achieves sub-50ms latency while serving over one million concurrent requests across our global edge network.",
+    description:
+      "Technical deep-dive into our distributed inference architecture that achieves sub-50ms latency while serving over one million concurrent requests across our global edge network.",
     citations: 189,
     icon: Globe,
   },
@@ -50,56 +54,80 @@ const researchPapers = [
     authors: ["Dr. Meera Iyer", "Ravi Shankar", "Pooja Desai"],
     date: "November 2025",
     category: "AI Safety",
-    description: "Adapting constitutional AI principles for the Indian context, ensuring AI systems respect diverse cultural norms, legal frameworks, and ethical considerations.",
+    description:
+      "Adapting constitutional AI principles for the Indian context, ensuring AI systems respect diverse cultural norms, legal frameworks, and ethical considerations.",
     citations: 312,
     icon: Brain,
   },
-]
+];
 
 const researchAreas = [
   {
     title: "Foundation Models",
-    description: "Building large-scale language and multimodal models optimized for Indian languages and contexts.",
+    description:
+      "Building large-scale language and multimodal models optimized for Indian languages and contexts.",
     papers: 24,
     researchers: 18,
   },
   {
     title: "Speech & Audio",
-    description: "Advancing voice AI technology for diverse Indian accents, dialects, and acoustic environments.",
+    description:
+      "Advancing voice AI technology for diverse Indian accents, dialects, and acoustic environments.",
     papers: 16,
     researchers: 12,
   },
   {
     title: "AI Safety & Alignment",
-    description: "Ensuring AI systems are safe, beneficial, and aligned with Indian values and legal frameworks.",
+    description:
+      "Ensuring AI systems are safe, beneficial, and aligned with Indian values and legal frameworks.",
     papers: 19,
     researchers: 14,
   },
   {
     title: "Efficient Inference",
-    description: "Optimizing model serving for low-latency, cost-effective AI deployment at population scale.",
+    description:
+      "Optimizing model serving for low-latency, cost-effective AI deployment at population scale.",
     papers: 21,
     researchers: 15,
   },
-]
+];
 
 const teamMembers = [
-  { name: "Dr. Priya Sharma", role: "Chief Research Scientist", focus: "NLP & Language Models", image: "PS" },
-  { name: "Dr. Sanjay Gupta", role: "VP of Infrastructure Research", focus: "Distributed Systems", image: "SG" },
-  { name: "Dr. Meera Iyer", role: "Head of AI Safety", focus: "Alignment & Ethics", image: "MI" },
-  { name: "Vikram Singh", role: "Principal Scientist", focus: "Speech & Audio AI", image: "VS" },
-]
+  {
+    name: "Dr. Priya Sharma",
+    role: "Chief Research Scientist",
+    focus: "NLP & Language Models",
+    image: "PS",
+  },
+  {
+    name: "Dr. Sanjay Gupta",
+    role: "VP of Infrastructure Research",
+    focus: "Distributed Systems",
+    image: "SG",
+  },
+  {
+    name: "Dr. Meera Iyer",
+    role: "Head of AI Safety",
+    focus: "Alignment & Ethics",
+    image: "MI",
+  },
+  {
+    name: "Vikram Singh",
+    role: "Principal Scientist",
+    focus: "Speech & Audio AI",
+    image: "VS",
+  },
+];
 
 export default function ResearchPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-highlight/20 via-accent/10 to-transparent blur-3xl opacity-30" />
-        
+        <Component />
+
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -107,7 +135,7 @@ export default function ResearchPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -116,21 +144,23 @@ export default function ResearchPage() {
               <Sparkles className="w-4 h-4 text-accent" />
               Research & Innovation
             </motion.span>
-            
+
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-8 leading-[1.1]">
-              Advancing AI for{" "}
-              <span className="text-gradient">Bharat</span>
+              Advancing AI for <span className="text-gradient">Bharat</span>
             </h1>
-            
+
             <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mb-10 leading-relaxed">
-              Our research team is pioneering the next generation of AI systems 
-              designed specifically for Indian languages, cultures, and use cases.
+              Our research team is pioneering the next generation of AI systems
+              designed specifically for Indian languages, cultures, and use
+              cases.
             </p>
-            
+
             <div className="flex flex-wrap gap-6">
               <div className="text-center">
                 <div className="text-4xl font-bold text-foreground">80+</div>
-                <div className="text-sm text-muted-foreground">Publications</div>
+                <div className="text-sm text-muted-foreground">
+                  Publications
+                </div>
               </div>
               <div className="w-px bg-border" />
               <div className="text-center">
@@ -145,13 +175,15 @@ export default function ResearchPage() {
               <div className="w-px bg-border" />
               <div className="text-center">
                 <div className="text-4xl font-bold text-foreground">5</div>
-                <div className="text-sm text-muted-foreground">Research Labs</div>
+                <div className="text-sm text-muted-foreground">
+                  Research Labs
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
-      
+
       {/* Research Areas */}
       <section className="py-24 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -169,7 +201,7 @@ export default function ResearchPage() {
               Pushing the boundaries of what&apos;s possible with AI in India
             </p>
           </motion.div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {researchAreas.map((area, index) => (
               <motion.div
@@ -180,11 +212,19 @@ export default function ResearchPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative bg-card rounded-2xl p-6 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl"
               >
-                <h3 className="text-xl font-semibold text-foreground mb-3">{area.title}</h3>
-                <p className="text-muted-foreground mb-6 text-sm leading-relaxed">{area.description}</p>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {area.title}
+                </h3>
+                <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                  {area.description}
+                </p>
                 <div className="flex items-center gap-4 text-sm">
-                  <span className="text-foreground font-medium">{area.papers} Papers</span>
-                  <span className="text-muted-foreground">{area.researchers} Researchers</span>
+                  <span className="text-foreground font-medium">
+                    {area.papers} Papers
+                  </span>
+                  <span className="text-muted-foreground">
+                    {area.researchers} Researchers
+                  </span>
                 </div>
                 <ArrowUpRight className="absolute top-6 right-6 w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
@@ -192,7 +232,7 @@ export default function ResearchPage() {
           </div>
         </div>
       </section>
-      
+
       {/* Featured Papers */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -215,7 +255,7 @@ export default function ResearchPage() {
               View All Papers <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
-          
+
           <div className="space-y-6">
             {researchPapers.map((paper, index) => (
               <motion.article
@@ -262,7 +302,7 @@ export default function ResearchPage() {
               </motion.article>
             ))}
           </div>
-          
+
           <div className="mt-8 sm:hidden">
             <Button variant="outline" className="w-full rounded-full">
               View All Papers <ArrowRight className="ml-2 h-4 w-4" />
@@ -270,7 +310,7 @@ export default function ResearchPage() {
           </div>
         </div>
       </section>
-      
+
       {/* Research Team */}
       <section className="py-24 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -288,7 +328,7 @@ export default function ResearchPage() {
               World-class researchers driving AI innovation in India
             </p>
           </motion.div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {teamMembers.map((member, index) => (
               <motion.div
@@ -302,13 +342,15 @@ export default function ResearchPage() {
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-highlight flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                   {member.image}
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {member.name}
+                </h3>
                 <p className="text-sm text-accent mb-2">{member.role}</p>
                 <p className="text-xs text-muted-foreground">{member.focus}</p>
               </motion.div>
             ))}
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -322,8 +364,8 @@ export default function ResearchPage() {
           </motion.div>
         </div>
       </section>
-      
+
       <Footer />
     </main>
-  )
+  );
 }

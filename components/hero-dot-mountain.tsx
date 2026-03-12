@@ -2,32 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  HeroDotMountain — pixel-accurate recreation of the reference design
-//
-//  Measured from the original image:
-//  • Dot shape : rounded square (borderRadius = 35% of size)
-//  • Dot size  : ~8px with ~2px gap → 10px center-to-center spacing
-//  • Opacity   : darkest at the skyline ridge, fades to 0 toward the bottom
-//                so text in the hero is never obscured
-//  • Skyline   : extracted directly from the reference image pixels
-//                (normalized 0–1 coordinates, Catmull-Rom smoothed)
-//
-//  Usage:
-//    <section className="relative overflow-hidden bg-white" style={{ minHeight: 680 }}>
-//      <HeroDotMountain />
-//      <div className="relative z-10"> …hero content… </div>
-//    </section>
-// ─────────────────────────────────────────────────────────────────────────────
-
 interface Pt {
   x: number;
   y: number;
 }
 
-// Skyline control points extracted from the reference image.
-// x = fraction of canvas width, y = fraction of canvas height (0 = top).
-// Shape: gentle left base → peak cluster at ~22% → plateau/ridge → right slope.
 const SKYLINE: Pt[] = [
   { x: 0.0, y: 0.7 },
   { x: 0.018, y: 0.655 },
@@ -77,7 +56,6 @@ const SKYLINE: Pt[] = [
   { x: 1.0, y: 0.71 },
 ];
 
-// ── Catmull-Rom spline ────────────────────────────────────────────────────────
 function crY(pts: Pt[], tx: number): number {
   const n = pts.length;
   if (tx <= pts[0].x) return pts[0].y;
@@ -102,15 +80,14 @@ function crY(pts: Pt[], tx: number): number {
   );
 }
 
-// ── Draw one rounded-square dot ───────────────────────────────────────────────
 function drawSquareDot(
   ctx: CanvasRenderingContext2D,
   cx: number,
   cy: number,
-  size: number, // full width/height of the square
+  size: number,
   opacity: number,
 ) {
-  const r = size * 0.32; // corner radius — 32% → looks like reference
+  const r = size * 0.32;
   const half = size / 2;
   const x = cx - half;
   const y = cy - half;
@@ -131,7 +108,6 @@ function drawSquareDot(
   ctx.globalAlpha = 1;
 }
 
-// ── Component ─────────────────────────────────────────────────────────────────
 export default function HeroDotMountain() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -157,35 +133,24 @@ export default function HeroDotMountain() {
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, W, H);
 
-      // ── Dot grid parameters ─────────────────────────────────────────────
-      // Reference: ~10px spacing at 1459px wide → scale proportionally
       const BASE_W = 1459;
-      const SPACING = Math.max(7, Math.round((10 * W) / BASE_W)); // center-to-center
-      const DOT_SIZE = Math.max(5, Math.round(SPACING * 0.78)); // dot is 78% of spacing
+      const SPACING = Math.max(7, Math.round((10 * W) / BASE_W));
+      const DOT_SIZE = Math.max(5, Math.round(SPACING * 0.78));
       const GAP = SPACING - DOT_SIZE; // ~2px gap
 
       const cols = Math.ceil(W / SPACING) + 1;
       const rows = Math.ceil(H / SPACING) + 1;
 
-      // Pre-compute skyline pixel-Y for each column (Catmull-Rom)
       const sky = new Float32Array(cols + 1);
       for (let c = 0; c <= cols; c++) {
         sky[c] = crY(SKYLINE, (c * SPACING) / W) * H;
       }
 
-      // Dot color: dark warm gray matching reference
       ctx.fillStyle = "rgb(30, 28, 26)";
 
-      // ── Opacity envelope ────────────────────────────────────────────────
-      //
-      // The reference shows dots that are DARKEST right at the skyline
-      // and fade to invisible about 55% of the canvas height below it.
-      // This means text in the upper hero area stays perfectly readable.
-      //
-      // Additionally, the horizontal edges dissolve softly (sin bell).
-      const FADE_RANGE = 0.52; // fraction of H over which dots fade to 0
-      const PEAK_OP = 0.28; // max opacity at the skyline edge
-      const BOTTOM_OP = 0.0; // opacity at FADE_RANGE below skyline
+      const FADE_RANGE = 0.52;
+      const PEAK_OP = 0.28;
+      const BOTTOM_OP = 0.0;
 
       for (let c = 0; c <= cols; c++) {
         const px = c * SPACING;
@@ -194,19 +159,15 @@ export default function HeroDotMountain() {
 
         for (let r = 0; r <= rows; r++) {
           const py = r * SPACING;
-          if (py < skyPY) continue; // above skyline → no dot
+          if (py < skyPY) continue;
 
-          // ── Vertical fade ─────────────────────────────────────────────
           const depth = (py - skyPY) / (H * FADE_RANGE);
-          if (depth >= 1) continue; // fully faded → skip
+          if (depth >= 1) continue;
 
-          // Smooth in at the very edge (first 2 dot-rows soft)
           const edgeSoften = Math.min(1, (py - skyPY) / (SPACING * 2.5));
-          // Ease-out: opaque near top, fades quickly toward bottom
           const fadeOut = Math.pow(1 - depth, 1.4);
           const vertOp = PEAK_OP * edgeSoften * fadeOut;
 
-          // ── Horizontal bell (dissolve at left/right canvas edges) ──────
           const hBell = Math.pow(
             Math.sin(Math.max(0, Math.min(1, nx)) * Math.PI),
             0.5,

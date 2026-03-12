@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -14,20 +15,19 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
   const { scrollY } = useScroll();
+
+  const isDark = resolvedTheme === "dark";
 
   const backgroundColor = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.9)"],
-  );
-
-  const darkBackgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.9)"],
+    [
+      "rgba(255, 255, 255, 0)",
+      isDark ? "rgba(10, 10, 15, 0.9)" : "rgba(255, 255, 255, 0.9)",
+    ],
   );
 
   const backdropBlur = useTransform(
@@ -38,28 +38,10 @@ export function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && systemDark)) {
-      setIsDark(true);
-      document.documentElement.classList.add("dark");
-    }
   }, []);
 
   const toggleDarkMode = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-
-    if (newIsDark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
+    setTheme(isDark ? "light" : "dark");
   };
 
   return (
@@ -104,7 +86,7 @@ export function Navbar() {
         </div>
 
         {/* Center: Glass Nav Pill */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/50 dark:bg-black/40 backdrop-blur-xl border border-black/5 dark:border-white/10 px-2 py-1.5 rounded-full shadow-lg shadow-black/5 ring-1 ring-black/5">
+        <nav className="hidden md:flex items-center gap-1 bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 px-2 py-1.5 rounded-full shadow-lg shadow-black/5 ring-1 ring-black/5 dark:ring-white/5">
           {navLinks.map((link) => (
             <motion.a
               key={link.href}
@@ -151,7 +133,7 @@ export function Navbar() {
             </Button>
             <Button
               size="sm"
-              className="bg-black text-white dark:bg-white dark:text-black hover:opacity-90 font-semibold px-6 rounded-full shadow-xl shadow-black/10"
+              className="bg-foreground text-background hover:opacity-90 font-semibold px-6 rounded-full shadow-xl shadow-black/10"
             >
               Get Started
             </Button>
@@ -223,3 +205,4 @@ export function Navbar() {
     </motion.header>
   );
 }
+

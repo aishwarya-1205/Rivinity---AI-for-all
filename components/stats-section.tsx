@@ -80,9 +80,9 @@ export function StatsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="rounded-3xl bg-gradient-to-r from-black via-neutral-900 to-black text-white overflow-hidden shadow-xl"
+          className="rounded-3xl bg-foreground text-background overflow-hidden shadow-xl"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={stat.label} className="relative px-8 py-12 text-center">
                 {/* divider */}
@@ -98,11 +98,11 @@ export function StatsSection() {
                   />
                 </div>
 
-                <p className="mt-3 text-sm font-semibold text-white/90">
+                <p className="mt-3 text-sm font-semibold text-background/90">
                   {stat.label}
                 </p>
 
-                <p className="mt-1 text-sm text-white/60">{stat.description}</p>
+                <p className="mt-1 text-sm text-background/60">{stat.description}</p>
               </div>
             ))}
           </div>

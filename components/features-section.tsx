@@ -102,49 +102,81 @@ export function FeaturesSection() {
   const textOpacity = [opacity1, opacity2, opacity3];
 
   return (
-    <section ref={containerRef} className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen flex items-center">
-        <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 px-6 w-full">
-          {/* TEXT SIDE */}
-          <div className="relative flex items-center">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                style={{ opacity: textOpacity[index] }}
-                className="absolute"
-              >
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border text-xs font-medium text-muted-foreground mb-4">
-                  <feature.icon className="w-3.5 h-3.5" />
-                  {feature.badge}
-                </span>
-
-                <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4">
-                  {feature.title}
-                </h2>
-
-                <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* VISUAL SIDE */}
-          <div className="flex justify-center items-center">
-            <div className="relative w-[420px] aspect-square rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-transparent overflow-hidden">
+    <>
+      {/* Desktop: sticky scroll version */}
+      <section ref={containerRef} className="relative h-[300vh] hidden lg:block">
+        <div className="sticky top-0 h-screen flex items-center">
+          <div className="mx-auto max-w-7xl grid grid-cols-2 gap-16 px-6 w-full">
+            {/* TEXT SIDE */}
+            <div className="relative flex items-center">
               {features.map((feature, index) => (
                 <motion.div
-                  key={feature.visual}
+                  key={feature.title}
                   style={{ opacity: textOpacity[index] }}
-                  className="absolute inset-0"
+                  className="absolute"
                 >
-                  <FeatureVisual type={feature.visual} />
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border text-xs font-medium text-muted-foreground mb-4">
+                    <feature.icon className="w-3.5 h-3.5" />
+                    {feature.badge}
+                  </span>
+                  <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4">
+                    {feature.title}
+                  </h2>
+                  <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
+            {/* VISUAL SIDE */}
+            <div className="flex justify-center items-center">
+              <div className="relative w-full max-w-[420px] aspect-square rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-transparent overflow-hidden">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={feature.visual}
+                    style={{ opacity: textOpacity[index] }}
+                    className="absolute inset-0"
+                  >
+                    <FeatureVisual type={feature.visual} />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Mobile/Tablet: stacked cards */}
+      <section className="lg:hidden py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl space-y-12">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col gap-6"
+            >
+              <div className="w-full aspect-[4/3] rounded-2xl border border-border bg-gradient-to-br from-accent/10 to-transparent overflow-hidden">
+                <FeatureVisual type={feature.visual} />
+              </div>
+              <div>
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border text-xs font-medium text-muted-foreground mb-3">
+                  <feature.icon className="w-3.5 h-3.5" />
+                  {feature.badge}
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-3">
+                  {feature.title}
+                </h2>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

@@ -14,13 +14,14 @@ import {
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { Component } from "@/components/ui/grid-background";
 
 const values = [
   {
     icon: Target,
     title: "Mission-Driven",
     description:
-      "We exist to democratize AI for Bharat and the world. Every decision we make is guided by our mission to make AI accessible to all.",
+      "We exist to democratize AI for India and the world. Every decision we make is guided by our mission to make AI accessible to all.",
   },
   {
     icon: Users,
@@ -127,8 +128,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-accent/20 via-highlight/10 to-transparent blur-3xl opacity-30" />
+        <Component />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
