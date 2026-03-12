@@ -50,37 +50,65 @@ const socialLinks: SocialLink[] = [
 
 export function Footer() {
   return (
-    <footer className="relative pb-10 pt-20 px-4 overflow-hidden">
+    // Outer wrapper: isolated white background so it's never affected by parent section colors
+    <footer
+      className="relative pb-10 pt-20 px-4"
+      style={{
+        backgroundColor: "#ffffff",
+        isolation: "isolate",
+      }}
+    >
       <div className="container-custom">
         <div className="relative">
-          {/* Gradient glow around the card */}
+          {/* Subtle gradient glow — low opacity, just a hint of color */}
           <div
-            className="absolute -inset-[2px] rounded-[3rem] -z-10 blur-2xl opacity-30
-  bg-gradient-to-r from-purple-500 via-orange-400 to-blue-500"
+            aria-hidden
+            style={{
+              position: "absolute",
+              inset: "-2px",
+              borderRadius: "3rem",
+              zIndex: 0,
+              filter: "blur(32px)",
+              opacity: 0.35,
+              background: "linear-gradient(135deg, #a855f7, #f97316, #3b82f6)",
+              pointerEvents: "none",
+            }}
           />
 
-          {/* Actual card */}
-          <div className="bg-card backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-10 shadow-2xl relative overflow-hidden group">
+          {/* Card */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              backgroundColor: "#ffffff",
+              border: "1px solid rgba(0,0,0,0.07)",
+              borderRadius: "3rem",
+              padding: "2.5rem",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+            }}
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
+              {/* Col 1 */}
               <div className="flex flex-col gap-8">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground/60">
+                <div className="flex items-center gap-2 text-xs text-gray-400">
                   <span>A product by</span>
-                  <div className="flex items-center gap-1.5 grayscale opacity-70">
+                  <div className="flex items-center gap-1.5 opacity-60">
                     <div className="w-4 h-4 rounded-sm bg-orange-500" />
-                    <span className="font-bold tracking-tight">BharatTech</span>
+                    <span className="font-bold tracking-tight text-gray-600">
+                      BharatTech
+                    </span>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-bold text-foreground mb-3 tracking-wide uppercase opacity-80">
+                  <p className="text-sm font-bold text-gray-800 mb-3 tracking-wide uppercase">
                     Support Inquiries:
                   </p>
-
                   <a
-                    href="mailto:support@rivinity.ai"
-                    className="flex items-center gap-2.5 text-muted-foreground hover:text-primary transition-colors"
+                    href="mailto:support@rivinity.in"
+                    className="flex items-center gap-2.5 text-gray-500 hover:text-gray-900 transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                       <Mail size={14} />
                     </div>
                     <span className="text-sm">support@rivinity.in</span>
@@ -88,18 +116,18 @@ export function Footer() {
                 </div>
               </div>
 
+              {/* Link columns */}
               {Object.entries(footerLinks).map(([category, links]) => (
                 <div key={category}>
-                  <h4 className="font-bold text-foreground text-sm tracking-widest uppercase mb-6 opacity-90">
+                  <h4 className="font-bold text-gray-900 text-sm tracking-widest uppercase mb-6">
                     {category}
                   </h4>
-
                   <ul className="space-y-4">
                     {links.map((link) => (
                       <li key={link.label}>
                         <a
                           href={link.href}
-                          className="text-sm text-muted-foreground hover:text-foreground transition-all duration-300"
+                          className="text-sm text-gray-500 hover:text-gray-900 transition-all duration-300"
                         >
                           {link.label}
                         </a>
@@ -109,21 +137,21 @@ export function Footer() {
                 </div>
               ))}
 
+              {/* Get in touch */}
               <div className="flex flex-col gap-6">
                 <div>
-                  <h4 className="font-bold text-foreground text-sm tracking-widest uppercase mb-2 opacity-90">
+                  <h4 className="font-bold text-gray-900 text-sm tracking-widest uppercase mb-2">
                     Get in touch
                   </h4>
-
-                  <p className="text-xs text-muted-foreground/80 leading-relaxed">
-                    We don't send spam so don't worry.
+                  <p className="text-xs text-gray-400 leading-relaxed">
+                    We don&apos;t send spam so don&apos;t worry.
                   </p>
                 </div>
 
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-full px-6 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200/60 text-gray-700 placeholder:text-gray-400"
                 />
 
                 <div className="flex items-center gap-5 pt-2">
@@ -133,7 +161,7 @@ export function Footer() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-gray-400 hover:text-gray-800 transition-colors"
                     >
                       <Icon size={18} strokeWidth={1.5} />
                     </a>
@@ -144,8 +172,9 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Copyright */}
         <div className="mt-10 mb-6 text-center">
-          <p className="text-[10px] sm:text-xs text-muted-foreground/60 font-medium tracking-wide">
+          <p className="text-[10px] sm:text-xs text-gray-400 font-medium tracking-wide">
             © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.
           </p>
         </div>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { BackgroundPaths } from "@/components/background-paths";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -75,7 +76,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          {children}
+          {/* Fixed full-page background paths — sits behind all content */}
+          <BackgroundPaths />
+
+          {/* Page content sits above via relative positioning */}
+          <div className="relative" style={{ zIndex: 1 }}>
+            {children}
+          </div>
+
           <Analytics />
         </ThemeProvider>
       </body>

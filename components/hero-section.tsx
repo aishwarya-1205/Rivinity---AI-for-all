@@ -22,7 +22,7 @@ const trustedLogos = [
 export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden pt-20 bg-background text-foreground">
-      <div className="absolute inset-0 z-0 flex items-end translate-y-[-180px]">
+      <div className="absolute inset-0 z-0 flex items-end translate-y-[-190px]">
         <HeroDotMountain />
       </div>
 
