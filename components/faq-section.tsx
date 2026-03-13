@@ -126,18 +126,7 @@ export function FAQSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 text-center"
-        >
-          <p className="text-muted-foreground mb-4">
-            Can&apos;t find what you&apos;re looking for?
-          </p>
-          <a
-            href="/support"
-            className="inline-flex items-center gap-2 text-accent hover:underline font-medium"
-          >
-            <Sparkles className="w-4 h-4" />
-            Contact our support team
-          </a>
-        </motion.div>
+        ></motion.div>
       </div>
     </section>
   );

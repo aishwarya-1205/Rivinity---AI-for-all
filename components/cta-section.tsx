@@ -12,7 +12,10 @@ export function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-26 sm:py-46 overflow-hidden">
+    <section
+      ref={ref}
+      className="relative min-h-[900px] flex items-center overflow-hidden"
+    >
       {/* Background Beams */}
       <BackgroundBeams className="opacity-40" />
 
@@ -21,7 +24,7 @@ export function CTASection() {
 
       {/* Globe Background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
-        <div className="relative w-[1100px] h-[1100px] opacity-50 dark:opacity-60 top-24">
+        <div className="relative w-[1100px] h-[1100px] opacity-50 dark:opacity-60 top-10">
           <Globe
             className="absolute inset-0"
             config={{
@@ -61,82 +64,78 @@ export function CTASection() {
       {/* Radial fade overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,transparent_20%,var(--background)_75%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center mt-6">
+        {/* Badge ABOVE globe */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+          animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="absolute left-1/2 -translate-x-1/2 -top-45 z-20"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md">
+            <Sparkles className="w-4 h-4" />
+            Start building today
+          </div>
+        </motion.div>
+
+        {/* Center content INSIDE globe */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative text-center"
+          className="text-center max-w-3xl"
         >
-          {/* Badge */}
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: -10 }}
-            animate={
-              isInView
-                ? { opacity: 1, scale: 1, y: 0 }
-                : { opacity: 0, scale: 0.9, y: -10 }
-            }
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="absolute left-1/2 -translate-x-1/2 -top-14 z-20"
-          >
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md">
-              <Sparkles className="w-4 h-4" />
-              Start building today
-            </div>
-          </motion.div>
-
           {/* Headline */}
-          <h2 className="mt-15 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 max-w-4xl mx-auto leading-[1.1]">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 leading-[1.1]">
             Build the future of{" "}
             <span className="text-gradient">India's AI</span> with Rivinity
           </h2>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
             Join the movement to democratize AI across Bharat. From startups in
             Bangalore to enterprises in Mumbai, build sovereign AI applications
             at scale.
           </p>
-
-          {/* Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
-          >
-            {/* Primary Button */}
-            <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl">
-              <MovingBorderButton
-                borderRadius="1rem"
-                className="bg-background dark:bg-card text-foreground px-10 py-4 font-semibold text-base"
-                containerClassName="h-14"
-                duration={3000}
-              >
-                <span className="flex items-center gap-2">
-                  Get Started Free
-                  <ArrowRight className="h-5 w-5" />
-                </span>
-              </MovingBorderButton>
-            </div>
-
-            {/* Secondary Button */}
-            <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition-all duration-300 hover:scale-105">
-              Contact Sales
-            </button>
-          </motion.div>
-
-          {/* Trust text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-10 text-sm text-muted-foreground"
-          >
-            No credit card required • Free tier includes 100K API calls/month
-          </motion.p>
         </motion.div>
+
+        {/* Buttons BELOW globe */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-40"
+        >
+          {/* Primary Button */}
+          <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl">
+            <MovingBorderButton
+              borderRadius="1rem"
+              className="bg-background dark:bg-card text-foreground px-10 py-4 font-semibold text-base"
+              containerClassName="h-14"
+              duration={3000}
+            >
+              <span className="flex items-center gap-2">
+                Get Started Free
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </MovingBorderButton>
+          </div>
+
+          {/* Secondary Button */}
+          <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition-all duration-300 hover:scale-105">
+            Contact Sales
+          </button>
+        </motion.div>
+
+        {/* Trust text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-8 text-sm text-muted-foreground text-center"
+        >
+          No credit card required • Free tier includes 100K API calls/month
+        </motion.p>
       </div>
     </section>
   );

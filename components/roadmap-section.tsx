@@ -211,39 +211,6 @@ export function RoadmapSection() {
             rotation.
           </motion.p>
         </motion.div>
-
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 md:mt-24"
-        >
-          {[
-            { value: 8, label: "Major Milestones" },
-            { value: 75, label: "Progress Complete", suffix: "%" },
-            { value: 2025, label: "AGI Target Year" },
-            { value: 50, label: "Global Regions", suffix: "+" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-accent/30 transition"
-            >
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 tabular-nums">
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix ?? ""}
-                />
-              </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

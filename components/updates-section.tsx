@@ -95,7 +95,7 @@ export function UpdatesSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-10 text-center"
         >
-          <Button variant="outline" className="group">
+          <Button variant="outline" className="group mt-8">
             View All Updates
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>

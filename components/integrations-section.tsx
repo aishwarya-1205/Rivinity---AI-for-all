@@ -53,7 +53,7 @@ export function IntegrationsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid lg:grid-cols-2 gap-12 items-center rounded-3xl border border-border bg-card/50 p-8 lg:p-12"
+          className="grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-12"
         >
           {/* Left Side - Content */}
           <div>

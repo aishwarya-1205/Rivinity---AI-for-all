@@ -144,6 +144,19 @@ function PricingCard({
 export function BentoPricing() {
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-8">
+      {/* Explorer / Free */}
+      <PricingCard
+        titleBadge="EXPLORER"
+        priceLabel="Free"
+        features={[
+          "Perfect for experimentation",
+          "1K AI agent executions/month",
+          "Community support access",
+        ]}
+        cta="Start Free"
+        className="lg:col-span-3"
+      />
+
       {/* Featured / PRO card */}
       <div
         className="relative w-full overflow-hidden rounded-xl lg:col-span-5"
@@ -152,7 +165,6 @@ export function BentoPricing() {
           ...cardGradientStyle,
         }}
       >
-        {/* Top accent line */}
         <div
           className="absolute top-0 left-0 w-full h-0.5"
           style={{
@@ -162,7 +174,6 @@ export function BentoPricing() {
         />
 
         <div className="flex items-center gap-3 p-4">
-          {/* PRO badge */}
           <span
             className="font-mono text-xs px-2 py-1 rounded-full border"
             style={{
@@ -174,7 +185,6 @@ export function BentoPricing() {
             PRO
           </span>
 
-          {/* Most Popular badge */}
           <span
             className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs"
             style={{
@@ -209,6 +219,7 @@ export function BentoPricing() {
               /month
             </span>
           </div>
+
           <ul
             className="grid gap-4 text-sm lg:w-[70%]"
             style={{ color: "var(--muted-foreground)" }}
@@ -227,19 +238,6 @@ export function BentoPricing() {
           </ul>
         </div>
       </div>
-
-      {/* Explorer / Free */}
-      <PricingCard
-        titleBadge="EXPLORER"
-        priceLabel="Free"
-        features={[
-          "Perfect for experimentation",
-          "1K AI agent executions/month",
-          "Community support access",
-        ]}
-        cta="Start Free"
-        className="lg:col-span-3"
-      />
 
       {/* Team */}
       <PricingCard
