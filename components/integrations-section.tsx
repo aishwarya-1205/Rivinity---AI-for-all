@@ -1,30 +1,48 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles } from "lucide-react"
-import Link from "next/link"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
+import {
+  SiOpenai,
+  SiGooglecloud,
+  SiSlack,
+  SiDiscord,
+  SiGithub,
+  SiNotion,
+  SiLinear,
+  SiVercel,
+  SiSupabase,
+  SiMongodb,
+  SiRedis,
+  SiStripe,
+  SiTwilio,
+  SiSendgrid,
+  SiZapier,
+} from "react-icons/si";
+import { Brain, Cloud, Server } from "lucide-react";
 
 const integrations = [
-  { name: "OpenAI", color: "#10A37F" },
-  { name: "Anthropic", color: "#D4A574" },
-  { name: "AWS", color: "#FF9900" },
-  { name: "Azure", color: "#0078D4" },
-  { name: "Google", color: "#4285F4" },
-  { name: "Slack", color: "#4A154B" },
-  { name: "Discord", color: "#5865F2" },
-  { name: "GitHub", color: "#181717" },
-  { name: "Notion", color: "#000000" },
-  { name: "Linear", color: "#5E6AD2" },
-  { name: "Vercel", color: "#000000" },
-  { name: "Supabase", color: "#3ECF8E" },
-  { name: "MongoDB", color: "#47A248" },
-  { name: "Redis", color: "#DC382D" },
-  { name: "Stripe", color: "#635BFF" },
-  { name: "Twilio", color: "#F22F46" },
-  { name: "SendGrid", color: "#1A82E2" },
-  { name: "Zapier", color: "#FF4A00" },
-]
+  { icon: SiOpenai, color: "#10A37F" },
+  { icon: Cloud, color: "#FF9900" },
+  { icon: Server, color: "#0078D4" },
+  { icon: SiGooglecloud, color: "#4285F4" },
+  { icon: SiSlack, color: "#4A154B" },
+  { icon: SiDiscord, color: "#5865F2" },
+  { icon: SiGithub, color: "#181717" },
+  { icon: SiNotion, color: "#000000" },
+  { icon: SiLinear, color: "#5E6AD2" },
+  { icon: SiVercel, color: "#000000" },
+  { icon: SiSupabase, color: "#3ECF8E" },
+  { icon: SiMongodb, color: "#47A248" },
+  { icon: SiRedis, color: "#DC382D" },
+  { icon: SiStripe, color: "#635BFF" },
+  { icon: SiTwilio, color: "#F22F46" },
+  { icon: SiSendgrid, color: "#1A82E2" },
+  { icon: SiZapier, color: "#FF4A00" },
+  { icon: Brain, color: "#D4A574" },
+];
 
 export function IntegrationsSection() {
   return (
@@ -39,7 +57,7 @@ export function IntegrationsSection() {
         >
           {/* Left Side - Content */}
           <div>
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -49,17 +67,17 @@ export function IntegrationsSection() {
               <Sparkles className="w-4 h-4 text-accent" />
               Integrations
             </motion.span>
-            
+
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-[1.1]">
-              Connect to{" "}
-              <span className="text-gradient">everything</span>
+              Connect to <span className="text-gradient">everything</span>
             </h2>
-            
+
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Seamlessly integrate Rivinity with your existing tools and workflows. 
-              Connect to 100+ services with our pre-built connectors and universal API.
+              Seamlessly integrate Rivinity with your existing tools and
+              workflows. Connect to 100+ services with our pre-built connectors
+              and universal API.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-full">
                 <Link href="/platform" className="flex items-center gap-2">
@@ -76,39 +94,41 @@ export function IntegrationsSection() {
           {/* Right Side - Hexagonal Grid */}
           <div className="relative">
             <div className="grid grid-cols-6 gap-3">
-              {integrations.map((integration, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: idx * 0.03 }}
-                  whileHover={{ scale: 1.1, zIndex: 10 }}
-                  className="relative aspect-square"
-                >
-                  <div
-                    className="absolute inset-0 bg-card dark:bg-card/80 border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30"
-                    style={{
-                      clipPath:
-                        "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
-                    }}
+              {integrations.map((integration, idx) => {
+                const Icon = integration.icon;
+
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: idx * 0.03 }}
+                    whileHover={{ scale: 1.1, zIndex: 10 }}
+                    className="relative aspect-square"
                   >
-                    <div 
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-                      style={{ backgroundColor: integration.color }}
+                    <div
+                      className="absolute inset-0 bg-card dark:bg-card/80 border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30"
+                      style={{
+                        clipPath:
+                          "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
+                      }}
                     >
-                      {integration.name.charAt(0)}
+                      <Icon
+                        className="w-6 h-6"
+                        style={{ color: integration.color }}
+                      />
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
-            
+
             {/* Glow effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-highlight/5 blur-3xl pointer-events-none" />
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

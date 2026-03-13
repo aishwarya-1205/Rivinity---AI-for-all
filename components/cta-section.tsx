@@ -66,23 +66,28 @@ export function CTASection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8 }}
-          className="text-center"
+          className="relative text-center"
         >
           {/* Badge */}
+          {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.9, y: -10 }}
             animate={
-              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+              isInView
+                ? { opacity: 1, scale: 1, y: 0 }
+                : { opacity: 0, scale: 0.9, y: -10 }
             }
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent mb-10"
+            className="absolute left-1/2 -translate-x-1/2 -top-14 z-20"
           >
-            <Sparkles className="w-4 h-4" />
-            Start building today
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md">
+              <Sparkles className="w-4 h-4" />
+              Start building today
+            </div>
           </motion.div>
 
           {/* Headline */}
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 max-w-4xl mx-auto leading-[1.1]">
+          <h2 className="mt-15 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 max-w-4xl mx-auto leading-[1.1]">
             Build the future of{" "}
             <span className="text-gradient">India's AI</span> with Rivinity
           </h2>

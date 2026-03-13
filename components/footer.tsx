@@ -52,13 +52,32 @@ export function Footer() {
   return (
     // Outer wrapper: isolated white background so it's never affected by parent section colors
     <footer
-      className="relative pb-10 pt-20 px-4"
+      className="relative pb-28 pt-32 px-4"
       style={{
         backgroundColor: "#ffffff",
         isolation: "isolate",
       }}
     >
-      <div className="container-custom">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden"
+      >
+        <span
+          className="font-black tracking-tight select-none"
+          style={{
+            fontSize: "clamp(120px, 18vw, 260px)",
+            lineHeight: 0.8,
+            background: "linear-gradient(90deg,#a855f7,#f97316,#3b82f6)",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            opacity: 0.07,
+            letterSpacing: "-0.05em",
+          }}
+        >
+          RIVINITY
+        </span>
+      </div>
+      <div className="container-custom relative z-10">
         <div className="relative">
           {/* Subtle gradient glow — low opacity, just a hint of color */}
           <div

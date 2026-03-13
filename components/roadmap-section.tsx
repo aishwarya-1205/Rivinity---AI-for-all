@@ -1,6 +1,6 @@
 "use client";
-
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import {
   Brain,
   Cpu,
@@ -112,6 +112,47 @@ const roadmapData = [
   },
 ];
 
+function AnimatedCounter({
+  value,
+  suffix = "",
+}: {
+  value: number;
+  suffix?: string;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const duration = 2000;
+    const increment = value / (duration / 16);
+
+    const counter = setInterval(() => {
+      start += increment;
+
+      if (start >= value) {
+        start = value;
+        clearInterval(counter);
+      }
+
+      setCount(Math.floor(start));
+    }, 16);
+
+    return () => clearInterval(counter);
+  }, [isInView, value]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export function RoadmapSection() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-background-to-b from-secondary via-card to-secondary">
@@ -180,20 +221,27 @@ export function RoadmapSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 md:mt-24"
         >
           {[
-            { value: "8", label: "Major Milestones" },
-            { value: "75%", label: "Progress Complete" },
-            { value: "2025", label: "AGI Target Year" },
-            { value: "50+", label: "Global Regions" },
+            { value: 8, label: "Major Milestones" },
+            { value: 75, label: "Progress Complete", suffix: "%" },
+            { value: 2025, label: "AGI Target Year" },
+            { value: 50, label: "Global Regions", suffix: "+" },
           ].map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-accent/30 transition"
             >
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                {stat.value}
+              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 tabular-nums">
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix ?? ""}
+                />
               </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
