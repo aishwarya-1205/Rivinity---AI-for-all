@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const updates = [
   {
@@ -10,23 +10,24 @@ const updates = [
     title: "Introducing Rivinity Bharat",
     date: "March 2026",
     gradient: "from-[#FF9933] to-accent",
-    description: "Our foundational model trained on Indian languages and cultural context"
+    description:
+      "Our foundational model trained on Indian languages and cultural context",
   },
   {
     category: "PRODUCT",
     title: "Rivinity Voice 2.0",
     date: "February 2026",
     gradient: "from-accent to-highlight",
-    description: "22 Indian languages with near-human speech synthesis"
+    description: "22 Indian languages with near-human speech synthesis",
   },
   {
     category: "ANNOUNCEMENT",
     title: "Rivinity Edge Launch",
     date: "January 2026",
     gradient: "from-highlight to-[#138808]",
-    description: "Deploy AI at the edge across 500+ Indian cities"
-  }
-]
+    description: "Deploy AI at the edge across 500+ Indian cities",
+  },
+];
 
 export function UpdatesSection() {
   return (
@@ -55,11 +56,13 @@ export function UpdatesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group block"
             >
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card hover:border-accent/50 transition-all duration-300">
-                <div className={`h-40 bg-gradient-to-br ${update.gradient} relative overflow-hidden`}>
+              <div className="relative h-full overflow-hidden rounded-2xl border border-border bg-card hover:border-accent/50 transition-all duration-300 flex flex-col">
+                <div
+                  className={`h-40 bg-gradient-to-br ${update.gradient} relative overflow-hidden`}
+                >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="text-4xl md:text-5xl font-bold text-white/90 tracking-tight">
-                      {update.title.split(' ').pop()}
+                      {update.title.split(" ").pop()}
                     </span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
@@ -99,5 +102,5 @@ export function UpdatesSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

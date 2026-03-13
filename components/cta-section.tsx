@@ -20,7 +20,6 @@ export function CTASection() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/30 to-secondary/60 pointer-events-none" />
 
       {/* Globe Background */}
-      {/* Globe Background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
         <div className="relative w-[1100px] h-[1100px] opacity-50 dark:opacity-60 top-24">
           <Globe

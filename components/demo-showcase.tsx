@@ -49,7 +49,7 @@ export function DemoShowcase() {
   const restart = () => setDemoState((p) => p + 1);
 
   return (
-    <section className="relative py-16 sm:py-24 bg-secondary/30">
+    <section className="relative py-16 sm:py-24 bg-background/30">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -58,7 +58,9 @@ export function DemoShowcase() {
             See it in Action
           </span>
 
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">Experience Rivinity</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
+            Experience Rivinity
+          </h2>
 
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Explore interactive demos that simulate real Rivinity workflows.

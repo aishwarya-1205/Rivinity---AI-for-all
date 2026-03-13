@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import Lenis from "lenis"
+import { useEffect } from "react";
+import Lenis from "lenis";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -13,19 +13,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1.1, // slightly faster wheel tracking for responsiveness
-    })
+    });
 
     function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf)
+    requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy()
-    }
-  }, [])
+      lenis.destroy();
+    };
+  }, []);
 
-  return <>{children}</>
+  return <>{children}</>;
 }

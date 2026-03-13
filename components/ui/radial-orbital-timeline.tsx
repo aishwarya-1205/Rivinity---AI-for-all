@@ -21,7 +21,7 @@ interface RadialOrbitalTimelineProps {
   timelineData: TimelineItem[];
 }
 
-const ORBIT_RADIUS = 180;
+const ORBIT_RADIUS = 220;
 
 export default function RadialOrbitalTimeline({
   timelineData,
@@ -220,21 +220,33 @@ export default function RadialOrbitalTimeline({
                   }}
                 />
 
-                {/* Node button */}
-                <div
-                  className={`
-                    w-12 h-12 rounded-full flex items-center justify-center
-                    border-2 transition-all duration-300 transform backdrop-blur-sm
-                    ${
-                      isExpanded
-                        ? "bg-accent text-white border-accent shadow-lg shadow-accent/30 scale-125"
-                        : isRelated
-                          ? "bg-highlight/50 text-white border-highlight animate-pulse"
-                          : "bg-card/80 text-foreground border-border hover:scale-110"
-                    }
-                  `}
-                >
-                  <Icon size={18} />
+                {/* Gradient border wrapper */}
+                <div className="relative flex items-center justify-center">
+                  {/* Gradient ring */}
+                  <div
+                    className="absolute -inset-[2px] rounded-full blur-[6px] opacity-70"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(255,122,24,0.9), rgba(108,99,255,0.9))",
+                    }}
+                  />
+
+                  {/* Node button */}
+                  <div
+                    className={`
+      relative w-12 h-12 rounded-full flex items-center justify-center
+      border transition-all duration-300 transform backdrop-blur-sm
+      ${
+        isExpanded
+          ? "bg-accent text-white border-accent shadow-lg scale-125"
+          : isRelated
+            ? "bg-highlight/50 text-white border-highlight"
+            : "bg-card/90 text-foreground border-border hover:scale-110"
+      }
+    `}
+                  >
+                    <Icon size={18} />
+                  </div>
                 </div>
 
                 {/* Label */}

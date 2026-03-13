@@ -143,12 +143,14 @@ export default function HeroDotMountain() {
 
       const sky = new Float32Array(cols + 1);
       for (let c = 0; c <= cols; c++) {
-        sky[c] = crY(SKYLINE, (c * SPACING) / W) * H;
+        const tx = (c * SPACING) / W;
+        const mirroredX = tx <= 0.5 ? tx : 1 - tx;
+        sky[c] = crY(SKYLINE, mirroredX) * H;
       }
 
       ctx.fillStyle = "rgb(120, 120, 130)";
 
-      const FADE_RANGE = 0.8;
+      const FADE_RANGE = 0.6;
       const PEAK_OP = 0.85;
       const BOTTOM_OP = 0.0;
 
@@ -165,7 +167,7 @@ export default function HeroDotMountain() {
           if (depth >= 1) continue;
 
           const edgeSoften = Math.min(1, (py - skyPY) / (SPACING * 2.5));
-          const fadeOut = Math.pow(1 - depth, 1.4);
+          const fadeOut = Math.pow(1 - depth, 2.3);
           const vertOp = PEAK_OP * edgeSoften * fadeOut;
 
           const hBell = Math.pow(

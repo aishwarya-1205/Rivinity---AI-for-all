@@ -1,37 +1,50 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
-import { BentoPricing } from "@/components/ui/bento-pricing"
+import { motion } from "framer-motion";
+import { BentoPricing } from "@/components/ui/bento-pricing";
 
 export function PricingSection() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background Effects */}
+    <section
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ background: "var(--background)", color: "var(--foreground)" }}
+    >
+      {/* ── Background Effects ── */}
       <div className="absolute inset-0 -z-10">
-        <div className="bg-[radial-gradient(35%_80%_at_50%_0%,var(--foreground)/.06,transparent)] absolute inset-0" />
-        {/* Dots Pattern */}
+        {/* Radial top gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(35% 80% at 50% 0%, color-mix(in srgb, var(--foreground) 6%, transparent), transparent)",
+          }}
+        />
+
+        {/* Dot pattern */}
         <div
           aria-hidden="true"
-          className={cn(
-            'absolute inset-0 size-full',
-            'bg-[radial-gradient(color-mix(in_oklab,var(--foreground)/.15_30%,transparent)_1px,transparent_1px)]',
-            'bg-[size:12px_12px]',
-          )}
+          className="absolute inset-0 size-full"
+          style={{
+            backgroundImage:
+              "radial-gradient(color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px)",
+            backgroundSize: "12px 12px",
+          }}
         />
-        {/* Gradient Orbs */}
+
+        {/* Accent orb — top left */}
         <div
-          aria-hidden
-          className="absolute inset-0 isolate -z-10 opacity-60 contain-strict"
-        >
-          <div className="bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,var(--foreground)/.04_0,hsla(0,0%,55%,.02)_50%,var(--foreground)/.01_80%)] absolute top-0 left-0 h-320 w-140 -translate-y-87.5 -rotate-45 rounded-full" />
-          <div className="bg-[radial-gradient(50%_50%_at_50%_50%,var(--foreground)/.03_0,var(--foreground)/.01_80%,transparent_100%)] absolute top-0 left-0 h-320 w-60 [translate:5%_-50%] -rotate-45 rounded-full" />
-          <div className="bg-[radial-gradient(50%_50%_at_50%_50%,var(--foreground)/.03_0,var(--foreground)/.01_80%,transparent_100%)] absolute top-0 left-0 h-320 w-60 -translate-y-87.5 -rotate-45 rounded-full" />
-        </div>
+          className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
+          style={{ background: "var(--accent)" }}
+        />
+        {/* Highlight orb — top right */}
+        <div
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-15 blur-3xl pointer-events-none"
+          style={{ background: "var(--highlight)" }}
+        />
       </div>
 
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
-        {/* Heading */}
+        {/* ── Heading ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,22 +57,49 @@ export function PricingSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono uppercase tracking-wider text-muted-foreground border border-border rounded-full bg-secondary/50"
+            className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono uppercase tracking-wider rounded-full"
+            style={{
+              color: "var(--muted-foreground)",
+              border: "1px solid var(--border)",
+              background:
+                "color-mix(in srgb, var(--secondary) 50%, transparent)",
+            }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <span
+              className="w-1.5 h-1.5 rounded-full animate-pulse"
+              style={{ background: "var(--accent)" }}
+            />
             Transparent Pricing
           </motion.span>
-          
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground text-balance">
+
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance"
+            style={{ color: "var(--foreground)" }}
+          >
             Scale Intelligence,{" "}
-            <span className="text-accent">Not Costs</span>
+            <span
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--accent) 0%, var(--highlight) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Not Costs
+            </span>
           </h2>
-          <p className="text-muted-foreground mt-4 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            From experimentation to enterprise scale. Choose the plan that matches your ambition and grow without limits.
+
+          <p
+            className="mt-4 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
+            style={{ color: "var(--muted-foreground)" }}
+          >
+            From experimentation to enterprise scale. Choose the plan that
+            matches your ambition and grow without limits.
           </p>
         </motion.div>
 
-        {/* Pricing Grid */}
+        {/* ── Pricing Grid ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,18 +109,26 @@ export function PricingSection() {
           <BentoPricing />
         </motion.div>
 
-        {/* Bottom Note */}
+        {/* ── Bottom Note ── */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center text-sm text-muted-foreground mt-8"
+          className="text-center text-sm mt-8"
+          style={{ color: "var(--muted-foreground)" }}
         >
-          All plans include access to our global infrastructure, API access, and community support.{" "}
-          <a href="#" className="text-accent hover:underline">Compare plans</a>
+          All plans include access to our global infrastructure, API access, and
+          community support.{" "}
+          <a
+            href="#"
+            className="font-medium transition-colors hover:underline"
+            style={{ color: "var(--highlight)" }}
+          >
+            Compare plans
+          </a>
         </motion.p>
       </div>
     </section>
-  )
+  );
 }

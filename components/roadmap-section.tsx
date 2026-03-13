@@ -1,24 +1,25 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { 
-  Brain, 
-  Cpu, 
-  Globe, 
-  Layers, 
-  Rocket, 
-  Shield, 
-  Sparkles, 
-  Zap 
-} from "lucide-react"
-import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline"
+import { motion } from "framer-motion";
+import {
+  Brain,
+  Cpu,
+  Globe,
+  Layers,
+  Rocket,
+  Shield,
+  Sparkles,
+  Zap,
+} from "lucide-react";
+import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 
 const roadmapData = [
   {
     id: 1,
     title: "Foundation",
     date: "Q1 2024",
-    content: "Core AI infrastructure and neural processing units deployed. Established the foundational layer for all Rivinity services.",
+    content:
+      "Core AI infrastructure and neural processing units deployed. Established the foundational layer for all Rivinity services.",
     category: "Infrastructure",
     icon: Cpu,
     relatedIds: [2, 8],
@@ -29,7 +30,8 @@ const roadmapData = [
     id: 2,
     title: "Agent Protocol",
     date: "Q2 2024",
-    content: "Autonomous AI agents framework launched. Self-learning systems that evolve and adapt to complex tasks.",
+    content:
+      "Autonomous AI agents framework launched. Self-learning systems that evolve and adapt to complex tasks.",
     category: "AI Agents",
     icon: Brain,
     relatedIds: [1, 3],
@@ -40,7 +42,8 @@ const roadmapData = [
     id: 3,
     title: "Voice AI",
     date: "Q3 2024",
-    content: "Natural voice synthesis and real-time conversation AI. Human-like interactions across all channels.",
+    content:
+      "Natural voice synthesis and real-time conversation AI. Human-like interactions across all channels.",
     category: "Voice",
     icon: Sparkles,
     relatedIds: [2, 4],
@@ -51,7 +54,8 @@ const roadmapData = [
     id: 4,
     title: "Global Network",
     date: "Q4 2024",
-    content: "Planet-scale infrastructure expansion. Edge computing nodes deployed across 50+ regions worldwide.",
+    content:
+      "Planet-scale infrastructure expansion. Edge computing nodes deployed across 50+ regions worldwide.",
     category: "Scale",
     icon: Globe,
     relatedIds: [3, 5],
@@ -62,7 +66,8 @@ const roadmapData = [
     id: 5,
     title: "Multi-Modal",
     date: "Q1 2025",
-    content: "Unified multi-modal AI processing. Text, image, audio, and video understanding in a single API.",
+    content:
+      "Unified multi-modal AI processing. Text, image, audio, and video understanding in a single API.",
     category: "Models",
     icon: Layers,
     relatedIds: [4, 6],
@@ -73,7 +78,8 @@ const roadmapData = [
     id: 6,
     title: "Zero-Trust",
     date: "Q2 2025",
-    content: "Enterprise-grade security layer. End-to-end encryption and compliance certifications.",
+    content:
+      "Enterprise-grade security layer. End-to-end encryption and compliance certifications.",
     category: "Security",
     icon: Shield,
     relatedIds: [5, 7],
@@ -84,7 +90,8 @@ const roadmapData = [
     id: 7,
     title: "Hyperscale",
     date: "Q3 2025",
-    content: "Unlimited scaling capabilities. Auto-scaling infrastructure that handles billions of requests.",
+    content:
+      "Unlimited scaling capabilities. Auto-scaling infrastructure that handles billions of requests.",
     category: "Performance",
     icon: Zap,
     relatedIds: [6, 8],
@@ -95,21 +102,22 @@ const roadmapData = [
     id: 8,
     title: "AGI Layer",
     date: "Q4 2025",
-    content: "Advanced general intelligence capabilities. The next frontier of artificial intelligence.",
+    content:
+      "Advanced general intelligence capabilities. The next frontier of artificial intelligence.",
     category: "Future",
     icon: Rocket,
     relatedIds: [7, 1],
     status: "pending" as const,
     energy: 10,
   },
-]
+];
 
 export function RoadmapSection() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-secondary via-card to-secondary">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-background-to-b from-secondary via-card to-secondary">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-highlight/5 via-transparent to-transparent" />
-      
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -121,19 +129,22 @@ export function RoadmapSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-highlight/10 border border-highlight/20 mb-6">
             <Rocket className="w-4 h-4 text-highlight" />
-            <span className="text-sm font-medium text-highlight">Product Roadmap</span>
+            <span className="text-sm font-medium text-highlight">
+              Product Roadmap
+            </span>
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 text-balance">
             Building the Future of
             <span className="block bg-gradient-to-r from-accent to-highlight bg-clip-text text-transparent">
               Intelligence Infrastructure
             </span>
           </h2>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Our roadmap represents our commitment to democratizing AI. Each milestone brings us closer to 
-            universal intelligence access for humanity.
+            Our roadmap represents our commitment to democratizing AI. Each
+            milestone brings us closer to universal intelligence access for
+            humanity.
           </p>
         </motion.div>
 
@@ -146,7 +157,7 @@ export function RoadmapSection() {
           className="relative"
         >
           <RadialOrbitalTimeline timelineData={roadmapData} />
-          
+
           {/* Hint Text */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -155,7 +166,8 @@ export function RoadmapSection() {
             viewport={{ once: true }}
             className="text-center text-sm text-muted-foreground mt-4"
           >
-            Click on any node to explore details. Click outside to resume rotation.
+            Click on any node to explore details. Click outside to resume
+            rotation.
           </motion.p>
         </motion.div>
 
@@ -173,17 +185,18 @@ export function RoadmapSection() {
             { value: "2025", label: "AGI Target Year" },
             { value: "50+", label: "Global Regions" },
           ].map((stat, index) => (
-            <div key={index} className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border">
+            <div
+              key={index}
+              className="text-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border"
+            >
               <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                 {stat.value}
               </div>
-              <div className="text-sm text-muted-foreground">
-                {stat.label}
-              </div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
