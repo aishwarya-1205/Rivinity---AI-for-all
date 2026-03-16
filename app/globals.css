@@ -15,7 +15,7 @@
   --secondary: #f8f9fa;
   --secondary-foreground: #0a0a0a;
   --muted: #f1f3f5;
-  --muted-foreground: #6b6b6b;
+  --muted-foreground: #4b4b4b;
   --accent: #ff7a18;
   --accent-foreground: #ffffff;
   --highlight: #6c63ff;
@@ -234,4 +234,26 @@
 
 .dark .glass {
   background: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-orbit-rotate {
+  animation: orbit-rotate 60s linear infinite;
 }

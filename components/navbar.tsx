@@ -86,18 +86,27 @@ export function Navbar() {
         </div>
 
         {/* Center: Glass Nav Pill */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-black/5 dark:border-white/10 px-2 py-1.5 rounded-full shadow-lg shadow-black/5 ring-1 ring-black/5 dark:ring-white/5">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.href}
-              href={link.href}
-              className="relative px-5 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
+        <nav className="hidden md:flex relative items-center">
+          {/* Glow Layer */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-accent/30 via-highlight/30 to-accent/30 blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+
+          {/* Border Glow Ring */}
+          <div className="absolute inset-0 rounded-full p-[1px] bg-gradient-to-r from-accent/40 via-highlight/40 to-accent/40 opacity-60" />
+
+          {/* Glass Pill */}
+          <div className="relative flex items-center gap-1 bg-background/60 dark:bg-white/[0.04] backdrop-blur-xl px-2 py-1.5 rounded-full border border-border/40 shadow-lg">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                className="relative px-5 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                {link.label}
+              </motion.a>
+            ))}
+          </div>
         </nav>
 
         {/* Right: Actions */}
@@ -205,4 +214,3 @@ export function Navbar() {
     </motion.header>
   );
 }
-

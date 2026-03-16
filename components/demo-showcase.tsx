@@ -92,12 +92,12 @@ export function DemoShowcase() {
         </div>
 
         {/* Demo Window */}
-        <div className="relative group">
+        <div className="relative group" style={{ translate: "z(0)" }}>
           {/* Gradient Glow */}
-          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-40 blur-sm transition duration-500 group-hover:blur-md group-hover:opacity-70"></div>
+          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-40 blur-sm transition duration-500 group-hover:blur-md group-hover:opacity-70 will-change-[opacity,filter]"></div>
 
           {/* Actual Window */}
-          <div className="relative bg-card border border-border rounded-2xl overflow-hidden">
+          <div className="relative bg-card border border-border rounded-2xl overflow-hidden will-change-transform">
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <div className="flex gap-2">

@@ -150,8 +150,8 @@ export default function HeroDotMountain() {
 
       ctx.fillStyle = "rgb(120, 120, 130)";
 
-      const FADE_RANGE = 0.6;
-      const PEAK_OP = 0.85;
+      const FADE_RANGE = 0.55;
+      const PEAK_OP = 0.95;
       const BOTTOM_OP = 0.0;
 
       for (let c = 0; c <= cols; c++) {

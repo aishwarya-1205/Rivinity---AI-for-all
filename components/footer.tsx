@@ -56,20 +56,24 @@ export function Footer() {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden"
       >
-        <span
-          className="font-black tracking-tight select-none"
+        <div
+          className="flex justify-between w-full max-w-[80vw] mx-auto font-black select-none pointer-events-none"
           style={{
-            fontSize: "clamp(120px, 18vw, 260px)",
-            lineHeight: 0.8,
+            fontSize: "clamp(50px, 10vw, 360px)",
+            lineHeight: 1,
+            opacity: 0.08,
             background: "linear-gradient(90deg,#a855f7,#f97316,#3b82f6)",
             WebkitBackgroundClip: "text",
             color: "transparent",
-            opacity: 0.07,
-            letterSpacing: "-0.05em",
+            whiteSpace: "nowrap",
           }}
         >
-          RIVINITY
-        </span>
+          {"RIVINITY".split("").map((char, i) => (
+            <span key={i} className="flex-1 text-center">
+              {char}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="container-custom relative z-10">
