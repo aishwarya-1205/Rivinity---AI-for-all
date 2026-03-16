@@ -24,7 +24,7 @@ export function CTASection() {
 
       {/* Globe Background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
-        <div className="relative w-[1100px] h-[1100px] opacity-50 dark:opacity-60 top-10">
+        <div className="relative w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] lg:w-[1100px] lg:h-[1100px] opacity-50 dark:opacity-60 top-40 sm:top-20 lg:top-10">
           <Globe
             className="absolute inset-0"
             config={{
@@ -64,40 +64,37 @@ export function CTASection() {
       {/* Radial fade overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,transparent_20%,var(--background)_75%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center mt-6">
-        {/* Badge ABOVE globe */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: -10 }}
-          animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="absolute left-1/2 -translate-x-1/2 -top-45 z-20"
-        >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center pt-20">
+        {/* Header content with Badge */}
+        <div className="flex flex-col items-center mb-12 sm:mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: -10 }}
+            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-10"
+          >
             <Sparkles className="w-4 h-4" />
             Start building today
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Center content INSIDE globe */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl"
-        >
-          {/* Headline */}
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 leading-[1.1]">
-            Build the future of{" "}
-            <span className="text-gradient">India's AI</span> with Rivinity
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-3xl"
+          >
+            <h2 className="text-4xl sm:text-5xl lg:text-5xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 leading-[1.1] text-balance">
+              Build the future of{" "}
+              <span className="text-gradient">India's AI</span> with Rivinity
+            </h2>
 
-          {/* Description */}
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-            Join the movement to democratize AI across Bharat. From startups in
-            Bangalore to enterprises in Mumbai, build sovereign AI applications
-            at scale.
-          </p>
-        </motion.div>
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              Join the movement to democratize AI across Bharat. From startups in
+              Bangalore to enterprises in Mumbai, build sovereign AI applications
+              at scale.
+            </p>
+          </motion.div>
+        </div>
 
         {/* Buttons BELOW globe */}
         <motion.div

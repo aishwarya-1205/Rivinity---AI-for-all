@@ -180,7 +180,7 @@ function ChatDemo() {
             )}
           >
             {msg.role === "assistant" && (
-              <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
                 R
               </div>
             )}

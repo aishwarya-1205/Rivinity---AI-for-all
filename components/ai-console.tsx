@@ -69,7 +69,7 @@ export function AIConsole() {
   const [message, setMessage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-    minHeight: 56,
+    minHeight: 64, // Increased to prevent placeholder cutting on mobile
     maxHeight: 160,
   });
 
@@ -111,7 +111,7 @@ export function AIConsole() {
               "w-full px-5 py-4 resize-none border-none rounded-t-2xl",
               "bg-transparent text-foreground text-base",
               "focus:outline-none focus:ring-0",
-              "placeholder:text-muted-foreground min-h-[56px]",
+              "placeholder:text-muted-foreground min-h-[64px]",
             )}
             style={{ overflow: "hidden" }}
           />
