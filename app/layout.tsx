@@ -80,7 +80,7 @@ export default function RootLayout({
           <BackgroundPaths />
 
           {/* Page content sits above via relative positioning */}
-          <div className="relative" style={{ zIndex: 1 }}>
+          <div className="relative will-change-transform" style={{ zIndex: 1 }}>
             {children}
           </div>
 

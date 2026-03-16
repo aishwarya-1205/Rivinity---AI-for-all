@@ -46,7 +46,10 @@ const integrations = [
 
 export function IntegrationsSection() {
   return (
-    <section className="py-24">
+    <section 
+      className="py-24"
+      style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -108,7 +111,7 @@ export function IntegrationsSection() {
                     className="relative aspect-square"
                   >
                     <div
-                      className="absolute inset-0 bg-card dark:bg-card/80 border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30"
+                      className="absolute inset-0 bg-card dark:bg-card/80 border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30 will-change-transform"
                       style={{
                         clipPath:
                           "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",

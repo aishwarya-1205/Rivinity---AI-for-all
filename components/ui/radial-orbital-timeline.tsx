@@ -5,7 +5,9 @@ import {
   useRef,
   useCallback,
   useEffect,
+  useMemo,
 } from "react";
+import { motion, useAnimationFrame, animate, motionValue, type MotionValue } from "framer-motion";
 import { ArrowRight, Link, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,19 +38,24 @@ export default function RadialOrbitalTimeline({
   const [isMobile, setIsMobile] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
 
-  // Per-node screen positions driven by RAF — these are container-relative px values
-  const [nodePositions, setNodePositions] = useState<
-    Record<number, { x: number; y: number }>
-  >({});
+  // Use useMemo to create MotionValues for the list safely without violating hook rules
+  const nodePositions = useMemo(() => {
+    const map: Record<number, { x: MotionValue<number>; y: MotionValue<number> }> = {};
+    timelineData.forEach((item) => {
+      map[item.id] = {
+        x: motionValue(0),
+        y: motionValue(0),
+      };
+    });
+    return map;
+  }, [timelineData]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const angleRef = useRef(0); // current orbit angle in radians
-  const rafRef = useRef<number>(0);
+  const angleRef = useRef(0);
   const pausedRef = useRef(false);
   const cardTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const orbitRadiusRef = useRef(220);
 
-  // Keep ref in sync with state
   useEffect(() => {
     orbitRadiusRef.current = orbitRadius;
   }, [orbitRadius]);
@@ -85,41 +92,35 @@ export default function RadialOrbitalTimeline({
     return () => window.removeEventListener("resize", updateRadius);
   }, []);
 
-  // RAF loop — computes each node's (x,y) in container space every frame
-  useEffect(() => {
-    const total = timelineData.length;
+  // Drive positions using framer-motion animation frame (bypasses React state)
+  useAnimationFrame((time) => {
+    if (!pausedRef.current) {
+      angleRef.current += 0.004;
+    }
 
-    const tick = () => {
-      if (!pausedRef.current) {
-        angleRef.current += 0.004;
-      }
+    const containerEl = containerRef.current;
+    if (containerEl) {
+      const w = containerEl.offsetWidth;
+      const h = containerEl.offsetHeight;
+      const cx = w / 2;
+      const cy = h / 2;
+      const r = orbitRadiusRef.current;
+      const total = timelineData.length;
 
-      const containerEl = containerRef.current;
-      if (containerEl) {
-        const w = containerEl.offsetWidth;
-        const h = containerEl.offsetHeight;
-        const cx = w / 2;
-        const cy = h / 2;
-        const r = orbitRadiusRef.current;
-
-        const positions: Record<number, { x: number; y: number }> = {};
-        timelineData.forEach((item, i) => {
+      timelineData.forEach((item, i) => {
+        // Only update if not expanded (handled by CSS transition/float logic for now)
+        if (activeNodeId !== item.id) {
           const baseAngle = (i / total) * Math.PI * 2;
           const a = angleRef.current + baseAngle;
-          positions[item.id] = {
-            x: cx + r * Math.cos(a),
-            y: cy + r * Math.sin(a),
-          };
-        });
-        setNodePositions(positions);
-      }
-
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [timelineData]);
+          const targetX = cx + r * Math.cos(a);
+          const targetY = cy + r * Math.sin(a);
+          
+          nodePositions[item.id].x.set(targetX);
+          nodePositions[item.id].y.set(targetY);
+        }
+      });
+    }
+  });
 
   const getRelatedItems = (itemId: number): number[] => {
     const current = timelineData.find((item) => item.id === itemId);
@@ -160,7 +161,13 @@ export default function RadialOrbitalTimeline({
       setActiveNodeId(id);
       setCardVisible(false);
 
-      // Card appears after node finishes floating (400ms CSS transition)
+      // Animate node to float target
+      const target = getFloatTarget();
+      const mPos = nodePositions[id];
+      animate(mPos.x, target.x, { duration: 0.45, ease: [0.34, 1.4, 0.64, 1] });
+      animate(mPos.y, target.y, { duration: 0.45, ease: [0.34, 1.4, 0.64, 1] });
+
+      // Card appears after node finishes floating
       cardTimerRef.current = setTimeout(() => setCardVisible(true), 420);
 
       const relatedItems = getRelatedItems(id);
@@ -266,36 +273,24 @@ export default function RadialOrbitalTimeline({
           </div>
         </div>
 
-        {/* ── Nodes — positioned via JS, NOT inside any rotating element ── */}
         {timelineData.map((item) => {
-          const pos = nodePositions[item.id];
-          if (!pos) return null;
-
+          const mPos = nodePositions[item.id];
           const isExpanded = activeNodeId === item.id;
           const isRelated = isRelatedToActive(item.id);
           const isPulsing = pulseEffect[item.id];
           const Icon = item.icon;
 
-          const floatTarget = isExpanded ? getFloatTarget() : null;
-
-          // Final rendered position: float target when expanded, orbit pos otherwise
-          const renderX = floatTarget ? floatTarget.x : pos.x;
-          const renderY = floatTarget ? floatTarget.y : pos.y;
-
           return (
-            <div
+            <motion.div
               key={item.id}
-              className="absolute cursor-pointer flex flex-col items-center"
+              className="absolute cursor-pointer flex flex-col items-center will-change-transform"
               style={{
-                left: renderX,
-                top: renderY,
-                transform: "translate(-50%, -50%)",
-                // Smooth float transition only when becoming/leaving expanded
-                transition: isExpanded
-                  ? "left 0.45s cubic-bezier(0.34,1.4,0.64,1), top 0.45s cubic-bezier(0.34,1.4,0.64,1)"
-                  : activeNodeId !== null
-                    ? "none" // other nodes: no transition while one is expanded
-                    : "none", // rotating: no transition (RAF drives it)
+                left: 0,
+                top: 0,
+                x: mPos.x,
+                y: mPos.y,
+                translateX: "-50%",
+                translateY: "-50%",
                 zIndex: isExpanded ? 60 : 20,
               }}
               onClick={(e) => {
@@ -303,21 +298,22 @@ export default function RadialOrbitalTimeline({
                 toggleItem(item.id);
               }}
             >
-              {/* Energy glow aura */}
-              <div
-                className={`absolute rounded-full pointer-events-none${isPulsing ? " animate-pulse" : ""}`}
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(255,122,24,0.28) 0%, rgba(108,99,255,0.10) 50%, transparent 70%)",
-                  width: item.energy * 0.5 + 40,
-                  height: item.energy * 0.5 + 40,
-                  left: -((item.energy * 0.5 + 40 - nodeSize) / 2),
-                  top: -((item.energy * 0.5 + 40 - nodeSize) / 2),
-                }}
-              />
-
-              {/* Gradient border glow */}
+              {/* Gradient border glow & icon container */}
               <div className="relative flex items-center justify-center">
+                {/* Energy glow aura - moved inside for perfect centering */}
+                <div
+                  className={`absolute rounded-full pointer-events-none${isPulsing ? " animate-pulse" : ""}`}
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,122,24,0.28) 0%, rgba(108,99,255,0.10) 50%, transparent 70%)",
+                    width: item.energy * 0.5 + 40,
+                    height: item.energy * 0.5 + 40,
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: -1,
+                  }}
+                />
                 <div
                   className="absolute -inset-[2px] rounded-full opacity-60"
                   style={{
@@ -353,7 +349,7 @@ export default function RadialOrbitalTimeline({
               >
                 {item.title}
               </div>
-            </div>
+            </motion.div>
           );
         })}
 
@@ -429,7 +425,7 @@ export default function RadialOrbitalTimeline({
                       </h4>
                     </div>
                     <div className="flex flex-wrap gap-1">
-                      {activeItem.relatedIds.map((relatedId) => {
+                      {activeItem.relatedIds.map((relatedId: number) => {
                         const relatedItem = timelineData.find(
                           (i) => i.id === relatedId
                         );
@@ -439,7 +435,7 @@ export default function RadialOrbitalTimeline({
                             variant="outline"
                             size="sm"
                             className="flex items-center h-6 px-2 py-0 text-[10px] border-border bg-transparent hover:bg-accent/10 text-card-foreground hover:text-accent transition-all"
-                            onClick={(e) => {
+                            onClick={(e: React.MouseEvent) => {
                               e.stopPropagation();
                               toggleItem(relatedId);
                             }}

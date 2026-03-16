@@ -16,6 +16,7 @@ export function BackgroundPaths() {
         zIndex: 0,
         pointerEvents: "none",
         overflow: "hidden",
+        willChange: "transform",
       }}
     >
       <svg

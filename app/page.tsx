@@ -20,14 +20,6 @@ export default function HomePage() {
   return (
     <SmoothScroll>
       <div className="relative min-h-screen bg-background">
-        {/* Continuous Gradient Background Canvas */}
-        <div
-          className="fixed inset-0 pointer-events-none z-0"
-          style={{
-            background: "var(--background)",
-          }}
-        />
-
         {/* Content Layer */}
         <div className="relative z-10">
           <Navbar />
