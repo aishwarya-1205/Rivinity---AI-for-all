@@ -460,15 +460,6 @@ export default function RadialOrbitalTimeline({
           );
         })()}
 
-        {/* Hint */}
-        <p
-          className="absolute bottom-3 left-0 right-0 text-center text-[11px] text-muted-foreground pointer-events-none"
-          data-backdrop="true"
-        >
-          {activeItem
-            ? "Click outside to resume rotation."
-            : "Click on any node to explore details. Click outside to resume rotation."}
-        </p>
       </div>
     </>
   );
