@@ -69,13 +69,45 @@ export function CTASection() {
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,transparent_20%,var(--background)_75%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center pt-0">
-        <div className="flex flex-col items-center mb-16 sm:mb-16">
+      <div
+        className="
+  relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8
+  flex flex-col items-center text-center
+
+  /* MOBILE FIX */
+  justify-center min-h-[650px] gap-6
+
+  /* DESKTOP stays same */
+  sm:pt-0 sm:gap-0
+"
+      >
+        <div
+          className="
+flex flex-col items-center
+
+/* MOBILE */
+justify-center gap-4
+
+/* DESKTOP */
+sm:mb-16 sm:gap-0
+"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: -10 }}
             animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-30 -mt-0"
+            className="
+inline-flex items-center gap-2 px-5 py-2.5 rounded-full 
+bg-gradient-to-r from-accent/10 to-highlight/10 
+border border-accent/30 text-sm font-medium text-accent 
+backdrop-blur-md shadow-md 
+
+/* MOBILE */
+mb-2
+
+/* DESKTOP */
+sm:mb-36
+"
           >
             <Sparkles className="w-4 h-4" />
             Start building today
@@ -87,12 +119,26 @@ export function CTASection() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-5xl xl:text-7xl font-bold text-foreground tracking-tight mb-8 leading-[1.1] text-balance">
+            <h2
+              className="
+text-3xl 
+sm:text-5xl lg:text-5xl xl:text-7xl
+font-bold text-foreground tracking-tight 
+leading-[1.1]
+"
+            >
               Build the future of{" "}
               <span className="text-gradient">India's AI</span> with Rivinity
             </h2>
 
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            <p
+              className="
+text-sm 
+sm:text-xl 
+text-muted-foreground leading-relaxed 
+max-w-md sm:max-w-2xl mx-auto
+"
+            >
               Join the movement to democratize AI across Bharat. From startups
               in Bangalore to enterprises in Mumbai, build sovereign AI
               applications at scale.
@@ -105,7 +151,7 @@ export function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-14"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16"
         >
           {/* Primary Button */}
           <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl">

@@ -149,7 +149,7 @@ export function FeaturesSection() {
       </section>
 
       {/* Mobile/Tablet:  */}
-      <section className="lg:hidden py-20 px-4 sm:px-6">
+      <section className="lg:hidden py-20 px-5 sm:px-7">
         <div className="mx-auto max-w-2xl space-y-12">
           {features.map((feature, index) => (
             <motion.div

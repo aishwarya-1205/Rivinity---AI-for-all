@@ -69,7 +69,7 @@ export function DemoShowcase() {
 
         {/* Tabs */}
         <div className="flex justify-center mb-8 sm:mb-12">
-          <div className="flex gap-2 p-2 rounded-xl bg-card border border-border overflow-x-auto max-w-full scrollbar-none">
+          <div className="flex flex-wrap justify-center gap-2 p-2 rounded-xl bg-card border border-border">
             {demos.map((demo) => (
               <button
                 key={demo.id}
@@ -78,7 +78,7 @@ export function DemoShowcase() {
                   restart();
                 }}
                 className={cn(
-                  "flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition whitespace-nowrap",
+                  "flex items-center justify-center gap-2 px-2 sm:px-4 py-2 rounded-lg text-[11px] sm:text-sm font-medium transition text-center",
                   activeDemo.id === demo.id
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary",

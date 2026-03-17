@@ -68,7 +68,7 @@ export function TestimonialsSection() {
   return (
     <section className="py-24 md:py-32 bg-background relative overflow-hidden">
       {/* Background Glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] pointer-events-none" />
 
       <div className="container z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -95,8 +95,11 @@ export function TestimonialsSection() {
         <div className="relative mt-16 h-[600px] xl:h-[700px] overflow-hidden">
           {/* Top Fade Overlay */}
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
-          
-          <div className="flex justify-center gap-6 h-full relative" style={{ transform: "translateZ(0)" }}>
+
+          <div
+            className="flex justify-center gap-6 h-full relative"
+            style={{ transform: "translateZ(0)" }}
+          >
             <TestimonialsColumn testimonials={firstColumn} duration={25} />
             <TestimonialsColumn
               testimonials={secondColumn}
