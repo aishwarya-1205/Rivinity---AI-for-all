@@ -268,7 +268,7 @@ export default function RadialOrbitalTimeline({
             className="absolute w-28 h-28 rounded-full border border-highlight/20 animate-ping opacity-50"
             style={{ animationDelay: "0.5s" }}
           />
-          <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center">
             <span className="text-xs font-bold text-foreground">AI</span>
           </div>
         </div>

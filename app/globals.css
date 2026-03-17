@@ -43,8 +43,8 @@
 }
 
 .dark {
-  --background: #030307;
-  --foreground: #f4f4f5;
+  --background: #111127;
+  --foreground: #e8e8e8;
 
   --card: #09090b;
   --card-foreground: #f4f4f5;
@@ -233,7 +233,7 @@
 }
 
 .dark .glass {
-  background: rgba(0, 0, 0, 0.2);
+  background: #111127;
 }
 
 @keyframes orbit-rotate {

@@ -50,18 +50,19 @@ const socialLinks: SocialLink[] = [
 
 export function Footer() {
   return (
-    <footer className="relative pb-28 pt-32 px-4 bg-white dark:bg-gray-950 transition-colors duration-300">
+    <footer className="relative pb-32 pt-40 px-4 bg-background transition-colors duration-300">
       {/* Watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-[-10%] flex justify-center overflow-hidden"
       >
         <div
-          className="flex justify-between w-full max-w-[80vw] mx-auto font-black select-none pointer-events-none"
+          className="flex justify-between w-full max-w-[95vw] mx-auto font-black select-none pointer-events-none items-end h-full"
           style={{
-            fontSize: "clamp(50px, 10vw, 360px)",
+            fontSize: "clamp(80px, 16vw, 520px)",
+            opacity: 0.06,
+            letterSpacing: "0.08em",
             lineHeight: 1,
-            opacity: 0.08,
             background: "linear-gradient(90deg,#a855f7,#f97316,#3b82f6)",
             WebkitBackgroundClip: "text",
             color: "transparent",
@@ -91,7 +92,7 @@ export function Footer() {
           />
 
           {/* Card */}
-          <div className="relative z-[1] bg-white dark:bg-gray-900 border border-black/[0.07] dark:border-white/[0.08] rounded-[3rem] p-10 shadow-sm dark:shadow-black/30 transition-colors duration-300">
+          <div className="relative z-[1] bg-card border border-black/[0.07] dark:border-white/[0.08] rounded-[3rem] p-10 shadow-sm dark:shadow-black/30 transition-colors duration-300">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
               {/* Col 1 — brand + contact */}
               <div className="flex flex-col gap-8">

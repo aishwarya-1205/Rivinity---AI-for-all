@@ -22,6 +22,7 @@ import {
   SiZapier,
 } from "react-icons/si";
 import { Brain, Cloud, Server } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const integrations = [
   { icon: SiOpenai, color: "#10A37F" },
@@ -30,7 +31,7 @@ const integrations = [
   { icon: SiGooglecloud, color: "#4285F4" },
   { icon: SiSlack, color: "#4A154B" },
   { icon: SiDiscord, color: "#5865F2" },
-  { icon: SiGithub, color: "#181717" },
+  { icon: SiGithub, color: "#181717", invertInDark: true },
   { icon: SiNotion, color: "#000000" },
   { icon: SiLinear, color: "#5E6AD2" },
   { icon: SiVercel, color: "#000000" },
@@ -45,8 +46,10 @@ const integrations = [
 ];
 
 export function IntegrationsSection() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
   return (
-    <section 
+    <section
       className="py-24"
       style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}
     >
@@ -111,15 +114,21 @@ export function IntegrationsSection() {
                     className="relative aspect-square"
                   >
                     <div
-                      className="absolute inset-0 bg-card dark:bg-card/80 border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30 will-change-transform"
+                      className="absolute inset-0 bg-card dark:bg-white/[0.03] border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30 will-change-transform"
                       style={{
                         clipPath:
                           "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
                       }}
                     >
                       <Icon
-                        className="w-6 h-6"
-                        style={{ color: integration.color }}
+                        className="w-6 h-6 drop-shadow-[0_0_6px_rgba(255,255,255,0.15)]"
+                        style={{
+                          color:
+                            isDark &&
+                            ["#000000", "#181717"].includes(integration.color)
+                              ? "#ffffff"
+                              : integration.color,
+                        }}
                       />
                     </div>
                   </motion.div>

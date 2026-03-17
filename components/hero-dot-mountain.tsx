@@ -29,12 +29,12 @@ const SKYLINE: Pt[] = [
   { x: 0.391, y: 0.522 },
   { x: 0.413, y: 0.526 },
   { x: 0.435, y: 0.525 },
-  { x: 0.457, y: 0.54 }, // slight dip centre
+  { x: 0.457, y: 0.54 },
   { x: 0.478, y: 0.54 },
   { x: 0.5, y: 0.529 },
   { x: 0.522, y: 0.508 },
-  { x: 0.544, y: 0.492 }, // right-of-centre ridge
-  { x: 0.566, y: 0.489 }, // ← right ridge top
+  { x: 0.544, y: 0.492 },
+  { x: 0.566, y: 0.489 },
   { x: 0.588, y: 0.513 },
   { x: 0.61, y: 0.534 },
   { x: 0.632, y: 0.558 },
@@ -43,7 +43,7 @@ const SKYLINE: Pt[] = [
   { x: 0.698, y: 0.522 },
   { x: 0.72, y: 0.526 },
   { x: 0.742, y: 0.535 },
-  { x: 0.764, y: 0.555 }, // right shoulder
+  { x: 0.764, y: 0.555 },
   { x: 0.786, y: 0.578 },
   { x: 0.808, y: 0.606 },
   { x: 0.829, y: 0.607 },
@@ -136,7 +136,7 @@ export default function HeroDotMountain() {
       const BASE_W = 1459;
       const SPACING = Math.max(7, Math.round((10 * W) / BASE_W));
       const DOT_SIZE = Math.max(5, Math.round(SPACING * 0.78));
-      const GAP = SPACING - DOT_SIZE; // ~2px gap
+      const GAP = SPACING - DOT_SIZE;
 
       const cols = Math.ceil(W / SPACING) + 1;
       const rows = Math.ceil(H / SPACING) + 1;
@@ -148,10 +148,10 @@ export default function HeroDotMountain() {
         sky[c] = crY(SKYLINE, mirroredX) * H;
       }
 
-      ctx.fillStyle = "rgb(120, 120, 130)";
+      ctx.fillStyle = "rgb(80, 30, 60)";
 
       const FADE_RANGE = 0.55;
-      const PEAK_OP = 0.95;
+      const PEAK_OP = 0.98;
       const BOTTOM_OP = 0.0;
 
       for (let c = 0; c <= cols; c++) {

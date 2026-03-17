@@ -14,13 +14,19 @@ export function CTASection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[900px] flex items-center overflow-hidden"
+      className="relative min-h-[900px] flex items-center overflow-hidden bg-background"
     >
       {/* Background Beams */}
       <BackgroundBeams className="opacity-40" />
 
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/30 to-secondary/60 pointer-events-none" />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--background) 40%, transparent), var(--background))",
+        }}
+      />
 
       {/* Globe Background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
@@ -30,7 +36,7 @@ export function CTASection() {
             config={{
               width: 1100,
               height: 1100,
-              onRender: () => { },
+              onRender: () => {},
               devicePixelRatio: 2,
               phi: 0,
               theta: 0.3,
@@ -71,7 +77,7 @@ export function CTASection() {
             initial={{ opacity: 0, scale: 0.9, y: -10 }}
             animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-26 -mt-64"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-28 -mt-60"
           >
             <Sparkles className="w-4 h-4" />
             Start building today
