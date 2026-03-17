@@ -92,18 +92,26 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Animated Testimonial Columns */}
-        <div className="flex justify-center gap-6 mt-16 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] h-[600px] xl:h-[700px] overflow-hidden relative">
-          <TestimonialsColumn testimonials={firstColumn} duration={25} />
-          <TestimonialsColumn
-            testimonials={secondColumn}
-            className="hidden md:block"
-            duration={35}
-          />
-          <TestimonialsColumn
-            testimonials={thirdColumn}
-            className="hidden lg:block"
-            duration={28}
-          />
+        <div className="relative mt-16 h-[600px] xl:h-[700px] overflow-hidden">
+          {/* Top Fade Overlay */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
+          
+          <div className="flex justify-center gap-6 h-full relative" style={{ transform: "translateZ(0)" }}>
+            <TestimonialsColumn testimonials={firstColumn} duration={25} />
+            <TestimonialsColumn
+              testimonials={secondColumn}
+              className="hidden md:block"
+              duration={35}
+            />
+            <TestimonialsColumn
+              testimonials={thirdColumn}
+              className="hidden lg:block"
+              duration={28}
+            />
+          </div>
+
+          {/* Bottom Fade Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
         </div>
       </div>
     </section>

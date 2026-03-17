@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import {
   MessageSquare,
   Mic,
@@ -92,9 +92,9 @@ export function DemoShowcase() {
         </div>
 
         {/* Demo Window */}
-        <div className="relative group" style={{ translate: "z(0)" }}>
+        <div className="relative group" style={{ transform: "translateZ(0)" }}>
           {/* Gradient Glow */}
-          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-40 blur-sm transition duration-500 group-hover:blur-md group-hover:opacity-70 will-change-[opacity,filter]"></div>
+          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-20 blur-sm transition-all duration-700 group-hover:blur-md group-hover:opacity-40 will-change-[opacity,filter] pointer-events-none"></div>
 
           {/* Actual Window */}
           <div className="relative bg-card border border-border rounded-2xl overflow-hidden will-change-transform">
@@ -144,7 +144,7 @@ export function DemoShowcase() {
 
 /* ---------------- CHAT DEMO ---------------- */
 
-function ChatDemo() {
+const ChatDemo = memo(function ChatDemo() {
   const messages = [
     {
       role: "user",
@@ -217,11 +217,11 @@ function ChatDemo() {
       </div>
     </div>
   );
-}
+});
 
 /* ---------------- VOICE DEMO ---------------- */
 
-function VoiceDemo() {
+const VoiceDemo = memo(function VoiceDemo() {
   return (
     <div className="flex flex-col h-full justify-between p-8">
       <div className="flex flex-col items-center justify-center flex-1 text-center gap-6">
@@ -250,11 +250,11 @@ function VoiceDemo() {
       </div>
     </div>
   );
-}
+});
 
 /* ---------------- CODE DEMO ---------------- */
 
-function CodeDemo() {
+const CodeDemo = memo(function CodeDemo() {
   const code = `const response = await rivinity.chat({
   model: "rivinity-turbo",
   messages: [{ role: "user", content: prompt }]
@@ -284,11 +284,11 @@ function CodeDemo() {
       </div>
     </div>
   );
-}
+});
 
 /* ---------------- SEARCH DEMO ---------------- */
 
-function SearchDemo() {
+const SearchDemo = memo(function SearchDemo() {
   const results = [
     "Enterprise Refund Policy",
     "Customer Support Guidelines",
@@ -317,4 +317,4 @@ function SearchDemo() {
       </div>
     </div>
   );
-}
+});
