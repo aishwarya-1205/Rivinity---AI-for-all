@@ -148,10 +148,10 @@ export default function HeroDotMountain() {
         sky[c] = crY(SKYLINE, mirroredX) * H;
       }
 
-      ctx.fillStyle = "rgb(80, 30, 60)";
+      ctx.fillStyle = "rgb(160, 150, 180)";
 
       const FADE_RANGE = 0.55;
-      const PEAK_OP = 0.98;
+      const PEAK_OP = 0.9;
       const BOTTOM_OP = 0.0;
 
       for (let c = 0; c <= cols; c++) {
