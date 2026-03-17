@@ -94,7 +94,6 @@ export function Footer() {
           {/* Card */}
           <div className="relative z-[1] bg-card border border-black/[0.07] dark:border-white/[0.08] rounded-[3rem] p-10 shadow-sm dark:shadow-black/30 transition-colors duration-300">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
-              {/* Col 1 — brand + contact */}
               <div className="flex flex-col gap-8">
                 <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
                   <span>A product by</span>
@@ -143,7 +142,6 @@ export function Footer() {
                 </div>
               ))}
 
-              {/* Get in touch */}
               <div className="flex flex-col gap-6">
                 <div>
                   <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm tracking-widest uppercase mb-2">
@@ -178,7 +176,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-4 mb-[-1rem] text-center">
           <p className="text-[15px] sm:text-s text-gray-400 dark:text-gray-600 font-medium tracking-wide">
             © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.

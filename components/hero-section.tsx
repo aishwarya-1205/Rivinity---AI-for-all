@@ -59,7 +59,6 @@ export function HeroSection() {
           </a>
         </motion.div>
 
-        {/* Hero Headline with Text Generate Effect */}
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0 }}

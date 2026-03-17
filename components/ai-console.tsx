@@ -69,7 +69,7 @@ export function AIConsole() {
   const [message, setMessage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-    minHeight: 64, // Increased to prevent placeholder cutting on mobile
+    minHeight: 64,
     maxHeight: 160,
   });
 
@@ -96,7 +96,6 @@ export function AIConsole() {
         />
 
         <div className="relative">
-          {/* Textarea Input */}
           <textarea
             ref={textareaRef}
             value={message}

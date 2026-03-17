@@ -103,8 +103,10 @@ export function FeaturesSection() {
 
   return (
     <>
-      {/* Desktop: sticky scroll version */}
-      <section ref={containerRef} className="relative h-[300vh] hidden lg:block">
+      <section
+        ref={containerRef}
+        className="relative h-[300vh] hidden lg:block"
+      >
         <div className="sticky top-0 h-screen flex items-center">
           <div className="mx-auto max-w-7xl grid grid-cols-2 gap-16 px-6 w-full">
             {/* TEXT SIDE */}
@@ -146,7 +148,7 @@ export function FeaturesSection() {
         </div>
       </section>
 
-      {/* Mobile/Tablet: stacked cards */}
+      {/* Mobile/Tablet:  */}
       <section className="lg:hidden py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-2xl space-y-12">
           {features.map((feature, index) => (

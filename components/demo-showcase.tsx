@@ -67,7 +67,7 @@ export function DemoShowcase() {
           </p>
         </div>
 
-        {/* Tabs - scrollable on mobile */}
+        {/* Tabs */}
         <div className="flex justify-center mb-8 sm:mb-12">
           <div className="flex gap-2 p-2 rounded-xl bg-card border border-border overflow-x-auto max-w-full scrollbar-none">
             {demos.map((demo) => (

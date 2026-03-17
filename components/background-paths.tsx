@@ -2,10 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * Pure CSS + SVG background paths — no framer-motion dependency issues.
- * Fixed full-page, sits behind all content.
- */
 export function BackgroundPaths() {
   return (
     <div

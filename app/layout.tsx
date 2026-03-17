@@ -76,10 +76,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          {/* Fixed full-page background paths — sits behind all content */}
           <BackgroundPaths />
 
-          {/* Page content sits above via relative positioning */}
           <div className="relative will-change-transform" style={{ zIndex: 1 }}>
             {children}
           </div>
