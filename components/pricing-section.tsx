@@ -10,35 +10,35 @@ export function PricingSection() {
       style={{ background: "var(--background)", color: "var(--foreground)" }}
     >
       {/* ── Background Effects ── */}
-      <div className="absolute inset-0 -z-10">
-        {/* Radial top gradient */}
+      <div className="absolute inset-0 -z-10" style={{ transform: "translateZ(0)" }}>
+        {/* Radial top gradient - Optimized */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(35% 80% at 50% 0%, color-mix(in srgb, var(--foreground) 6%, transparent), transparent)",
+              "radial-gradient(35% 80% at 50% 0%, rgba(10, 10, 10, 0.05), transparent)",
           }}
         />
 
-        {/* Dot pattern */}
+        {/* Dot pattern - Simplified */}
         <div
           aria-hidden="true"
           className="absolute inset-0 size-full"
           style={{
             backgroundImage:
-              "radial-gradient(color-mix(in srgb, var(--foreground) 7%, transparent) 1px, transparent 1px)",
-            backgroundSize: "12px 12px",
+              "radial-gradient(rgba(10, 10, 10, 0.05) 1px, transparent 1px)",
+            backgroundSize: "16px 16px",
           }}
         />
 
         {/* Accent orb — top left */}
         <div
-          className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
+          className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-10 blur-[80px] pointer-events-none"
           style={{ background: "var(--accent)" }}
         />
         {/* Highlight orb — top right */}
         <div
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-15 blur-3xl pointer-events-none"
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10 blur-[80px] pointer-events-none"
           style={{ background: "var(--highlight)" }}
         />
       </div>

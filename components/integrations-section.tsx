@@ -95,8 +95,8 @@ export function IntegrationsSection() {
           </div>
 
           {/* Right Side - Hexagonal Grid */}
-          <div className="relative">
-            <div className="grid grid-cols-6 gap-3">
+          <div className="relative" style={{ transform: "translateZ(0)" }}>
+            <div className="grid grid-cols-6 gap-3 will-change-transform">
               {integrations.map((integration, idx) => {
                 const Icon = integration.icon;
 

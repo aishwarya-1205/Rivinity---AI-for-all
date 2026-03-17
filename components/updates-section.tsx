@@ -45,7 +45,7 @@ export function UpdatesSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8" style={{ transform: "translateZ(0)" }}>
           {updates.map((update, index) => (
             <motion.a
               href="#"

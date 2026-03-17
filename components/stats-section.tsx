@@ -82,7 +82,10 @@ export function StatsSection() {
           transition={{ duration: 0.6 }}
           className="rounded-3xl bg-foreground text-background overflow-hidden shadow-xl"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            style={{ transform: "translateZ(0)" }}
+          >
             {stats.map((stat, index) => (
               <div key={stat.label} className="relative px-8 py-12 text-center">
                 {/* divider */}

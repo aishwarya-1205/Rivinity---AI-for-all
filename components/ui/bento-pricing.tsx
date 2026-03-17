@@ -20,8 +20,8 @@ function FilledCheck() {
 
 /* ─── Shared card gradient background ────────────────────────────────────── */
 const cardGradientStyle: React.CSSProperties = {
-  background:
-    "linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--card)) 0%, var(--card) 40%, color-mix(in srgb, var(--highlight) 5%, var(--card)) 100%)",
+  background: "var(--card)",
+  transform: "translateZ(0)",
 };
 
 /* ─── OutlineButton ───────────────────────────────────────────────────────── */

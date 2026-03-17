@@ -44,7 +44,10 @@ export function SecuritySection() {
           </h2>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 lg:gap-16">
+        <div 
+          className="flex flex-wrap justify-center gap-6 md:gap-10 lg:gap-16"
+          style={{ transform: "translateZ(0)" }}
+        >
           {certifications.map((cert, index) => (
             <motion.div
               key={index}

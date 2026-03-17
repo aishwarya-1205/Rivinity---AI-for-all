@@ -70,7 +70,7 @@ export function FAQSection() {
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-4" style={{ transform: "translateZ(0)" }}>
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
