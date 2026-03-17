@@ -126,7 +126,7 @@ export function IntegrationsSection() {
                           color:
                             isDark &&
                             ["#000000", "#181717"].includes(integration.color)
-                              ? "#ffffff"
+                              ? "rgb(24, 23, 23)"
                               : integration.color,
                         }}
                       />

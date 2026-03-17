@@ -16,7 +16,6 @@ export function BackgroundPaths() {
         zIndex: 0,
         pointerEvents: "none",
         overflow: "hidden",
-        willChange: "transform",
       }}
     >
       <svg
@@ -59,8 +58,8 @@ export function BackgroundPaths() {
               100% { stroke-dashoffset: -2000; opacity: 0; }
             }
             .bp { stroke-dasharray: 2000; fill: none; }
-            .bp:nth-child(odd)  { animation: dash1 var(--dur, 20s) var(--del, 0s) infinite ease-in-out; }
-            .bp:nth-child(even) { animation: dash2 var(--dur, 20s) var(--del, 0s) infinite ease-in-out; }
+            .bp:nth-child(odd)  { animation: dash1 var(--dur, 40s) var(--del, 0s) infinite ease-in-out; }
+            .bp:nth-child(even) { animation: dash2 var(--dur, 40s) var(--del, 0s) infinite ease-in-out; }
           `}</style>
         </defs>
 
@@ -71,7 +70,7 @@ export function BackgroundPaths() {
           d="M-300 800 C200 600 400 300 800 200 S1200 100 1800 50"
           stroke="url(#pg1)"
           strokeWidth="0.8"
-          strokeOpacity="0.15"
+          strokeOpacity="0.06"
         />
         <path
           className="bp"

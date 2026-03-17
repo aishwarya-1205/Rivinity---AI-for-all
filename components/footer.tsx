@@ -50,11 +50,11 @@ const socialLinks: SocialLink[] = [
 
 export function Footer() {
   return (
-    <footer className="relative pb-32 pt-40 px-4 bg-background transition-colors duration-300">
+    <footer className="relative pb-22 pt-40 px-4 bg-background transition-colors duration-300">
       {/* Watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-[-10%] flex justify-center overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-[-15%] flex justify-center overflow-hidden"
       >
         <div
           className="flex justify-between w-full max-w-[95vw] mx-auto font-black select-none pointer-events-none items-end h-full"

@@ -14,7 +14,7 @@ export function CTASection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[900px] flex items-center overflow-hidden bg-background"
+      className="relative min-h-[650px] flex items-center overflow-hidden bg-background"
     >
       {/* Background Beams */}
       <BackgroundBeams className="opacity-40" />
@@ -70,14 +70,14 @@ export function CTASection() {
       {/* Radial fade overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,transparent_20%,var(--background)_75%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center pt-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8 flex flex-col items-center text-center pt-0">
         {/* Header content with Badge */}
         <div className="flex flex-col items-center mb-16 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: -10 }}
             animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-28 -mt-60"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 border border-accent/30 text-sm font-medium text-accent backdrop-blur-md shadow-md mb-28 -mt-0"
           >
             <Sparkles className="w-4 h-4" />
             Start building today
@@ -107,7 +107,7 @@ export function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-14"
         >
           {/* Primary Button */}
           <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl">
