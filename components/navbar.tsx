@@ -86,13 +86,21 @@ export function Navbar() {
         </div>
 
         {/* Center: Glass Nav Pill */}
-        <nav
-          className="hidden md:flex relative items-center"
-          style={{
-            filter:
-              "drop-shadow(0 12px 20px rgba(205, 90, 50, 0.25)) drop-shadow(0 12px 28px rgba(160, 80, 140, 0.2)) drop-shadow(0 12px 36px rgba(110, 85, 185, 0.2))",
-          }}
-        >
+        <nav className="hidden md:flex relative items-center">
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-12px",
+              left: "10%",
+              right: "10%",
+              height: "20px",
+              background:
+                "linear-gradient(to right, rgba(205, 90, 50, 0.5), rgba(175, 90, 150, 0.45), rgba(110, 85, 185, 0.5))",
+              filter: "blur(12px)",
+              borderRadius: "50%",
+              zIndex: -1,
+            }}
+          />
           {/* Glass Pill */}
           <div className="relative flex items-center gap-1 bg-background/60 dark:bg-white/[0.04] backdrop-blur-xl px-2 py-1.5 rounded-full border border-border/40 shadow-lg">
             {navLinks.map((link) => (
