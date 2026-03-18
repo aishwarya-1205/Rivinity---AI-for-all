@@ -414,7 +414,7 @@ export default function PlatformPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="h-14 px-8 text-base rounded-full border-background/30 text-background hover:bg-background/10"
+                className="h-14 px-8 text-base rounded-full border-background/30 text-foreground hover:bg-background/10"
               >
                 Talk to Sales
               </Button>

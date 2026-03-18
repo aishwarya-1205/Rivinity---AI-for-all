@@ -15,6 +15,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Component } from "@/components/ui/grid-background";
+import { Timeline } from "@/components/ui/timeline";
 
 const values = [
   {
@@ -76,40 +77,6 @@ const leadership = [
   },
 ];
 
-const milestones = [
-  {
-    year: "2023",
-    event: "Founded in Bangalore",
-    description: "Started with a vision to build sovereign AI for India",
-  },
-  {
-    year: "2024",
-    event: "Series A Funding",
-    description: "Raised $50M led by Sequoia India and Accel",
-  },
-  {
-    year: "2024",
-    event: "Rivinity-1 Launch",
-    description:
-      "Released first multilingual LLM supporting 22 Indian languages",
-  },
-  {
-    year: "2025",
-    event: "1M+ Developers",
-    description: "Crossed 1 million developers on the platform",
-  },
-  {
-    year: "2025",
-    event: "Series B Funding",
-    description: "Raised $200M at $2B valuation",
-  },
-  {
-    year: "2026",
-    event: "Enterprise Launch",
-    description: "Deployed across 50+ Fortune 500 companies in India",
-  },
-];
-
 const offices = [
   { city: "Bangalore", type: "HQ", address: "Koramangala, Bangalore 560034" },
   { city: "Mumbai", type: "Office", address: "BKC, Mumbai 400051" },
@@ -118,6 +85,144 @@ const offices = [
     city: "Hyderabad",
     type: "Office",
     address: "HITEC City, Hyderabad 500081",
+  },
+];
+
+// Timeline data — title is the sticky year, content is the rich card
+const timelineData = [
+  {
+    title: "2023",
+    content: (
+      <div>
+        <p className="text-accent font-semibold text-sm mb-1 uppercase tracking-wider">
+          Founded
+        </p>
+        <h3 className="text-2xl font-bold text-foreground mb-3">
+          Founded in Bangalore
+        </h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Started with a vision to build sovereign AI for India. A small team of
+          researchers and engineers came together in Koramangala with a bold
+          mission: to make AI work for 1.4 billion Indians.
+        </p>
+        <div className="mt-6 grid grid-cols-2 gap-4">
+          <div className="bg-secondary/50 rounded-2xl p-4 border border-border">
+            <div className="text-3xl font-bold text-foreground">5</div>
+            <div className="text-sm text-muted-foreground mt-1">Founders</div>
+          </div>
+          <div className="bg-secondary/50 rounded-2xl p-4 border border-border">
+            <div className="text-3xl font-bold text-foreground">22</div>
+            <div className="text-sm text-muted-foreground mt-1">
+              Target Languages
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "2024",
+    content: (
+      <div>
+        <p className="text-accent font-semibold text-sm mb-1 uppercase tracking-wider">
+          Growth
+        </p>
+        <h3 className="text-2xl font-bold text-foreground mb-3">
+          Series A & First Model Launch
+        </h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Raised $50M Series A led by Sequoia India and Accel — then shipped
+          Rivinity-1, our first multilingual LLM supporting all 22 scheduled
+          Indian languages.
+        </p>
+        <div className="space-y-3">
+          {[
+            { label: "Series A raised", value: "$50M" },
+            { label: "Lead investors", value: "Sequoia India · Accel" },
+            { label: "Languages supported", value: "22 Indian languages" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="flex items-center justify-between py-3 px-4 bg-secondary/50 rounded-xl border border-border"
+            >
+              <span className="text-muted-foreground text-sm">
+                {stat.label}
+              </span>
+              <span className="font-semibold text-foreground text-sm">
+                {stat.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "2025",
+    content: (
+      <div>
+        <p className="text-accent font-semibold text-sm mb-1 uppercase tracking-wider">
+          Scale
+        </p>
+        <h3 className="text-2xl font-bold text-foreground mb-3">
+          1M Developers & Series B
+        </h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Crossed 1 million developers on the platform, then raised $200M at a
+          $2B valuation — cementing Rivinity as India's leading AI
+          infrastructure company.
+        </p>
+        <div className="mt-4 grid grid-cols-3 gap-4">
+          {[
+            { value: "1M+", label: "Developers" },
+            { value: "$200M", label: "Series B" },
+            { value: "$2B", label: "Valuation" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-gradient-to-br from-accent/10 to-highlight/5 rounded-2xl p-4 border border-accent/20 text-center"
+            >
+              <div className="text-2xl font-bold text-foreground">
+                {stat.value}
+              </div>
+              <div className="text-xs text-muted-foreground mt-1">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "2026",
+    content: (
+      <div>
+        <p className="text-accent font-semibold text-sm mb-1 uppercase tracking-wider">
+          Enterprise
+        </p>
+        <h3 className="text-2xl font-bold text-foreground mb-3">
+          Enterprise Launch
+        </h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Deployed across 50+ Fortune 500 companies in India. Rivinity becomes
+          the default AI infrastructure layer for India's largest enterprises,
+          government bodies, and public institutions.
+        </p>
+        <div className="bg-secondary/50 rounded-2xl p-5 border border-border">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-sm font-medium text-foreground">
+              Currently live
+            </span>
+          </div>
+          <div className="text-muted-foreground text-sm leading-relaxed">
+            Serving real-time AI workloads across BFSI, healthcare, retail, and
+            public sector at population scale.
+          </div>
+        </div>
+      </div>
+    ),
   },
 ];
 
@@ -238,7 +343,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Timeline — Our Journey */}
       <section className="py-24 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -246,7 +351,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-4"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Our Journey
@@ -255,43 +360,10 @@ export default function AboutPage() {
               From a small team in Bangalore to India&apos;s leading AI company
             </p>
           </motion.div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-border hidden lg:block" />
-
-            <div className="space-y-8">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={milestone.year + milestone.event}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex items-center gap-8 ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
-                >
-                  <div
-                    className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}
-                  >
-                    <div className="bg-card rounded-2xl p-6 border border-border inline-block">
-                      <div className="text-accent font-bold text-lg mb-1">
-                        {milestone.year}
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">
-                        {milestone.event}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {milestone.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="hidden lg:flex w-4 h-4 rounded-full bg-accent absolute left-1/2 -translate-x-1/2" />
-                  <div className="flex-1" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
+
+        {/* Timeline renders full-width with its own internal max-w */}
+        <Timeline data={timelineData} />
       </section>
 
       {/* Leadership */}
