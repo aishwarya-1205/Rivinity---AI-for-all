@@ -69,48 +69,53 @@ function AnimatedNumber({
   );
 }
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function StatsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl bg-foreground text-background overflow-hidden shadow-xl"
+    <SectionWrapper
+      ref={ref}
+      className="bg-background"
+      id="stats"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="rounded-3xl bg-gradient-to-br from-foreground to-foreground/90 text-background overflow-hidden shadow-xl relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-highlight/10 pointer-events-none" />
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+          style={{ transform: "translateZ(0)" }}
         >
-          <div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-            style={{ transform: "translateZ(0)" }}
-          >
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="relative px-8 py-12 text-center">
-                {/* divider */}
-                {index !== 0 && (
-                  <div className="hidden lg:block absolute left-0 top-1/4 bottom-1/4 w-px bg-white/10" />
-                )}
+          {stats.map((stat, index) => (
+            <div key={stat.label} className="relative px-8 py-12 text-center">
+              {/* divider */}
+              {index !== 0 && (
+                <div className="hidden lg:block absolute left-0 top-1/4 bottom-1/4 w-px bg-white/10" />
+              )}
 
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
-                  <AnimatedNumber
-                    value={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                  />
-                </div>
-
-                <p className="mt-3 text-sm font-semibold text-background/90">
-                  {stat.label}
-                </p>
-
-                <p className="mt-1 text-sm text-background/60">{stat.description}</p>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-secondary">
+                <AnimatedNumber
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                />
               </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+
+              <p className="mt-3 text-sm font-semibold text-background/90 uppercase tracking-wider">
+                {stat.label}
+              </p>
+
+              <p className="mt-1 text-sm text-background/60 leading-relaxed">{stat.description}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </SectionWrapper>
   );
 }

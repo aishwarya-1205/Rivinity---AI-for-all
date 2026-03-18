@@ -153,68 +153,66 @@ function AnimatedCounter({
   );
 }
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function RoadmapSection() {
   return (
-    <section 
-      className="relative py-24 md:py-32 overflow-hidden bg-background"
-      style={{ contentVisibility: "auto", containIntrinsicSize: "0 1000px" }}
+    <SectionWrapper
+      className="bg-background"
+      id="roadmap"
+      style={{ contentVisibility: "auto", containIntrinsicSize: "0 1000px" } as React.CSSProperties}
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-background" />
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-center mb-12 md:mb-16"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-highlight/10 border border-highlight/20 mb-6 font-medium text-highlight">
+          <Rocket className="w-4 h-4" />
+          <span className="text-sm">
+            Product Roadmap
+          </span>
+        </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 text-balance">
+          Building the Future of{" "}
+          <span className="text-gradient">
+            Intelligence Infrastructure
+          </span>
+        </h2>
+
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+          Our roadmap represents our commitment to democratizing AI. Each
+          milestone brings us closer to universal intelligence access for
+          humanity.
+        </p>
+      </motion.div>
+
+      {/* Orbital Timeline */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="relative"
+      >
+        <RadialOrbitalTimeline timelineData={roadmapData} />
+
+        {/* Hint Text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center text-sm text-muted-foreground mt-4"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-highlight/10 border border-highlight/20 mb-6">
-            <Rocket className="w-4 h-4 text-highlight" />
-            <span className="text-sm font-medium text-highlight">
-              Product Roadmap
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 text-balance">
-            Building the Future of
-            <span className="block bg-gradient-to-r from-accent to-highlight bg-clip-text text-transparent">
-              Intelligence Infrastructure
-            </span>
-          </h2>
-
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Our roadmap represents our commitment to democratizing AI. Each
-            milestone brings us closer to universal intelligence access for
-            humanity.
-          </p>
-        </motion.div>
-
-        {/* Orbital Timeline */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="relative"
-        >
-          <RadialOrbitalTimeline timelineData={roadmapData} />
-
-          {/* Hint Text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center text-sm text-muted-foreground mt-4"
-          >
-            Click on any node to explore details. Click outside to resume
-            rotation.
-          </motion.p>
-        </motion.div>
-      </div>
-    </section>
+          Click on any node to explore details. Click outside to resume
+          rotation.
+        </motion.p>
+      </motion.div>
+    </SectionWrapper>
   );
 }

@@ -88,8 +88,16 @@ export default function RadialOrbitalTimeline({
     };
 
     updateRadius();
-    window.addEventListener("resize", updateRadius);
-    return () => window.removeEventListener("resize", updateRadius);
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateRadius, 150);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Drive positions using framer-motion animation frame (bypasses React state)
@@ -261,6 +269,7 @@ export default function RadialOrbitalTimeline({
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
+            boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)"
           }}
         >
           <div className="absolute w-24 h-24 rounded-full border border-accent/20 animate-ping opacity-70" />
@@ -305,7 +314,7 @@ export default function RadialOrbitalTimeline({
                   className={`absolute rounded-full pointer-events-none${isPulsing ? " animate-pulse" : ""}`}
                   style={{
                     background:
-                      "radial-gradient(circle, rgba(255,122,24,0.28) 0%, rgba(108,99,255,0.10) 50%, transparent 70%)",
+                      "radial-gradient(circle, color-mix(in srgb, var(--accent) 28%, transparent) 0%, color-mix(in srgb, var(--highlight) 10%, transparent) 50%, transparent 70%)",
                     width: item.energy * 0.5 + 40,
                     height: item.energy * 0.5 + 40,
                     left: "50%",
@@ -318,7 +327,7 @@ export default function RadialOrbitalTimeline({
                   className="absolute -inset-[2px] rounded-full opacity-60"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(255,122,24,0.9), rgba(108,99,255,0.9))",
+                      "linear-gradient(135deg, var(--accent), var(--highlight))",
                     filter: "blur(5px)",
                   }}
                 />
@@ -372,8 +381,8 @@ export default function RadialOrbitalTimeline({
             >
               {/* Connector stem */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div className="w-px h-3 bg-accent/50" />
-                <div className="w-1.5 h-1.5 rounded-full bg-accent/70 mt-px" />
+                <div className="w-px h-3 bg-accent" />
+                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-px" />
               </div>
 
               <CardHeader className="pb-2 px-3 pt-3">

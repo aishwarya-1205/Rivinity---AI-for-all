@@ -52,10 +52,19 @@ export function MouseSpark() {
           color: colors[Math.floor(Math.random() * colors.length)],
         })
       }
+      if (!animationRef.current) {
+        animationRef.current = requestAnimationFrame(animate)
+      }
     }
 
     const animate = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      if (particlesRef.current.length === 0) {
+        animationRef.current = 0
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        return
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       particlesRef.current = particlesRef.current.filter((p) => {
         p.x += p.vx
@@ -93,7 +102,7 @@ export function MouseSpark() {
     resize()
     window.addEventListener("resize", resize)
     window.addEventListener("mousemove", handleMouseMove)
-    animate()
+    // Removed unconditional animate() start to save CPU/GPU cycles when idle
 
     return () => {
       window.removeEventListener("resize", resize)

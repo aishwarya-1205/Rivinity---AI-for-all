@@ -19,6 +19,7 @@ export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const { scrollY } = useScroll();
 
+  const [activeTab, setActiveTab] = useState(navLinks[0].label);
   const isDark = resolvedTheme === "dark";
 
   const backgroundColor = useTransform(
@@ -87,33 +88,49 @@ export function Navbar() {
 
         {/* Center: Glass Nav Pill */}
         <nav className="hidden md:flex relative items-center">
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-12px",
-              left: "10%",
-              right: "10%",
-              height: "20px",
-              background:
-                "linear-gradient(to right, rgba(205, 90, 50, 0.5), rgba(175, 90, 150, 0.45), rgba(110, 85, 185, 0.5))",
-              filter: "blur(12px)",
-              borderRadius: "50%",
-              zIndex: -1,
-            }}
-          />
           {/* Glass Pill */}
           <div className="relative flex items-center gap-1 bg-background/60 dark:bg-white/[0.04] backdrop-blur-xl px-2 py-1.5 rounded-full border border-border/40 shadow-lg">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                className="relative px-5 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeTab === link.label;
+              return (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    // Prevent navigation if these are just internal test links
+                    // e.preventDefault(); 
+                    setActiveTab(link.label);
+                  }}
+                  className={`
+                    relative px-5 py-2 text-sm font-medium transition-colors rounded-full
+                    ${isActive ? "text-accent" : "text-muted-foreground hover:text-foreground"}
+                  `}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="relative z-10">{link.label}</span>
+                  
+                  {isActive && (
+                    <motion.div
+                      layoutId="lamp"
+                      className="absolute inset-0 w-full bg-accent/5 rounded-full z-0"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    >
+                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-accent rounded-t-full">
+                        <div className="absolute w-12 h-6 bg-accent/20 rounded-full blur-md -top-2 -left-2" />
+                        <div className="absolute w-8 h-6 bg-highlight/20 rounded-full blur-md -top-1" />
+                        <div className="absolute w-4 h-4 bg-accent/20 rounded-full blur-sm top-0 left-2" />
+                      </div>
+                    </motion.div>
+                  )}
+                </motion.a>
+              );
+            })}
           </div>
         </nav>
 

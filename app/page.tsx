@@ -15,6 +15,7 @@ import { FAQSection } from "@/components/faq-section";
 import { UpdatesSection } from "@/components/updates-section";
 import { CTASection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
+import { GlowingFeatures } from "@/components/glowing-features";
 
 export default function HomePage() {
   return (
@@ -25,6 +26,7 @@ export default function HomePage() {
           <Navbar />
           <main>
             <HeroSection />
+            <GlowingFeatures />
             <FeaturesSection />
             <DemoShowcase />
             <IntegrationsSection />

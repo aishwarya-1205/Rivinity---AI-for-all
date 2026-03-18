@@ -3,12 +3,11 @@
 import { motion } from "framer-motion";
 import { BentoPricing } from "@/components/ui/bento-pricing";
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function PricingSection() {
   return (
-    <section
-      className="relative py-24 md:py-32 overflow-hidden"
-      style={{ background: "var(--background)", color: "var(--foreground)" }}
-    >
+    <SectionWrapper className="bg-background" id="pricing">
       {/* Background Effects */}
       <div
         className="absolute inset-0 -z-10"
@@ -42,7 +41,7 @@ export function PricingSection() {
         />
       </div>
 
-      <div className="container mx-auto max-w-6xl px-4 md:px-6">
+      <div>
         {/* Heading  */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,43 +55,20 @@ export function PricingSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono uppercase tracking-wider rounded-full"
-            style={{
-              color: "var(--muted-foreground)",
-              border: "1px solid var(--border)",
-              background:
-                "color-mix(in srgb, var(--secondary) 50%, transparent)",
-            }}
+            className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono uppercase tracking-wider rounded-full border border-border bg-secondary/50 text-muted-foreground"
           >
-            <span
-              className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: "var(--accent)" }}
-            />
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-accent" />
             Transparent Pricing
           </motion.span>
 
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance"
-            style={{ color: "var(--foreground)" }}
-          >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance text-foreground">
             Scale Intelligence,{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--accent) 0%, var(--highlight) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="text-gradient">
               Not Costs
             </span>
           </h2>
 
-          <p
-            className="mt-4 text-base md:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ color: "var(--muted-foreground)" }}
-          >
+          <p className="mt-4 text-base md:text-lg leading-relaxed max-w-xl mx-auto text-muted-foreground">
             From experimentation to enterprise scale. Choose the plan that
             matches your ambition and grow without limits.
           </p>
@@ -114,20 +90,18 @@ export function PricingSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center text-sm mt-8"
-          style={{ color: "var(--muted-foreground)" }}
+          className="text-center text-sm mt-8 text-muted-foreground"
         >
           All plans include access to our global infrastructure, API access, and
           community support.{" "}
           <a
             href="#"
-            className="font-medium transition-colors hover:underline"
-            style={{ color: "var(--highlight)" }}
+            className="font-medium transition-colors hover:underline text-highlight"
           >
             Compare plans
           </a>
         </motion.p>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

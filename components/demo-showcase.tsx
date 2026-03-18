@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useRef } from "react";
 import {
   MessageSquare,
   Mic,
@@ -42,6 +42,8 @@ const demos = [
   },
 ];
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function DemoShowcase() {
   const [activeDemo, setActiveDemo] = useState(demos[0]);
   const [demoState, setDemoState] = useState(0);
@@ -49,96 +51,94 @@ export function DemoShowcase() {
   const restart = () => setDemoState((p) => p + 1);
 
   return (
-    <section className="relative py-16 sm:py-24 bg-background/30">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-sm font-medium mb-6">
-            <Sparkles className="w-4 h-4" />
-            See it in Action
-          </span>
+    <SectionWrapper className="bg-background" id="experience">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-sm font-medium mb-6 text-foreground">
+          <Sparkles className="w-4 h-4 text-accent" />
+          See it in Action
+        </span>
 
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
-            Experience Rivinity
-          </h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
+          Experience <span className="text-gradient">Rivinity</span>
+        </h2>
 
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore interactive demos that simulate real Rivinity workflows.
-          </p>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Explore interactive demos that simulate real Rivinity workflows.
+        </p>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex justify-center mb-8 sm:mb-12">
+        <div className="flex flex-wrap justify-center gap-2 p-2 rounded-xl bg-card border border-border">
+          {demos.map((demo) => (
+            <button
+              key={demo.id}
+              onClick={() => {
+                setActiveDemo(demo);
+                restart();
+              }}
+              className={cn(
+                "flex items-center justify-center gap-2 px-2 sm:px-4 py-2 rounded-lg text-[11px] sm:text-sm font-medium transition text-center",
+                activeDemo.id === demo.id
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary",
+              )}
+            >
+              <demo.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              {demo.label}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center mb-8 sm:mb-12">
-          <div className="flex flex-wrap justify-center gap-2 p-2 rounded-xl bg-card border border-border">
-            {demos.map((demo) => (
-              <button
-                key={demo.id}
-                onClick={() => {
-                  setActiveDemo(demo);
-                  restart();
-                }}
-                className={cn(
-                  "flex items-center justify-center gap-2 px-2 sm:px-4 py-2 rounded-lg text-[11px] sm:text-sm font-medium transition text-center",
-                  activeDemo.id === demo.id
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary",
-                )}
-              >
-                <demo.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                {demo.label}
-              </button>
-            ))}
+      {/* Demo Window */}
+      <div className="relative group" style={{ transform: "translateZ(0)" }}>
+        {/* Gradient Glow */}
+        <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,var(--highlight),var(--accent),var(--highlight))] opacity-20 blur-sm transition-all duration-700 group-hover:blur-md group-hover:opacity-40 will-change-opacity pointer-events-none" style={{ transform: "translateZ(0)" }}></div>
+
+        {/* Actual Window */}
+        <div className="relative bg-card border border-border rounded-2xl overflow-hidden will-change-transform">
+          {/* Header */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-400/50" />
+              <div className="w-3 h-3 rounded-full bg-yellow-400/50" />
+              <div className="w-3 h-3 rounded-full bg-green-400/50" />
+            </div>
+
+            <span className="text-sm text-muted-foreground">
+              {activeDemo.title}
+            </span>
+
+            <button
+              onClick={restart}
+              className="p-2 rounded-lg hover:bg-secondary text-foreground"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
           </div>
-        </div>
 
-        {/* Demo Window */}
-        <div className="relative group" style={{ transform: "translateZ(0)" }}>
-          {/* Gradient Glow */}
-          <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,#6c63ff,#fafafa,#ff7a18,#6c63ff)] opacity-20 blur-sm transition-all duration-700 group-hover:blur-md group-hover:opacity-40 will-change-[opacity,filter] pointer-events-none"></div>
-
-          {/* Actual Window */}
-          <div className="relative bg-card border border-border rounded-2xl overflow-hidden will-change-transform">
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-400/50" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400/50" />
-                <div className="w-3 h-3 rounded-full bg-green-400/50" />
-              </div>
-
-              <span className="text-sm text-muted-foreground">
-                {activeDemo.title}
-              </span>
-
-              <button
-                onClick={restart}
-                className="p-2 rounded-lg hover:bg-secondary"
+          {/* Demo Content */}
+          <div className="h-[360px] sm:h-[460px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${activeDemo.id}-${demoState}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="h-full"
               >
-                <RotateCcw className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Demo Content */}
-            <div className="h-[360px] sm:h-[460px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activeDemo.id}-${demoState}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="h-full"
-                >
-                  {activeDemo.id === "chat" && <ChatDemo />}
-                  {activeDemo.id === "voice" && <VoiceDemo />}
-                  {activeDemo.id === "code" && <CodeDemo />}
-                  {activeDemo.id === "search" && <SearchDemo />}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                {activeDemo.id === "chat" && <ChatDemo />}
+                {activeDemo.id === "voice" && <VoiceDemo />}
+                {activeDemo.id === "code" && <CodeDemo />}
+                {activeDemo.id === "search" && <SearchDemo />}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }
 
@@ -260,12 +260,14 @@ const CodeDemo = memo(function CodeDemo() {
   messages: [{ role: "user", content: prompt }]
 })`;
 
-  const [text, setText] = useState("");
+  const textRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
     let i = 0;
     const timer = setInterval(() => {
-      setText(code.slice(0, i));
+      if (textRef.current) {
+        textRef.current.textContent = code.slice(0, i);
+      }
       i++;
       if (i > code.length) clearInterval(timer);
     }, 20);
@@ -276,7 +278,7 @@ const CodeDemo = memo(function CodeDemo() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-auto p-6 font-mono text-sm bg-secondary">
-        <pre>{text}</pre>
+        <pre ref={textRef}></pre>
       </div>
 
       <div className="border-t border-border px-6 py-3 text-xs text-muted-foreground">

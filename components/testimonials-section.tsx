@@ -64,59 +64,59 @@ const firstColumn = testimonials.slice(0, 3);
 const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function TestimonialsSection() {
   return (
-    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <SectionWrapper className="bg-background" id="testimonials">
       {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] pointer-events-none" />
 
-      <div className="container z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center justify-center max-w-[600px] mx-auto text-center"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="flex flex-col items-center justify-center max-w-[600px] mx-auto text-center"
+      >
+        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-xs sm:text-sm font-medium text-accent uppercase tracking-wider mb-6">
+          Trusted by India's Leaders
+        </span>
+
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground text-balance">
+          What our <span className="text-gradient">users</span> say
+        </h2>
+        <p className="text-lg text-muted-foreground text-balance">
+          See how organizations across Bharat trust Rivinity to build
+          population-scale AI applications.
+        </p>
+      </motion.div>
+
+      {/* Animated Testimonial Columns */}
+      <div className="relative mt-16 h-[600px] xl:h-[700px] overflow-hidden">
+        {/* Top Fade Overlay */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
+
+        <div
+          className="flex justify-center gap-6 h-full relative"
+          style={{ transform: "translateZ(0)" }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-xs sm:text-sm font-medium text-accent uppercase tracking-wider mb-6">
-            Trusted by India's Leaders
-          </span>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground text-balance">
-            What our users say
-          </h2>
-          <p className="text-lg text-muted-foreground text-balance">
-            See how organizations across Bharat trust Rivinity to build
-            population-scale AI applications.
-          </p>
-        </motion.div>
-
-        {/* Animated Testimonial Columns */}
-        <div className="relative mt-16 h-[600px] xl:h-[700px] overflow-hidden">
-          {/* Top Fade Overlay */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
-
-          <div
-            className="flex justify-center gap-6 h-full relative"
-            style={{ transform: "translateZ(0)" }}
-          >
-            <TestimonialsColumn testimonials={firstColumn} duration={25} />
-            <TestimonialsColumn
-              testimonials={secondColumn}
-              className="hidden md:block"
-              duration={35}
-            />
-            <TestimonialsColumn
-              testimonials={thirdColumn}
-              className="hidden lg:block"
-              duration={28}
-            />
-          </div>
-
-          {/* Bottom Fade Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
+          <TestimonialsColumn testimonials={firstColumn} duration={25} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={35}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={28}
+          />
         </div>
+
+        {/* Bottom Fade Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

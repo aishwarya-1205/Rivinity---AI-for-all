@@ -10,12 +10,12 @@ const GLOBE_CONFIG: COBEOptions = {
   width: 800,
   height: 800,
   onRender: () => {},
-  devicePixelRatio: 2,
+  devicePixelRatio: typeof window !== "undefined" ? Math.min(window.devicePixelRatio, 1.5) : 1,
   phi: 0,
   theta: 0.3,
   dark: 0,
   diffuse: 1.2,
-  mapSamples: 16000,
+  mapSamples: 1200,
   mapBrightness: 6,
   baseColor: [0.95, 0.9, 0.85], // Warm cream tone matching Rivinity palette
   markerColor: [255 / 255, 122 / 255, 24 / 255], // Rivinity orange #FF7A18

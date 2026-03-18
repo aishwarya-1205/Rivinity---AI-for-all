@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Globe, Shield, Layers, Cpu, Search, Code2 } from "lucide-react";
+import { Globe, Shield, Layers, Cpu, Search } from "lucide-react";
+import { SectionWrapper } from "./ui/section-wrapper";
 
 const features = [
   {
@@ -105,7 +106,7 @@ export function FeaturesSection() {
     <>
       <section
         ref={containerRef}
-        className="relative h-[300vh] hidden lg:block"
+        className="relative h-[300vh] hidden lg:block bg-background"
       >
         <div className="sticky top-0 h-screen flex items-center">
           <div className="mx-auto max-w-7xl grid grid-cols-2 gap-16 px-6 w-full">
@@ -121,8 +122,10 @@ export function FeaturesSection() {
                     <feature.icon className="w-3.5 h-3.5" />
                     {feature.badge}
                   </span>
-                  <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4">
-                    {feature.title}
+                  <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight mb-4 text-foreground">
+                    {index === 0 && <>Planet-Scale <span className="text-gradient">Intelligence</span></>}
+                    {index === 1 && <>Zero-Trust AI <span className="text-gradient">Security</span></>}
+                    {index === 2 && <>Universal API <span className="text-gradient">Layer</span></>}
                   </h2>
                   <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                     {feature.description}
@@ -149,8 +152,8 @@ export function FeaturesSection() {
       </section>
 
       {/* Mobile/Tablet:  */}
-      <section className="lg:hidden py-20 px-5 sm:px-7">
-        <div className="mx-auto max-w-2xl space-y-12">
+      <SectionWrapper className="lg:hidden" as="div">
+        <div className="max-w-2xl mx-auto space-y-12">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -168,8 +171,10 @@ export function FeaturesSection() {
                   <feature.icon className="w-3.5 h-3.5" />
                   {feature.badge}
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-3">
-                  {feature.title}
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-3 text-foreground">
+                  {index === 0 && <>Planet-Scale <span className="text-gradient">Intelligence</span></>}
+                  {index === 1 && <>Zero-Trust AI <span className="text-gradient">Security</span></>}
+                  {index === 2 && <>Universal API <span className="text-gradient">Layer</span></>}
                 </h2>
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {feature.description}
@@ -178,7 +183,7 @@ export function FeaturesSection() {
             </motion.div>
           ))}
         </div>
-      </section>
+      </SectionWrapper>
     </>
   );
 }

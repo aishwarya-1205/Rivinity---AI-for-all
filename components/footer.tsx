@@ -50,7 +50,7 @@ const socialLinks: SocialLink[] = [
 
 export function Footer() {
   return (
-    <footer className="relative pb-22 pt-40 px-4 bg-background transition-colors duration-300">
+    <footer className="relative pb-24 pt-40 px-4 bg-background transition-colors duration-300">
       {/* Watermark */}
       <div
         aria-hidden
@@ -63,7 +63,7 @@ export function Footer() {
             opacity: 0.06,
             letterSpacing: "0.08em",
             lineHeight: 1,
-            background: "linear-gradient(90deg,#a855f7,#f97316,#3b82f6)",
+            background: "linear-gradient(90deg, var(--accent), var(--highlight), var(--accent))",
             WebkitBackgroundClip: "text",
             color: "transparent",
             whiteSpace: "nowrap",
@@ -77,7 +77,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="relative">
           {/* Gradient glow border */}
           <div
@@ -86,35 +86,35 @@ export function Footer() {
             style={{
               zIndex: 0,
               filter: "blur(32px)",
-              opacity: 0.35,
-              background: "linear-gradient(135deg, #a855f7, #f97316, #3b82f6)",
+              opacity: 0.2,
+              background: "linear-gradient(135deg, var(--accent), var(--highlight))",
             }}
           />
 
           {/* Card */}
-          <div className="relative z-[1] bg-card border border-black/[0.07] dark:border-white/[0.08] rounded-[3rem] p-10 shadow-sm dark:shadow-black/30 transition-colors duration-300">
+          <div className="relative z-[1] bg-card border border-border rounded-[3rem] p-10 shadow-sm transition-colors duration-300">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
               <div className="flex flex-col gap-8">
-                <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span>A product by</span>
-                  <div className="flex items-center gap-1.5 opacity-60">
-                    <div className="w-4 h-4 rounded-sm bg-orange-500" />
-                    <span className="font-bold tracking-tight text-gray-600 dark:text-gray-300">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-4 h-4 rounded-sm bg-accent/80" />
+                    <span className="font-bold tracking-tight text-foreground">
                       BharatTech
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 tracking-wide uppercase">
+                  <p className="text-sm font-bold text-foreground mb-3 tracking-wide uppercase">
                     Support Inquiries:
                   </p>
                   <a
                     href="mailto:support@rivinity.in"
-                    className="flex items-center gap-2.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                      <Mail size={14} />
+                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                      <Mail size={14} className="text-foreground" />
                     </div>
                     <span className="text-sm">support@rivinity.in</span>
                   </a>
@@ -124,7 +124,7 @@ export function Footer() {
               {/* Link columns */}
               {Object.entries(footerLinks).map(([category, links]) => (
                 <div key={category}>
-                  <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm tracking-widest uppercase mb-6">
+                  <h4 className="font-bold text-foreground text-sm tracking-widest uppercase mb-6">
                     {category}
                   </h4>
                   <ul className="space-y-4">
@@ -132,7 +132,7 @@ export function Footer() {
                       <li key={link.label}>
                         <a
                           href={link.href}
-                          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+                          className="text-sm text-muted-foreground hover:text-foreground transition-all duration-300"
                         >
                           {link.label}
                         </a>
@@ -144,10 +144,10 @@ export function Footer() {
 
               <div className="flex flex-col gap-6">
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm tracking-widest uppercase mb-2">
+                  <h4 className="font-bold text-foreground text-sm tracking-widest uppercase mb-2">
                     Get in touch
                   </h4>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     We don&apos;t send spam so don&apos;t worry.
                   </p>
                 </div>
@@ -155,7 +155,7 @@ export function Footer() {
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full px-6 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200/60 dark:focus:ring-purple-500/30 text-gray-700 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
+                  className="w-full bg-secondary border border-border rounded-full px-6 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 text-foreground placeholder:text-muted-foreground transition-colors"
                 />
 
                 <div className="flex items-center gap-5 pt-2">
@@ -165,7 +165,7 @@ export function Footer() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Icon size={18} strokeWidth={1.5} />
                     </a>
@@ -176,8 +176,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-4 mb-[-1rem] text-center">
-          <p className="text-[15px] sm:text-s text-gray-400 dark:text-gray-600 font-medium tracking-wide">
+        <div className="mt-8 mb-[-1rem] text-center">
+          <p className="text-sm text-muted-foreground font-medium tracking-wide">
             © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.
           </p>
         </div>

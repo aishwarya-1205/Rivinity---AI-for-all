@@ -7,14 +7,18 @@ import { Globe } from "@/components/ui/globe";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button as MovingBorderButton } from "@/components/ui/moving-border";
 
+import { SectionWrapper } from "./ui/section-wrapper";
+
 export function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
+    <SectionWrapper
       ref={ref}
       className="relative min-h-[650px] flex items-center overflow-hidden bg-background"
+      py={false}
+      id="cta"
     >
       {/* Background Beams */}
       <BackgroundBeams className="opacity-40" />
@@ -36,7 +40,7 @@ export function CTASection() {
             config={{
               width: 1100,
               height: 1100,
-              onRender: () => {},
+              onRender: () => { },
               devicePixelRatio: 2,
               phi: 0,
               theta: 0.3,
@@ -106,7 +110,7 @@ backdrop-blur-md shadow-md
 mb-2
 
 /* DESKTOP */
-sm:mb-36
+sm:mb-32
 "
           >
             <Sparkles className="w-4 h-4" />
@@ -121,7 +125,7 @@ sm:mb-36
           >
             <h2
               className="
-text-3xl 
+text-4xl 
 sm:text-5xl lg:text-5xl xl:text-7xl
 font-bold text-foreground tracking-tight 
 leading-[1.1]
@@ -133,10 +137,10 @@ leading-[1.1]
 
             <p
               className="
-text-sm 
+text-base
 sm:text-xl 
 text-muted-foreground leading-relaxed 
-max-w-md sm:max-w-2xl mx-auto
+max-w-md sm:max-w-2xl mx-auto mt-6
 "
             >
               Join the movement to democratize AI across Bharat. From startups
@@ -184,6 +188,6 @@ max-w-md sm:max-w-2xl mx-auto
           No credit card required • Free tier includes 100K API calls/month
         </motion.p>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

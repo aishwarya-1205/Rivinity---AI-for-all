@@ -5,8 +5,10 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { AIConsole } from "./ai-console";
 import { IndiaBadge } from "./india-badge";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
-import HeroDotMountain from "./hero-dot-mountain";
+import MountainSunrise from "./mountain-sunrise";
+import { SectionWrapper } from "./ui/section-wrapper";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
+import HeroDotMountain from "./hero-dot-mountain";
 
 const trustedLogos = [
   { name: "Reliance" },
@@ -22,21 +24,14 @@ const trustedLogos = [
 export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden pt-20 bg-background text-foreground">
-      <div className="absolute inset-0 z-0 flex items-end translate-y-[-190px]">
+      <MountainSunrise />
+
+      <div className="absolute inset-0 z-0 flex items-end translate-y-[-120px] sm:translate-y-[-180px] opacity-70">
         <HeroDotMountain />
       </div>
 
-      <div
-        className="pointer-events-none absolute inset-0 z-10 
-      bg-gradient-to-b 
-      from-background 
-      via-background/75 
-      via-background/50 
-      to-transparent 
-      h-[65%]"
-      />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24">
+      <SectionWrapper className="relative z-10 pt-16 sm:pt-20 lg:pt-24" py={false}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,7 +119,7 @@ export function HeroSection() {
             className="mx-auto"
           />
         </motion.div>
-      </div>
+      </SectionWrapper>
     </section>
   );
 }
