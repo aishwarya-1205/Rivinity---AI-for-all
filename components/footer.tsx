@@ -50,20 +50,24 @@ const socialLinks: SocialLink[] = [
 
 export function Footer() {
   return (
-    <footer className="relative pb-24 pt-40 px-4 bg-background transition-colors duration-300">
+    <footer
+      className="relative pt-40 px-4 bg-background transition-colors duration-300 overflow-hidden"
+      style={{ paddingBottom: 0 }}
+    >
       {/* Watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-[-15%] flex justify-center overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
       >
         <div
-          className="flex justify-between w-full max-w-[95vw] mx-auto font-black select-none pointer-events-none items-end h-full"
+          className="flex justify-between w-full max-w-[100vw] mx-auto font-black select-none pointer-events-none items-end h-full"
           style={{
             fontSize: "clamp(80px, 16vw, 520px)",
             opacity: 0.06,
             letterSpacing: "0.08em",
             lineHeight: 1,
-            background: "linear-gradient(90deg, var(--accent), var(--highlight), var(--accent))",
+            background:
+              "linear-gradient(90deg, var(--accent), var(--highlight), var(--accent))",
             WebkitBackgroundClip: "text",
             color: "transparent",
             whiteSpace: "nowrap",
@@ -77,7 +81,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 px-4">
         <div className="relative">
           {/* Gradient glow border */}
           <div
@@ -87,7 +91,8 @@ export function Footer() {
               zIndex: 0,
               filter: "blur(32px)",
               opacity: 0.2,
-              background: "linear-gradient(135deg, var(--accent), var(--highlight))",
+              background:
+                "linear-gradient(135deg, var(--accent), var(--highlight))",
             }}
           />
 
@@ -176,7 +181,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 mb-[-1rem] text-center">
+        <div
+          style={{
+            height: "clamp(80px, 16vw, 520px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <p className="text-sm text-muted-foreground font-medium tracking-wide">
             © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.
           </p>

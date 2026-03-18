@@ -2,6 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { SparklesIcon, CheckIcon } from "lucide-react";
+import Link from "next/link";
+
 
 /* ─── FilledCheck ─────────────────────────────────────────────────────────── */
 function FilledCheck() {
@@ -104,8 +106,11 @@ function PricingCard({
           {titleBadge}
         </span>
         <div className="ml-auto">
-          <OutlineButton>{cta}</OutlineButton>
+          <Link href="/signup">
+            <OutlineButton>{cta}</OutlineButton>
+          </Link>
         </div>
+
       </div>
 
       <div className="flex items-end gap-2 px-4 py-2">
@@ -200,8 +205,11 @@ export function BentoPricing() {
           </span>
 
           <div className="ml-auto">
-            <AccentButton>Start Building</AccentButton>
+            <Link href="/signup">
+              <AccentButton>Start Building</AccentButton>
+            </Link>
           </div>
+
         </div>
 
         <div className="flex flex-col p-4 lg:flex-row">

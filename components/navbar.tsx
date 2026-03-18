@@ -5,6 +5,8 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 
 const navLinks = [
   { href: "/platform", label: "Platform" },
@@ -158,19 +160,24 @@ export function Navbar() {
                 </motion.div>
               </motion.button>
             )}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-foreground font-medium px-4 rounded-full"
-            >
-              Sign in
-            </Button>
-            <Button
-              size="sm"
-              className="bg-foreground text-background hover:opacity-90 font-semibold px-6 rounded-full shadow-xl shadow-black/10"
-            >
-              Get Started
-            </Button>
+            <Link href="/signup">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground font-medium px-4 rounded-full"
+              >
+                Sign in
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button
+                size="sm"
+                className="bg-foreground text-background hover:opacity-90 font-semibold px-6 rounded-full shadow-xl shadow-black/10"
+              >
+                Get Started
+              </Button>
+            </Link>
+
           </div>
 
           {/* Mobile Menu Button & Dark Mode */}
@@ -223,15 +230,24 @@ export function Navbar() {
               </a>
             ))}
             <div className="pt-4 space-y-3">
-              <Button
-                variant="outline"
-                className="w-full h-12 rounded-xl font-medium"
-              >
-                Sign in
-              </Button>
-              <Button className="w-full h-12 rounded-xl bg-foreground text-background font-semibold">
-                Get Started
-              </Button>
+              <Link href="/signup" className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full h-12 rounded-xl font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign in
+                </Button>
+              </Link>
+              <Link href="/signup" className="w-full">
+                <Button 
+                  className="w-full h-12 rounded-xl bg-foreground text-background font-semibold"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Started
+                </Button>
+              </Link>
+
             </div>
           </div>
         </motion.div>

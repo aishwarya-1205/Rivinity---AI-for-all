@@ -6,6 +6,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Globe } from "@/components/ui/globe";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button as MovingBorderButton } from "@/components/ui/moving-border";
+import Link from "next/link";
+
 
 import { SectionWrapper } from "./ui/section-wrapper";
 
@@ -158,19 +160,22 @@ max-w-md sm:max-w-2xl mx-auto mt-6
           className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16"
         >
           {/* Primary Button */}
-          <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl">
-            <MovingBorderButton
-              borderRadius="1rem"
-              className="bg-background dark:bg-card text-foreground px-10 py-4 font-semibold text-base"
-              containerClassName="h-14"
-              duration={3000}
-            >
-              <span className="flex items-center gap-2">
-                Get Started Free
-                <ArrowRight className="h-5 w-5" />
-              </span>
-            </MovingBorderButton>
-          </div>
+          <Link href="/signup">
+            <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl cursor-pointer">
+              <MovingBorderButton
+                borderRadius="1rem"
+                className="bg-background dark:bg-card text-foreground px-10 py-4 font-semibold text-base w-full h-full"
+                containerClassName="h-14"
+                duration={3000}
+              >
+                <span className="flex items-center gap-2">
+                  Get Started Free
+                  <ArrowRight className="h-5 w-5" />
+                </span>
+              </MovingBorderButton>
+            </div>
+          </Link>
+
 
           {/* Secondary Button */}
           <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition-all duration-300 hover:scale-105">
