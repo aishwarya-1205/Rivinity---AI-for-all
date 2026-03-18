@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
 
 const navLinks = [
   { href: "/platform", label: "Platform" },
@@ -20,8 +20,12 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { scrollY } = useScroll();
+  const pathname = usePathname();
 
-  const [activeTab, setActiveTab] = useState(navLinks[0].label);
+  // Derive active tab from current pathname — falls back to null if no match
+  const activeTab =
+    navLinks.find((link) => pathname.startsWith(link.href))?.label ?? null;
+
   const isDark = resolvedTheme === "dark";
 
   const backgroundColor = useTransform(
@@ -90,28 +94,20 @@ export function Navbar() {
 
         {/* Center: Glass Nav Pill */}
         <nav className="hidden md:flex relative items-center">
-          {/* Glass Pill */}
           <div className="relative flex items-center gap-1 bg-background/60 dark:bg-white/[0.04] backdrop-blur-xl px-2 py-1.5 rounded-full border border-border/40 shadow-lg">
             {navLinks.map((link) => {
               const isActive = activeTab === link.label;
               return (
-                <motion.a
+                <Link
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => {
-                    // Prevent navigation if these are just internal test links
-                    // e.preventDefault(); 
-                    setActiveTab(link.label);
-                  }}
                   className={`
                     relative px-5 py-2 text-sm font-medium transition-colors rounded-full
                     ${isActive ? "text-accent" : "text-muted-foreground hover:text-foreground"}
                   `}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
                 >
                   <span className="relative z-10">{link.label}</span>
-                  
+
                   {isActive && (
                     <motion.div
                       layoutId="lamp"
@@ -130,7 +126,7 @@ export function Navbar() {
                       </div>
                     </motion.div>
                   )}
-                </motion.a>
+                </Link>
               );
             })}
           </div>
@@ -177,7 +173,6 @@ export function Navbar() {
                 Get Started
               </Button>
             </Link>
-
           </div>
 
           {/* Mobile Menu Button & Dark Mode */}
@@ -220,14 +215,19 @@ export function Navbar() {
         >
           <div className="px-4 py-6 space-y-2">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
-                className="block text-base font-medium text-foreground py-3 px-4 rounded-xl hover:bg-secondary/80 transition-colors"
+                className={`block text-base font-medium py-3 px-4 rounded-xl transition-colors
+                  ${
+                    pathname.startsWith(link.href)
+                      ? "text-accent bg-accent/5"
+                      : "text-foreground hover:bg-secondary/80"
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <div className="pt-4 space-y-3">
               <Link href="/signup" className="w-full">
@@ -240,14 +240,13 @@ export function Navbar() {
                 </Button>
               </Link>
               <Link href="/signup" className="w-full">
-                <Button 
+                <Button
                   className="w-full h-12 rounded-xl bg-foreground text-background font-semibold"
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started
                 </Button>
               </Link>
-
             </div>
           </div>
         </motion.div>

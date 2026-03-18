@@ -20,6 +20,7 @@ import {
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { Component } from "@/components/ui/grid-background";
 
@@ -29,42 +30,42 @@ const platformFeatures = [
     title: "Autonomous Agents",
     description:
       "Deploy self-improving AI agents that reason, plan, and execute complex multi-step tasks with minimal human oversight.",
-    gradient: "from-orange-500 to-amber-500",
+    area: "md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]",
   },
   {
     icon: Cpu,
     title: "Inference Engine",
     description:
       "Optimized inference infrastructure delivering sub-100ms latency at scale with intelligent model routing and caching.",
-    gradient: "from-blue-500 to-cyan-500",
+    area: "md:[grid-area:1/7/2/13] xl:[grid-area:1/5/2/9]",
   },
   {
     icon: Globe,
     title: "Global Edge Network",
     description:
       "500+ edge locations across India and worldwide ensuring low-latency AI inference wherever your users are.",
-    gradient: "from-purple-500 to-pink-500",
+    area: "md:[grid-area:2/1/3/13] xl:[grid-area:1/9/2/13]",
   },
   {
     icon: Shield,
     title: "Enterprise Security",
     description:
       "SOC 2 Type II compliant with end-to-end encryption, RBAC, and comprehensive audit logging.",
-    gradient: "from-emerald-500 to-teal-500",
+    area: "md:[grid-area:3/1/4/7] xl:[grid-area:2/1/3/5]",
   },
   {
     icon: Database,
     title: "Vector Store",
     description:
       "Petabyte-scale vector database with hybrid search, real-time indexing, and automatic embedding optimization.",
-    gradient: "from-rose-500 to-red-500",
+    area: "md:[grid-area:3/7/4/10] xl:[grid-area:2/5/3/9]",
   },
   {
     icon: Code2,
     title: "SDK & APIs",
     description:
       "Type-safe SDKs for Python, JavaScript, Go, and Rust with comprehensive REST and streaming APIs.",
-    gradient: "from-indigo-500 to-violet-500",
+    area: "md:[grid-area:4/1/5/13] xl:[grid-area:2/9/3/13]",
   },
 ];
 
@@ -107,47 +108,56 @@ const capabilities = [
   },
 ];
 
-function FeatureCard({
-  feature,
-  index,
-}: {
-  feature: (typeof platformFeatures)[0];
+interface GlowingFeatureCardProps {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  area: string;
   index: number;
-}) {
+}
+
+function GlowingFeatureCard({
+  icon: Icon,
+  title,
+  description,
+  area,
+  index,
+}: GlowingFeatureCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <motion.li
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative"
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className={`min-h-[14rem] list-none ${area}`}
     >
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/10">
-        <div
-          className={cn(
-            "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-5 bg-gradient-to-br",
-            feature.gradient,
-          )}
+      <div className="relative h-full rounded-[2rem] border border-black/5 dark:border-white/5 p-2 md:p-3">
+        <GlowingEffect
+          blur={0}
+          borderWidth={4}
+          spread={80}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
         />
-        <div
-          className={cn(
-            "mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br",
-            feature.gradient,
-          )}
-        >
-          <feature.icon className="h-7 w-7 text-white" />
-        </div>
-        <h3 className="mb-3 text-xl font-semibold text-foreground">
-          {feature.title}
-        </h3>
-        <p className="text-muted-foreground leading-relaxed">
-          {feature.description}
-        </p>
-        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-accent opacity-0 transition-all duration-300 group-hover:opacity-100">
-          Learn more <ArrowRight className="h-4 w-4" />
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-[1.5rem] border border-black/5 dark:border-white/5 bg-card p-6 shadow-sm dark:shadow-[0_-1px_0_1px_rgba(255,255,255,0.01)_inset,0_1px_4px_rgba(0,0,0,0.5)]">
+          <div className="relative flex flex-1 flex-col justify-between">
+            <div className="w-fit rounded-lg border border-border p-2">
+              <Icon className="h-4 w-4 text-foreground dark:text-neutral-400" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="pt-0.5 text-xl/[1.375rem] font-semibold -tracking-[0.04em] md:text-2xl/[1.875rem] text-balance text-foreground">
+                {title}
+              </h3>
+              <p className="text-sm/[1.125rem] md:text-base/[1.375rem] text-muted-foreground">
+                {description}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </motion.li>
   );
 }
 
@@ -165,10 +175,7 @@ export default function PlatformPage() {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Grid background — sits at z-0, everything else at z-10 */}
         <Component />
-
-        {/* Page content — must be relative z-10 to sit above the grid */}
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -216,7 +223,7 @@ export default function PlatformPage() {
         </div>
       </section>
 
-      {/* Platform Features Grid */}
+      {/* Platform Features — Glowing Bento Grid */}
       <section ref={containerRef} className="py-24 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -233,15 +240,19 @@ export default function PlatformPage() {
               Built from the ground up for enterprise-grade AI workloads
             </p>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <ul className="grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-12 md:grid-rows-3 lg:gap-6 xl:max-h-[34rem] xl:grid-rows-2">
             {platformFeatures.map((feature, index) => (
-              <FeatureCard
+              <GlowingFeatureCard
                 key={feature.title}
-                feature={feature}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                area={feature.area}
                 index={index}
               />
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
