@@ -8,7 +8,6 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button as MovingBorderButton } from "@/components/ui/moving-border";
 import Link from "next/link";
 
-
 import { SectionWrapper } from "./ui/section-wrapper";
 
 export function CTASection() {
@@ -36,13 +35,13 @@ export function CTASection() {
 
       {/* Globe Background */}
       <div className="absolute inset-0 flex justify-center pointer-events-none">
-        <div className="relative w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] lg:w-[1100px] lg:h-[1100px] opacity-50 dark:opacity-60 top-52 sm:top-28 lg:top-2">
+        <div className="relative w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] lg:w-[1100px] lg:h-[1100px] opacity-50 dark:opacity-60 top-20 sm:top-28 lg:top-2">
           <Globe
             className="absolute inset-0"
             config={{
               width: 1100,
               height: 1100,
-              onRender: () => { },
+              onRender: () => {},
               devicePixelRatio: 2,
               phi: 0,
               theta: 0.3,
@@ -79,7 +78,7 @@ export function CTASection() {
         className="
   relative z-10 w-full sm:mx-auto sm:max-w-7xl px-4 sm:px-8 lg:px-8
   flex flex-col items-center text-center
-  justify-center min-h-[650px] gap-8
+  justify-center min-h-[650px] gap-4
   sm:pt-0 sm:gap-0
 "
       >
@@ -148,7 +147,7 @@ max-w-md sm:max-w-2xl mx-auto mt-6
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-6 sm:mt-16"
         >
           {/* Primary Button */}
           <Link href="/signup">
@@ -166,7 +165,6 @@ max-w-md sm:max-w-2xl mx-auto mt-6
               </MovingBorderButton>
             </div>
           </Link>
-
 
           {/* Secondary Button */}
           <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition duration-300 hover:scale-105">
