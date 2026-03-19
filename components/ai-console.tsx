@@ -78,7 +78,7 @@ export function AIConsole() {
       {/* Main Input Container */}
       <motion.div
         className={cn(
-          "relative rounded-2xl border transition-all duration-300",
+          "relative rounded-2xl border transition duration-300",
           "bg-card/60 dark:bg-card/40 backdrop-blur-xl",
           isFocused
             ? "border-accent/50 shadow-2xl shadow-accent/10 dark:shadow-accent/5"
@@ -139,7 +139,7 @@ export function AIConsole() {
             <Button
               disabled={!message.trim()}
               className={cn(
-                "h-9 w-9 rounded-lg transition-all",
+                "h-9 w-9 rounded-lg transition",
                 message.trim()
                   ? "bg-accent text-accent-foreground hover:bg-accent/90"
                   : "bg-secondary text-muted-foreground cursor-not-allowed",
@@ -167,7 +167,7 @@ export function AIConsole() {
             whileTap={{ scale: 0.97 }}
             onClick={() => setMessage(action.label)}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all",
+              "flex items-center gap-2 px-4 py-2 rounded-full text-sm transition",
               "border border-border bg-card/50 dark:bg-card/30 backdrop-blur-sm",
               "text-muted-foreground hover:text-foreground hover:bg-secondary hover:border-border/80",
             )}

@@ -138,7 +138,7 @@ export function Navbar() {
             {mounted && (
               <motion.button
                 onClick={toggleDarkMode}
-                className="relative p-2.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary/40 transition-all duration-200"
+                className="relative p-2.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-secondary/40 transition duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Toggle dark mode"

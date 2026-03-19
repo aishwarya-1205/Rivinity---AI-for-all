@@ -30,7 +30,7 @@ const cardGradientStyle: React.CSSProperties = {
 function OutlineButton({ children }: { children: React.ReactNode }) {
   return (
     <button
-      className="px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-80 cursor-pointer"
+      className="px-4 py-1.5 rounded-lg text-sm font-medium transition duration-200 hover:opacity-80 cursor-pointer"
       style={{
         border: "1px solid var(--border)",
         background: "var(--background)",
@@ -46,7 +46,7 @@ function OutlineButton({ children }: { children: React.ReactNode }) {
 function AccentButton({ children }: { children: React.ReactNode }) {
   return (
     <button
-      className="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90 hover:scale-[1.02] cursor-pointer"
+      className="px-5 py-2 rounded-lg text-sm font-semibold transition duration-200 hover:opacity-90 hover:scale-[1.02] cursor-pointer"
       style={{
         background: "linear-gradient(135deg, var(--accent), var(--highlight))",
         color: "#ffffff",

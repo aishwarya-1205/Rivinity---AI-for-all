@@ -95,7 +95,7 @@ export function DemoShowcase() {
       {/* Demo Window */}
       <div className="relative group" style={{ transform: "translateZ(0)" }}>
         {/* Gradient Glow */}
-        <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,var(--highlight),var(--accent),var(--highlight))] opacity-20 blur-sm transition-all duration-700 group-hover:blur-md group-hover:opacity-40 will-change-opacity pointer-events-none" style={{ transform: "translateZ(0)" }}></div>
+        <div className="absolute -inset-[1px] rounded-2xl bg-[linear-gradient(120deg,var(--highlight),var(--accent),var(--highlight))] opacity-20 blur-sm transition duration-700 group-hover:blur-md group-hover:opacity-40 will-change-opacity pointer-events-none" style={{ transform: "translateZ(0)" }}></div>
 
         {/* Actual Window */}
         <div className="relative bg-card border border-border rounded-2xl overflow-hidden will-change-transform">

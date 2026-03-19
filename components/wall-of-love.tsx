@@ -85,7 +85,7 @@ function TestimonialCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="flex-shrink-0 w-[350px] p-6 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl group"
+      className="flex-shrink-0 w-[350px] p-6 rounded-2xl bg-card border border-border hover:border-accent/30 transition duration-300 hover:shadow-xl group"
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">

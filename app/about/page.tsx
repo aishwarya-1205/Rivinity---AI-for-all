@@ -392,7 +392,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-card rounded-2xl p-6 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl"
+                className="group bg-card rounded-2xl p-6 border border-border hover:border-accent/30 transition duration-300 hover:shadow-xl"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-highlight flex items-center justify-center text-white text-xl font-bold flex-shrink-0">

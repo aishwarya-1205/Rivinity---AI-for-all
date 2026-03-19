@@ -41,7 +41,7 @@ export function HeroSection() {
           <IndiaBadge />
           <a
             href="#"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 dark:from-accent/20 dark:to-highlight/20 backdrop-blur-sm border border-accent/20 hover:border-accent/40 transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 dark:from-accent/20 dark:to-highlight/20 backdrop-blur-sm border border-accent/20 hover:border-accent/40 transition duration-300"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>

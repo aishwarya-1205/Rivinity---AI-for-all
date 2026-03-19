@@ -83,7 +83,7 @@ export function FAQSection() {
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
               className={cn(
-                "w-full text-left p-6 rounded-2xl border transition-all duration-300",
+                "w-full text-left p-6 rounded-2xl border transition duration-300",
                 openIndex === index
                   ? "bg-card border-accent/30 shadow-lg"
                   : "bg-card/50 border-border hover:border-accent/20 hover:bg-card",

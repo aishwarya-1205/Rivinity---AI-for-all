@@ -117,7 +117,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="w-full max-w-sm bg-gradient-to-b from-sky-50/50 to-white dark:from-gray-900 dark:to-black rounded-3xl shadow-2xl shadow-blue-500/10 p-8 flex flex-col items-center border border-blue-100 dark:border-gray-800 transition-all duration-300">
+    <div className="w-full max-w-sm bg-gradient-to-b from-sky-50/50 to-white dark:from-gray-900 dark:to-black rounded-3xl shadow-2xl shadow-blue-500/10 p-8 flex flex-col items-center border border-blue-100 dark:border-gray-800 transition duration-300">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 mb-6 shadow-lg shadow-black/5 dark:shadow-none">
         <LogIn className="w-7 h-7 text-black dark:text-white" />
       </div>
@@ -146,7 +146,7 @@ const SignUpForm = () => {
               placeholder="John Doe"
               type="text"
               value={fullName}
-              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition-all"
+              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition"
               onChange={(e) => setFullName(e.target.value)}
               disabled={isLoading}
             />
@@ -169,7 +169,7 @@ const SignUpForm = () => {
               placeholder="name@example.com"
               type="email"
               value={email}
-              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition-all"
+              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition"
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
             />
@@ -192,7 +192,7 @@ const SignUpForm = () => {
               placeholder="••••••••"
               type="password"
               value={password}
-              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition-all"
+              className="pl-10 h-11 rounded-xl border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition"
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
             />
@@ -207,7 +207,7 @@ const SignUpForm = () => {
 
         <Button
           type="submit"
-          className="w-full bg-black dark:bg-white text-white dark:text-black font-semibold h-11 rounded-xl hover:opacity-90 transition-all mt-2 active:scale-[0.98]"
+          className="w-full bg-black dark:bg-white text-white dark:text-black font-semibold h-11 rounded-xl hover:opacity-90 transition mt-2 active:scale-[0.98]"
           disabled={isLoading}
         >
           {isLoading ? "Creating account..." : "Get Started"}

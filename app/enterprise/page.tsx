@@ -173,7 +173,7 @@ export default function EnterprisePage() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
-                    className="aspect-square rounded-2xl bg-card border border-border p-4 flex flex-col items-center justify-center text-center hover:border-accent/30 hover:shadow-lg transition-all duration-300"
+                    className="aspect-square rounded-2xl bg-card border border-border p-4 flex flex-col items-center justify-center text-center hover:border-accent/30 hover:shadow-lg transition duration-300"
                   >
                     <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-lg font-bold text-foreground mb-2">
                       {customer.name.charAt(0)}
@@ -219,7 +219,7 @@ export default function EnterprisePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-8 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl"
+                className="bg-card rounded-2xl p-8 border border-border hover:border-accent/30 transition duration-300 hover:shadow-xl"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/10 to-highlight/10 flex items-center justify-center mb-6">
                   <feature.icon className="w-6 h-6 text-accent" />
@@ -263,7 +263,7 @@ export default function EnterprisePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bg-card rounded-xl p-6 border border-border text-center hover:border-accent/30 transition-all duration-300"
+                className="bg-card rounded-xl p-6 border border-border text-center hover:border-accent/30 transition duration-300"
               >
                 <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-6 h-6 text-accent" />
@@ -306,7 +306,7 @@ export default function EnterprisePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl p-8 border border-background/10 bg-background/5 hover:bg-background/10 transition-all duration-300"
+                className="rounded-2xl p-8 border border-background/10 bg-background/5 hover:bg-background/10 transition duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-xl font-semibold">{useCase.title}</h3>

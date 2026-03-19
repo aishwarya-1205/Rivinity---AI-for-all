@@ -161,7 +161,7 @@ max-w-md sm:max-w-2xl mx-auto mt-6
         >
           {/* Primary Button */}
           <Link href="/signup">
-            <div className="transition-all duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl cursor-pointer">
+            <div className="transition duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl cursor-pointer">
               <MovingBorderButton
                 borderRadius="1rem"
                 className="bg-background dark:bg-card text-foreground px-10 py-4 font-semibold text-base w-full h-full"
@@ -178,7 +178,7 @@ max-w-md sm:max-w-2xl mx-auto mt-6
 
 
           {/* Secondary Button */}
-          <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition-all duration-300 hover:scale-105">
+          <button className="h-14 px-10 text-base font-semibold border-2 border-border rounded-2xl bg-background/50 backdrop-blur-sm hover:bg-secondary/50 hover:border-foreground/20 transition duration-300 hover:scale-105">
             Contact Sales
           </button>
         </motion.div>

@@ -31,7 +31,7 @@ export const TestimonialsColumn = ({
         {items.map(({ text, image, name, role }, i) => (
           <div
             key={i}
-            className="p-8 rounded-3xl bg-card border border-white/5 hover:border-accent/30 transition-all shadow-md max-w-sm w-full"
+            className="p-8 rounded-3xl bg-card border border-white/5 hover:border-accent/30 transition shadow-md max-w-sm w-full"
           >
             <p className="text-sm text-foreground/90 leading-relaxed">
               {text}

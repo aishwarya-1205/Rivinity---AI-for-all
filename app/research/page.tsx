@@ -210,7 +210,7 @@ export default function ResearchPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-card rounded-2xl p-6 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl"
+                className="group relative bg-card rounded-2xl p-6 border border-border hover:border-accent/30 transition duration-300 hover:shadow-xl"
               >
                 <h3 className="text-xl font-semibold text-foreground mb-3">
                   {area.title}
@@ -264,7 +264,7 @@ export default function ResearchPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-card rounded-2xl p-8 border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-xl cursor-pointer"
+                className="group relative bg-card rounded-2xl p-8 border border-border hover:border-accent/30 transition duration-300 hover:shadow-xl cursor-pointer"
               >
                 <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                   <div className="flex-shrink-0">
@@ -337,7 +337,7 @@ export default function ResearchPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-6 border border-border text-center hover:shadow-xl transition-all duration-300"
+                className="bg-card rounded-2xl p-6 border border-border text-center hover:shadow-xl transition duration-300"
               >
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-highlight flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
                   {member.image}

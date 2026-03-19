@@ -334,7 +334,7 @@ export default function RadialOrbitalTimeline({
                 <div
                   className={`
                     relative rounded-full flex items-center justify-center
-                    border transition-all duration-300 backdrop-blur-sm
+                    border transition duration-300 backdrop-blur-sm
                     ${isExpanded
                       ? "bg-accent text-white border-accent shadow-xl scale-125"
                       : isRelated
@@ -351,7 +351,7 @@ export default function RadialOrbitalTimeline({
               {/* Label — always upright (node is never inside a rotated element) */}
               <div
                 className={`
-                  mt-2 whitespace-nowrap font-semibold tracking-wider transition-all duration-300
+                  mt-2 whitespace-nowrap font-semibold tracking-wider transition duration-300
                   ${isMobile ? "text-[9px]" : "text-xs"}
                   ${isExpanded ? "text-accent" : "text-foreground/70"}
                 `}
@@ -443,7 +443,7 @@ export default function RadialOrbitalTimeline({
                             key={relatedId}
                             variant="outline"
                             size="sm"
-                            className="flex items-center h-6 px-2 py-0 text-[10px] border-border bg-transparent hover:bg-accent/10 text-card-foreground hover:text-accent transition-all"
+                            className="flex items-center h-6 px-2 py-0 text-[10px] border-border bg-transparent hover:bg-accent/10 text-card-foreground hover:text-accent transition"
                             onClick={(e: React.MouseEvent) => {
                               e.stopPropagation();
                               toggleItem(relatedId);

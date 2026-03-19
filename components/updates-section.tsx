@@ -60,7 +60,7 @@ export function UpdatesSection() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group block"
           >
-            <div className="relative h-full overflow-hidden rounded-2xl border border-border bg-card hover:border-accent/50 transition-all duration-300 flex flex-col">
+            <div className="relative h-full overflow-hidden rounded-2xl border border-border bg-card hover:border-accent/50 transition duration-300 flex flex-col">
               <div
                 className={`h-40 bg-gradient-to-br ${update.gradient} relative overflow-hidden`}
               >

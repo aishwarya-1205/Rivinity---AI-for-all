@@ -113,7 +113,7 @@ export function IntegrationsSection() {
                   className="relative aspect-square"
                 >
                   <div
-                    className="absolute inset-0 bg-card dark:bg-white/[0.03] border border-border shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-accent/30 will-change-transform"
+                    className="absolute inset-0 bg-card dark:bg-white/[0.03] border border-border shadow-sm flex items-center justify-center transition duration-300 hover:shadow-lg hover:border-accent/30 will-change-transform"
                     style={{
                       clipPath:
                         "polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)",
