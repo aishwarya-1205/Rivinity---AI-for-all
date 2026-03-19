@@ -77,24 +77,15 @@ export function CTASection() {
 
       <div
         className="
-  relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-8
+  relative z-10 w-full sm:mx-auto sm:max-w-7xl px-4 sm:px-8 lg:px-8
   flex flex-col items-center text-center
-
-  /* MOBILE FIX */
-  justify-center min-h-[650px] gap-6
-
-  /* DESKTOP stays same */
+  justify-center min-h-[650px] gap-8
   sm:pt-0 sm:gap-0
 "
       >
         <div
           className="
-flex flex-col items-center
-
-/* MOBILE */
-justify-center gap-4
-
-/* DESKTOP */
+flex flex-col items-center justify-center w-full gap-4
 sm:mb-16 sm:gap-0
 "
         >
@@ -130,7 +121,7 @@ sm:mb-32
 text-4xl 
 sm:text-5xl lg:text-5xl xl:text-7xl
 font-bold text-foreground tracking-tight 
-leading-[1.1]
+leading-[1.1] w-full
 "
             >
               Build the future of{" "}
@@ -188,7 +179,7 @@ max-w-md sm:max-w-2xl mx-auto mt-6
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-8 text-sm text-muted-foreground text-center"
+          className="mt-8 text-sm text-muted-foreground text-center w-full max-w-md mx-auto px-4"
         >
           No credit card required • Free tier includes 100K API calls/month
         </motion.p>

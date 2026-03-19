@@ -193,7 +193,7 @@ export default function EnterprisePage() {
       </section>
 
       {/* Enterprise Features */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -281,7 +281,7 @@ export default function EnterprisePage() {
       </section>
 
       {/* Use Cases */}
-      <section className="py-24 bg-foreground text-background">
+      <section className="py-24 bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -293,7 +293,7 @@ export default function EnterprisePage() {
             <h2 className="text-4xl sm:text-5xl font-bold mb-6">
               Enterprise Use Cases
             </h2>
-            <p className="text-xl text-background/70 max-w-2xl mx-auto">
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               How India&apos;s leading companies are transforming with Rivinity
             </p>
           </motion.div>
@@ -306,15 +306,15 @@ export default function EnterprisePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl p-8 border border-background/10 bg-background/5 hover:bg-background/10 transition duration-300"
+                className="rounded-2xl p-8 border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 transition duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-xl font-semibold">{useCase.title}</h3>
-                  <span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium">
+                  <span className="px-3 py-1 rounded-full bg-accent text-accent-background text-sm font-medium">
                     {useCase.stats}
                   </span>
                 </div>
-                <p className="text-background/70 leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   {useCase.description}
                 </p>
               </motion.div>

@@ -185,7 +185,7 @@ export default function ResearchPage() {
       </section>
 
       {/* Research Areas */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -312,7 +312,7 @@ export default function ResearchPage() {
       </section>
 
       {/* Research Team */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
