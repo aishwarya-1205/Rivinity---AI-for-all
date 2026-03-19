@@ -211,7 +211,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-background/98 backdrop-blur-2xl border-t border-border"
+          className="md:hidden bg-background/98 backdrop-blur-2xl border-t border-border pointer-events-auto"
         >
           <div className="px-4 py-6 space-y-2">
             {navLinks.map((link) => (
