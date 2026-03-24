@@ -150,7 +150,7 @@ max-w-md sm:max-w-2xl mx-auto mt-6
           className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-6 sm:mt-16"
         >
           {/* Primary Button */}
-          <Link href="/signup">
+          <Link href="https://rivinity-dashboard.netlify.app/" target="_blank">
             <div className="transition duration-300 hover:scale-105 hover:shadow-[0_10px_40px_rgba(255,122,24,0.35)] rounded-2xl cursor-pointer">
               <MovingBorderButton
                 borderRadius="1rem"
