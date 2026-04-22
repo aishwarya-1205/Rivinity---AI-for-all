@@ -73,6 +73,12 @@ export function AIConsole() {
     maxHeight: 160,
   });
 
+  const handleSubmit = () => {
+    const trimmed = message.trim();
+    if (!trimmed) return;
+    window.location.href = `/dashboard?q=${encodeURIComponent(trimmed)}`;
+  };
+
   return (
     <div className="max-w-3xl mx-auto">
       {/* Main Input Container */}
@@ -105,6 +111,12 @@ export function AIConsole() {
             }}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit();
+              }
+            }}
             placeholder="Ask Rivinity to build something amazing..."
             className={cn(
               "w-full px-5 py-4 resize-none border-none rounded-t-2xl",
@@ -138,6 +150,7 @@ export function AIConsole() {
 
             <Button
               disabled={!message.trim()}
+              onClick={handleSubmit}
               className={cn(
                 "h-9 w-9 rounded-lg transition",
                 message.trim()
