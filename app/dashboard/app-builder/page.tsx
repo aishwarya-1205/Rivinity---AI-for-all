@@ -9,9 +9,10 @@ import { PanelLeft } from "lucide-react";
 
 export default function AppBuilderPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [rightPanelOpen, setRightPanelOpen] = useState(true);
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex bg-background overflow-hidden relative">
       <div
         className="shrink-0 transition-all duration-300 ease-in-out overflow-hidden"
         style={{ width: sidebarOpen ? 260 : 0 }}
@@ -27,10 +28,10 @@ export default function AppBuilderPage() {
           <PanelLeft className="w-4 h-4" />
         </button>
 
-        <AppBuilderTopBar />
+        <AppBuilderTopBar rightPanelOpen={rightPanelOpen} setRightPanelOpen={setRightPanelOpen} />
         <div className="flex-1 flex min-h-0">
           <AppBuilderMain />
-          <AppBuilderRightPanel />
+          <AppBuilderRightPanel isOpen={rightPanelOpen} onClose={() => setRightPanelOpen(false)} />
         </div>
       </div>
     </div>

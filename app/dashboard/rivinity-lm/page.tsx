@@ -10,12 +10,13 @@ import { PanelLeft } from "lucide-react";
 
 function RivinityLMContent() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [rightPanelOpen, setRightPanelOpen] = useState(true);
   const [activeFeature, setActiveFeature] = useState<string>("landing");
   const searchParams = useSearchParams();
   const initialMessage = searchParams.get("q") || "";
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex bg-background overflow-hidden relative">
       <div
         className="shrink-0 transition-all duration-300 ease-in-out overflow-hidden"
         style={{ width: sidebarOpen ? 260 : 0 }}
@@ -31,14 +32,19 @@ function RivinityLMContent() {
           <PanelLeft className="w-4 h-4" />
         </button>
 
-        <CanvasNav />
+        <CanvasNav rightPanelOpen={rightPanelOpen} setRightPanelOpen={setRightPanelOpen} />
         <div className="flex-1 flex min-h-0">
           <RivinityLMMain
             activeFeature={activeFeature}
             onFeatureChange={setActiveFeature}
             initialMessage={initialMessage}
           />
-          <RivinityLMRightPanel activeFeature={activeFeature} onFeatureChange={setActiveFeature} />
+          <RivinityLMRightPanel 
+            activeFeature={activeFeature} 
+            onFeatureChange={setActiveFeature} 
+            isOpen={rightPanelOpen}
+            onClose={() => setRightPanelOpen(false)}
+          />
         </div>
       </div>
     </div>

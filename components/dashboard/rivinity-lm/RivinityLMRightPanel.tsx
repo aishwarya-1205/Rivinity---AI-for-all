@@ -30,13 +30,21 @@ const recentItems = [
 interface Props {
   activeFeature: string;
   onFeatureChange: (id: string) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-const RivinityLMRightPanel = ({ activeFeature, onFeatureChange }: Props) => {
+const RivinityLMRightPanel = ({ activeFeature, onFeatureChange, isOpen, onClose }: Props) => {
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
 
   return (
-    <aside className="w-[260px] h-full flex-col py-6 px-4 shrink-0 hidden xl:flex gap-5 overflow-y-auto scrollbar-none no-scrollbar">
+    <aside
+      className={`h-full flex-col py-6 px-4 shrink-0 flex gap-5 overflow-y-auto scrollbar-none no-scrollbar bg-background lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${
+        isOpen
+          ? "translate-x-0 w-[260px] opacity-100"
+          : "translate-x-full lg:translate-x-0 lg:w-0 lg:px-0 lg:opacity-0 pointer-events-none lg:pointer-events-auto"
+      }`}
+    >
       {/* Model */}
       <div>
         <p className="text-[10px] font-medium text-muted-foreground/50 uppercase tracking-widest mb-3 px-1">AI Model</p>

@@ -1,9 +1,14 @@
-import { ChevronDown, Settings } from "lucide-react";
+import { ChevronDown, Settings, SquareArrowRight } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState } from "react";
 import SettingsModal from "../shared/SettingsModal";
 
-const CanvasNav = () => {
+interface CanvasNavProps {
+  rightPanelOpen?: boolean;
+  setRightPanelOpen?: (open: boolean) => void;
+}
+
+const CanvasNav = ({ rightPanelOpen, setRightPanelOpen }: CanvasNavProps) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
@@ -20,6 +25,18 @@ const CanvasNav = () => {
 
         {/* Right */}
         <div className="flex items-center gap-1.5">
+          {setRightPanelOpen && (
+            <button
+              onClick={() => setRightPanelOpen(!rightPanelOpen)}
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 mr-1 ${
+                rightPanelOpen
+                  ? "bg-accent/10 text-[#ff7a18]"
+                  : "text-muted-foreground/50 hover:text-foreground/70 hover:bg-muted"
+              }`}
+            >
+              <SquareArrowRight className="w-4 h-4" />
+            </button>
+          )}
 
           <Avatar className="w-7 h-7 rounded-lg">
             <AvatarFallback className="rounded-lg bg-secondary/10 text-secondary text-[10px] font-medium">
