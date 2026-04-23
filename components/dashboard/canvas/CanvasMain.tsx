@@ -83,7 +83,7 @@ const MessageActions = ({ content }: { content: string }) => {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <div className="flex items-center gap-0.5 mt-1.5 ml-1">
+    <div className="flex items-center gap-0.5 mt-1.5 ml-1 opacity-0 group-hover:opacity-100 transition-opacity">
       <button
         onClick={copy}
         title="Copy"

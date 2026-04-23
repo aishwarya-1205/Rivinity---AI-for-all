@@ -59,7 +59,7 @@ const StudyCompanionView = () => {
                   : "rounded-2xl rounded-bl-lg glass border border-glass text-foreground/75"
               }`}>{msg.content}</div>
                 {msg.role === "ai" && (
-                  <div className="flex items-center gap-1 mt-1 ml-1 text-muted-foreground/40">
+                  <div className="flex items-center gap-1 mt-1 ml-1 text-muted-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button onClick={() => copy(msg.content, msg.id)} title="Copy" className="p-1.5 rounded-lg hover:bg-red-500/10 transition-colors hover:text-red-500">
                       {copiedId === msg.id ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
