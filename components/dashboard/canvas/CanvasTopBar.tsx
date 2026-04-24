@@ -177,12 +177,17 @@ const CanvasTopBar = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setRightPanelOpen?.(!rightPanelOpen)}
-            className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-150 mr-1 ${rightPanelOpen
+            className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 mr-1 ${
+              rightPanelOpen
                 ? "bg-accent/10 text-[#ff7a18]"
                 : "text-muted-foreground/50 hover:text-foreground/70 hover:bg-muted"
-              }`}
+            }`}
           >
-            <SquareArrowRight className="w-4 h-4" />
+            <SquareArrowRight
+              className={`w-4 h-4 transition-transform duration-300 ${
+                rightPanelOpen ? "rotate-0" : "rotate-180"
+              }`}
+            />
           </button>
 
           <button
@@ -190,8 +195,9 @@ const CanvasTopBar = ({
             onClick={() => {
               setProfileOpen((v) => !v);
             }}
-            className={`w-8 h-8 rounded-xl gradient-accent flex items-center justify-center text-white text-[12px] font-bold transition-all duration-150 hover:opacity-90 ${profileOpen ? "ring-2 ring-[#ff7a18]/30 ring-offset-1" : ""
-              }`}
+            className={`w-8 h-8 rounded-xl gradient-accent flex items-center justify-center text-white text-[12px] font-bold transition-all duration-150 hover:opacity-90 ${
+              profileOpen ? "ring-2 ring-[#ff7a18]/30 ring-offset-1" : ""
+            }`}
           >
             JD
           </button>

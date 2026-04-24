@@ -29,6 +29,7 @@ import {
   FileText,
   Lightbulb,
 } from "lucide-react";
+import Image from "next/image";
 
 interface Message {
   id: number;
@@ -48,15 +49,33 @@ const defaultTabs: Tab[] = [
 ];
 
 const allTemplates = [
-  { icon: Layout, label: "Full App Blueprint", desc: "Generate architecture and logic" },
-  { icon: Smartphone, label: "UI Kit Designer", desc: "Tailwind components and themes" },
-  { icon: Globe, label: "Website Architect", desc: "High-conversion landing pages" },
-  { icon: Monitor, label: "Dashboard Analytics", desc: "Admin panels and data viz" },
+  {
+    icon: Layout,
+    label: "Full App Blueprint",
+    desc: "Generate architecture and logic",
+  },
+  {
+    icon: Smartphone,
+    label: "UI Kit Designer",
+    desc: "Tailwind components and themes",
+  },
+  {
+    icon: Globe,
+    label: "Website Architect",
+    desc: "High-conversion landing pages",
+  },
+  {
+    icon: Monitor,
+    label: "Dashboard Analytics",
+    desc: "Admin panels and data viz",
+  },
   { icon: Code2, label: "API Developer", desc: "REST & GraphQL backend" },
-  { icon: Component, label: "Component Studio", desc: "Atomic design elements" },
+  {
+    icon: Component,
+    label: "Component Studio",
+    desc: "Atomic design elements",
+  },
 ];
-
-
 
 const MessageActions = ({ content }: { content: string }) => {
   const [copied, setCopied] = useState(false);
@@ -93,13 +112,22 @@ const MessageActions = ({ content }: { content: string }) => {
       >
         <ThumbsDown className="w-3.5 h-3.5" />
       </button>
-      <button title="Share" className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all">
+      <button
+        title="Share"
+        className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all"
+      >
         <Share2 className="w-3.5 h-3.5" />
       </button>
-      <button title="Regenerate" className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all">
+      <button
+        title="Regenerate"
+        className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all"
+      >
         <RotateCcw className="w-3.5 h-3.5" />
       </button>
-      <button title="Read aloud" className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all">
+      <button
+        title="Read aloud"
+        className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all"
+      >
         <Volume2 className="w-3.5 h-3.5" />
       </button>
     </div>
@@ -115,7 +143,10 @@ const UserMessageActions = ({ content }: { content: string }) => {
   };
   return (
     <div className="flex items-center gap-0.5 mt-1.5 mr-1 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-      <button title="Edit" className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all">
+      <button
+        title="Edit"
+        className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/10 transition-all"
+      >
         <Pencil className="w-3.5 h-3.5" />
       </button>
       <button
@@ -211,11 +242,13 @@ const QuickCardsCarousel = ({
         onMouseUp={stopDrag}
         onMouseLeave={stopDrag}
         className="flex gap-2 overflow-x-auto cursor-grab active:cursor-grabbing select-none no-scrollbar"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          WebkitOverflowScrolling: "touch",
-        } as React.CSSProperties}
+        style={
+          {
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          } as React.CSSProperties
+        }
       >
         {cards.map((c, i) => (
           <button
@@ -252,19 +285,42 @@ const QuickCardsCarousel = ({
   );
 };
 
-
 const getTabIcon = (label: string) => {
   const l = label.toLowerCase();
-  if (l.includes("app") || l.includes("mobile") || l.includes("phone")) return Smartphone;
-  if (l.includes("web") || l.includes("site") || l.includes("page")) return Globe;
-  if (l.includes("api") || l.includes("code") || l.includes("back") || l.includes("server")) return Code2;
-  if (l.includes("dash") || l.includes("admin") || l.includes("panel")) return Monitor;
+  if (l.includes("app") || l.includes("mobile") || l.includes("phone"))
+    return Smartphone;
+  if (l.includes("web") || l.includes("site") || l.includes("page"))
+    return Globe;
+  if (
+    l.includes("api") ||
+    l.includes("code") ||
+    l.includes("back") ||
+    l.includes("server")
+  )
+    return Code2;
+  if (l.includes("dash") || l.includes("admin") || l.includes("panel"))
+    return Monitor;
   if (l.includes("saas") || l.includes("platform")) return Layers;
-  if (l.includes("ui") || l.includes("comp") || l.includes("front")) return Component;
-  if (l.includes("design") || l.includes("style") || l.includes("color")) return Palette;
-  if (l.includes("launch") || l.includes("deploy") || l.includes("start")) return Rocket;
-  if (l.includes("doc") || l.includes("text") || l.includes("file") || l.includes("read")) return FileText;
-  if (l.includes("idea") || l.includes("plan") || l.includes("think") || l.includes("brain")) return Lightbulb;
+  if (l.includes("ui") || l.includes("comp") || l.includes("front"))
+    return Component;
+  if (l.includes("design") || l.includes("style") || l.includes("color"))
+    return Palette;
+  if (l.includes("launch") || l.includes("deploy") || l.includes("start"))
+    return Rocket;
+  if (
+    l.includes("doc") ||
+    l.includes("text") ||
+    l.includes("file") ||
+    l.includes("read")
+  )
+    return FileText;
+  if (
+    l.includes("idea") ||
+    l.includes("plan") ||
+    l.includes("think") ||
+    l.includes("brain")
+  )
+    return Lightbulb;
   return Layout;
 };
 
@@ -325,10 +381,11 @@ const AppBuilderMain = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${activeTab === tab.id
-                ? "bg-muted/60 text-foreground"
-                : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60"
-                }`}
+              className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${
+                activeTab === tab.id
+                  ? "bg-muted/60 text-foreground"
+                  : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60"
+              }`}
             >
               <tab.icon className="w-3 h-3 shrink-0" />
               <span className="hidden xs:inline truncate max-w-[90px]">
@@ -346,24 +403,34 @@ const AppBuilderMain = () => {
             onClick={() => setIsAddingTab(!isAddingTab)}
             className={`px-3 py-2 flex items-center gap-1 text-[12px] font-medium transition-all shrink-0 ${isAddingTab ? "bg-accent/10 text-accent" : "text-muted-foreground/40 hover:text-muted-foreground/70 hover:bg-muted/60"}`}
           >
-            <Plus className={`w-3 h-3 transition-transform duration-300 ${isAddingTab ? "rotate-45" : ""}`} />
+            <Plus
+              className={`w-3 h-3 transition-transform duration-300 ${isAddingTab ? "rotate-45" : ""}`}
+            />
             <span className="sr-only">New Tab</span>
           </button>
         </div>
 
         {/* Template Selection Grid */}
-        <div className={`overflow-hidden transition-all duration-330 ease-in-out ${isAddingTab ? "max-h-[400px] opacity-100 border-b border-border/40" : "max-h-0 opacity-0"}`}>
+        <div
+          className={`overflow-hidden transition-all duration-330 ease-in-out ${isAddingTab ? "max-h-[400px] opacity-100 border-b border-border/40" : "max-h-0 opacity-0"}`}
+        >
           <div className="p-4 bg-muted/20">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-widest px-1">Project Blueprints</p>
+              <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-widest px-1">
+                Project Blueprints
+              </p>
               <div className="flex items-center gap-2">
                 <input
                   value={newTabName}
                   onChange={(e) => setNewTabName(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && newTabName.trim()) {
-                      const tab = { id: Date.now(), icon: getTabIcon(newTabName.trim()), label: newTabName.trim() };
-                      setTabs(p => [...p, tab]);
+                      const tab = {
+                        id: Date.now(),
+                        icon: getTabIcon(newTabName.trim()),
+                        label: newTabName.trim(),
+                      };
+                      setTabs((p) => [...p, tab]);
                       setActiveTab(tab.id);
                       setIsAddingTab(false);
                       setNewTabName("");
@@ -379,22 +446,28 @@ const AppBuilderMain = () => {
                 <button
                   key={template.label}
                   onClick={() => {
-                    const tab = { id: Date.now(), icon: template.icon, label: template.label };
-                    setTabs(p => [...p, tab]);
+                    const tab = {
+                      id: Date.now(),
+                      icon: template.icon,
+                      label: template.label,
+                    };
+                    setTabs((p) => [...p, tab]);
                     setActiveTab(tab.id);
                     setIsAddingTab(false);
                   }}
                   className="flex flex-col items-start justify-center w-full px-4 py-3 rounded-xl border border-transparent hover:border-accent/20 bg-background/0 hover:bg-background/40 hover:shadow-sm transition-all group min-h-[50px]"
                 >
-                  <p className="text-[14px] font-semibold text-foreground/60 group-hover:text-accent transition-all group-hover:pl-2">{template.label}</p>
-                  <p className="text-[11px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-all group-hover:pl-2">{template.desc}</p>
+                  <p className="text-[14px] font-semibold text-foreground/60 group-hover:text-accent transition-all group-hover:pl-2">
+                    {template.label}
+                  </p>
+                  <p className="text-[11px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-all group-hover:pl-2">
+                    {template.desc}
+                  </p>
                 </button>
               ))}
             </div>
           </div>
         </div>
-
-
 
         {/* Textarea */}
         <textarea
@@ -449,7 +522,15 @@ const AppBuilderMain = () => {
 
             {/* Content block */}
             <div className="w-full max-w-[660px] flex flex-col items-center">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full gradient-accent opacity-80 animate-orb mb-3 shadow-glow-accent" />
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 mb-3">
+                <Image
+                  src="/logo.png"
+                  alt="Rivinity Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase mb-2">
                 {new Date().toLocaleDateString("en-US", {
                   weekday: "long",
@@ -489,15 +570,18 @@ const AppBuilderMain = () => {
                 className={`group animate-float-in flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
               >
                 <div
-                  className={`max-w-[85%] sm:max-w-[75%] px-3 sm:px-4 py-2.5 sm:py-3 text-[13px] sm:text-[14px] leading-relaxed ${msg.role === "user"
-                    ? "rounded-2xl rounded-br-lg gradient-accent text-primary-foreground"
-                    : "rounded-2xl rounded-bl-lg glass border border-glass text-foreground/80"
-                    }`}
+                  className={`max-w-[85%] sm:max-w-[75%] px-3 sm:px-4 py-2.5 sm:py-3 text-[13px] sm:text-[14px] leading-relaxed ${
+                    msg.role === "user"
+                      ? "rounded-2xl rounded-br-lg gradient-accent text-primary-foreground"
+                      : "rounded-2xl rounded-bl-lg glass border border-glass text-foreground/80"
+                  }`}
                 >
                   {msg.content}
                 </div>
                 {msg.role === "ai" && <MessageActions content={msg.content} />}
-                {msg.role === "user" && <UserMessageActions content={msg.content} />}
+                {msg.role === "user" && (
+                  <UserMessageActions content={msg.content} />
+                )}
               </div>
             ))}
           </div>

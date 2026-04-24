@@ -1,10 +1,34 @@
 import { useState, useRef, useEffect } from "react";
 import {
-  Send, Paperclip, Mic, Sparkles, ChevronDown, Plus, X,
-  MessageSquare, StickyNote, Layers, HelpCircle, Podcast,
-  FileAudio, CalendarCheck, GraduationCap, Swords, Bot, BarChart3,
-  BookOpen, Beaker, Globe, Code, Lightbulb, Search, Check, ChevronLeft, ChevronRight
+  Send,
+  Paperclip,
+  Mic,
+  Sparkles,
+  ChevronDown,
+  Plus,
+  X,
+  MessageSquare,
+  StickyNote,
+  Layers,
+  HelpCircle,
+  Podcast,
+  FileAudio,
+  CalendarCheck,
+  GraduationCap,
+  Swords,
+  Bot,
+  BarChart3,
+  BookOpen,
+  Beaker,
+  Globe,
+  Code,
+  Lightbulb,
+  Search,
+  Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import Image from "next/image";
 import ContextualChatView from "./views/ContextualChatView";
 import SmartNotesView from "./views/SmartNotesView";
 import FlashcardsView from "./views/FlashcardsView";
@@ -18,14 +42,54 @@ import StudyCompanionView from "./views/StudyCompanionView";
 import DataAnalystView from "./views/DataAnalystView";
 
 const features = [
-  { id: "contextual-chat", icon: MessageSquare, label: "Document Research", desc: "Collaborate with your study files" },
-  { id: "smart-notes", icon: StickyNote, label: "Cornell Study Notes", desc: "Auto-structured lecture notes" },
-  { id: "flashcards", icon: Layers, label: "Repetition Flashcards", desc: "Spaced learning system" },
-  { id: "quizzes", icon: HelpCircle, label: "Practice Exam Lab", desc: "Test your comprehension" },
-  { id: "ai-podcast", icon: Podcast, label: "AI Podcast Producer", desc: "Audio learning on the go" },
-  { id: "voice-transcribe", icon: FileAudio, label: "Voice Lecture Sync", desc: "Convert speech to text" },
-  { id: "debate", icon: Swords, label: "Mock Debate Trainer", desc: "Sharpen critical thinking" },
-  { id: "study-companion", icon: Bot, label: "AI Study Tutor", desc: "24/7 personalized guidance" },
+  {
+    id: "contextual-chat",
+    icon: MessageSquare,
+    label: "Document Research",
+    desc: "Collaborate with your study files",
+  },
+  {
+    id: "smart-notes",
+    icon: StickyNote,
+    label: "Cornell Study Notes",
+    desc: "Auto-structured lecture notes",
+  },
+  {
+    id: "flashcards",
+    icon: Layers,
+    label: "Repetition Flashcards",
+    desc: "Spaced learning system",
+  },
+  {
+    id: "quizzes",
+    icon: HelpCircle,
+    label: "Practice Exam Lab",
+    desc: "Test your comprehension",
+  },
+  {
+    id: "ai-podcast",
+    icon: Podcast,
+    label: "AI Podcast Producer",
+    desc: "Audio learning on the go",
+  },
+  {
+    id: "voice-transcribe",
+    icon: FileAudio,
+    label: "Voice Lecture Sync",
+    desc: "Convert speech to text",
+  },
+  {
+    id: "debate",
+    icon: Swords,
+    label: "Mock Debate Trainer",
+    desc: "Sharpen critical thinking",
+  },
+  {
+    id: "study-companion",
+    icon: Bot,
+    label: "AI Study Tutor",
+    desc: "24/7 personalized guidance",
+  },
 ];
 
 interface Tab {
@@ -54,7 +118,7 @@ const TopicCardsCarousel = ({
 }: {
   cards: { icon: React.ElementType; title: string; desc: string }[];
   onSelect: (val: string) => void;
-  textareaRef: React.RefObject<HTMLTextAreaElement>;
+  textareaRef: React.RefObject<HTMLTextAreaElement | null>;
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
@@ -107,11 +171,13 @@ const TopicCardsCarousel = ({
         onMouseUp={stopDrag}
         onMouseLeave={stopDrag}
         className="flex gap-2 overflow-x-auto cursor-grab active:cursor-grabbing select-none no-scrollbar"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          WebkitOverflowScrolling: "touch",
-        } as React.CSSProperties}
+        style={
+          {
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          } as React.CSSProperties
+        }
       >
         {cards.map((c, i) => (
           <button
@@ -156,20 +222,49 @@ interface Props {
 
 const getTabIcon = (label: string) => {
   const l = label.toLowerCase();
-  if (l.includes("code") || l.includes("dev") || l.includes("program") || l.includes("soft")) return Code;
-  if (l.includes("math") || l.includes("calc") || l.includes("stat")) return BarChart3;
-  if (l.includes("science") || l.includes("chem") || l.includes("phys") || l.includes("bio")) return Beaker;
-  if (l.includes("history") || l.includes("world") || l.includes("geo")) return Globe;
-  if (l.includes("lit") || l.includes("book") || l.includes("read") || l.includes("write")) return BookOpen;
-  if (l.includes("phil") || l.includes("logic") || l.includes("idea")) return Lightbulb;
-  if (l.includes("study") || l.includes("learn") || l.includes("school")) return GraduationCap;
-  if (l.includes("chat") || l.includes("talk") || l.includes("ask")) return MessageSquare;
-  if (l.includes("note") || l.includes("write") || l.includes("draft")) return StickyNote;
-  if (l.includes("exam") || l.includes("quiz") || l.includes("test")) return HelpCircle;
+  if (
+    l.includes("code") ||
+    l.includes("dev") ||
+    l.includes("program") ||
+    l.includes("soft")
+  )
+    return Code;
+  if (l.includes("math") || l.includes("calc") || l.includes("stat"))
+    return BarChart3;
+  if (
+    l.includes("science") ||
+    l.includes("chem") ||
+    l.includes("phys") ||
+    l.includes("bio")
+  )
+    return Beaker;
+  if (l.includes("history") || l.includes("world") || l.includes("geo"))
+    return Globe;
+  if (
+    l.includes("lit") ||
+    l.includes("book") ||
+    l.includes("read") ||
+    l.includes("write")
+  )
+    return BookOpen;
+  if (l.includes("phil") || l.includes("logic") || l.includes("idea"))
+    return Lightbulb;
+  if (l.includes("study") || l.includes("learn") || l.includes("school"))
+    return GraduationCap;
+  if (l.includes("chat") || l.includes("talk") || l.includes("ask"))
+    return MessageSquare;
+  if (l.includes("note") || l.includes("write") || l.includes("draft"))
+    return StickyNote;
+  if (l.includes("exam") || l.includes("quiz") || l.includes("test"))
+    return HelpCircle;
   return Search;
 };
 
-const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Props) => {
+const RivinityLMMain = ({
+  activeFeature,
+  onFeatureChange,
+  initialMessage,
+}: Props) => {
   const [input, setInput] = useState("");
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [activeTab, setActiveTab] = useState(defaultTabs[0].id);
@@ -190,18 +285,18 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
       }, 100);
       return () => clearTimeout(timer);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeTab = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
     if (tabs.length <= 1) return;
-    const idx = tabs.findIndex(t => t.id === id);
+    const idx = tabs.findIndex((t) => t.id === id);
     if (activeTab === id) {
       const next = tabs[idx + 1] || tabs[idx - 1];
       setActiveTab(next.id);
     }
-    setTabs(prev => prev.filter(t => t.id !== id));
+    setTabs((prev) => prev.filter((t) => t.id !== id));
   };
 
   const handleSend = () => {
@@ -212,23 +307,38 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
 
   const renderView = () => {
     switch (activeFeature) {
-      case "contextual-chat": return <ContextualChatView />;
-      case "smart-notes": return <SmartNotesView />;
-      case "flashcards": return <FlashcardsView />;
-      case "quizzes": return <QuizzesView />;
-      case "ai-podcast": return <AIPodcastView />;
-      case "voice-transcribe": return <VoiceTranscribeView />;
-      case "homework-planner": return <HomeworkPlannerView />;
-      case "exam-lab": return <ExamLabView />;
-      case "debate": return <DebateView />;
-      case "study-companion": return <StudyCompanionView />;
-      case "data-analyst": return <DataAnalystView />;
-      default: return null;
+      case "contextual-chat":
+        return <ContextualChatView />;
+      case "smart-notes":
+        return <SmartNotesView />;
+      case "flashcards":
+        return <FlashcardsView />;
+      case "quizzes":
+        return <QuizzesView />;
+      case "ai-podcast":
+        return <AIPodcastView />;
+      case "voice-transcribe":
+        return <VoiceTranscribeView />;
+      case "homework-planner":
+        return <HomeworkPlannerView />;
+      case "exam-lab":
+        return <ExamLabView />;
+      case "debate":
+        return <DebateView />;
+      case "study-companion":
+        return <StudyCompanionView />;
+      case "data-analyst":
+        return <DataAnalystView />;
+      default:
+        return null;
     }
   };
 
   const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long", month: "long", day: "numeric", year: "numeric",
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 
   if (activeFeature !== "landing") {
@@ -250,14 +360,23 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
 
           <div className="w-full max-w-[740px] flex flex-col items-center">
             {/* Orb */}
-            <div className="w-10 h-10 rounded-full gradient-accent opacity-80 animate-orb mb-3 shadow-glow-accent" />
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 mb-3 shadow-glow-accent">
+              <Image
+                src="/logo.png"
+                alt="Rivinity Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
 
-            <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase mb-2">{today}</p>
+            <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase mb-2">
+              {today}
+            </p>
 
             <h1 className="text-3xl sm:text-4xl font-semibold text-foreground/85 text-center leading-tight tracking-tight">
               What'd you like to
-              <br className="hidden sm:block" />
-              {" "}learn today?
+              <br className="hidden sm:block" /> learn today?
             </h1>
 
             <div className="h-0.5 w-16 rounded-full gradient-accent mt-3 mb-5" />
@@ -277,13 +396,16 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${activeTab === tab.id
-                        ? "bg-muted/60 text-foreground"
-                        : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60"
-                        }`}
+                      className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${
+                        activeTab === tab.id
+                          ? "bg-muted/60 text-foreground"
+                          : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60"
+                      }`}
                     >
                       <tab.icon className="w-3.5 h-3.5 shrink-0" />
-                      <span className="hidden xs:inline truncate max-w-[90px]">{tab.label}</span>
+                      <span className="hidden xs:inline truncate max-w-[90px]">
+                        {tab.label}
+                      </span>
                       {tabs.length > 1 && (
                         <X
                           className="w-2.5 h-2.5 shrink-0 opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity ml-1"
@@ -296,35 +418,48 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     onClick={() => setIsAddingTab(!isAddingTab)}
                     className={`px-3 py-2 flex items-center gap-1 text-[12px] font-medium transition-all shrink-0 ${isAddingTab ? "bg-accent/10 text-accent" : "text-muted-foreground/40 hover:text-muted-foreground/70 hover:bg-muted/60"}`}
                   >
-                    <Plus className={`w-3 h-3 transition-transform duration-300 ${isAddingTab ? "rotate-45" : ""}`} />
+                    <Plus
+                      className={`w-3 h-3 transition-transform duration-300 ${isAddingTab ? "rotate-45" : ""}`}
+                    />
                   </button>
                 </div>
 
                 {/* Feature Selection Grid */}
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isAddingTab ? "max-h-[500px] opacity-100 border-b border-border/40" : "max-h-0 opacity-0"}`}>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isAddingTab ? "max-h-[500px] opacity-100 border-b border-border/40" : "max-h-0 opacity-0"}`}
+                >
                   <div className="p-5 bg-muted/20">
-                    <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-widest px-1 mb-4">Study Tools & Modes</p>
+                    <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-widest px-1 mb-4">
+                      Study Tools & Modes
+                    </p>
                     <div className="flex flex-col gap-1 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                       {features.map((feature) => (
                         <button
                           key={feature.id}
                           onClick={() => {
-                            const newTab = { id: Date.now(), icon: feature.icon, label: feature.label, featureId: feature.id };
-                            setTabs(p => [...p, newTab]);
+                            const newTab = {
+                              id: Date.now(),
+                              icon: feature.icon,
+                              label: feature.label,
+                              featureId: feature.id,
+                            };
+                            setTabs((p) => [...p, newTab]);
                             setActiveTab(newTab.id);
                             setIsAddingTab(false);
                           }}
                           className="flex flex-col items-start justify-center w-full px-4 py-3 rounded-xl border border-transparent hover:border-accent/20 bg-background/0 hover:bg-background/40 hover:shadow-sm transition-all group min-h-[50px]"
                         >
-                          <p className="text-[14px] font-semibold text-foreground/60 group-hover:text-accent transition-all group-hover:pl-2">{feature.label}</p>
-                          <p className="text-[11px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-all group-hover:pl-2">{feature.desc}</p>
+                          <p className="text-[14px] font-semibold text-foreground/60 group-hover:text-accent transition-all group-hover:pl-2">
+                            {feature.label}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-all group-hover:pl-2">
+                            {feature.desc}
+                          </p>
                         </button>
                       ))}
                     </div>
                   </div>
                 </div>
-
-
 
                 <textarea
                   ref={textareaRef}
@@ -347,20 +482,38 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     {/* Prompt Mode */}
                     <div className="relative">
                       <button
-                        onClick={() => { setShowPromptDropdown(!showPromptDropdown); setShowLengthDropdown(false); }}
+                        onClick={() => {
+                          setShowPromptDropdown(!showPromptDropdown);
+                          setShowLengthDropdown(false);
+                        }}
                         className="flex flex-col px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
                       >
-                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">Prompt Mode</span>
+                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">
+                          Prompt Mode
+                        </span>
                         <span className="text-[12px] font-semibold text-foreground/70 flex items-center gap-1">
-                          {promptMode} <ChevronDown className="w-3 h-3 opacity-50" />
+                          {promptMode}{" "}
+                          <ChevronDown className="w-3 h-3 opacity-50" />
                         </span>
                       </button>
                       {showPromptDropdown && (
                         <div className="absolute top-full mt-1 left-0 w-36 glass-strong rounded-xl border border-glass shadow-float overflow-hidden animate-float-in z-50">
-                          {["Chat", "Deep Dive", "Quick Answer", "Tutorial"].map((m) => (
-                            <button key={m} onClick={() => { setPromptMode(m); setShowPromptDropdown(false); }}
+                          {[
+                            "Chat",
+                            "Deep Dive",
+                            "Quick Answer",
+                            "Tutorial",
+                          ].map((m) => (
+                            <button
+                              key={m}
+                              onClick={() => {
+                                setPromptMode(m);
+                                setShowPromptDropdown(false);
+                              }}
                               className={`w-full px-4 py-2 text-[12px] text-left transition-colors ${m === promptMode ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent/50"}`}
-                            >{m}</button>
+                            >
+                              {m}
+                            </button>
                           ))}
                         </div>
                       )}
@@ -372,8 +525,12 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-muted/40 transition-all">
                       <Paperclip className="w-3.5 h-3.5 text-muted-foreground/40" />
                       <div className="text-left">
-                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider block">Add files</span>
-                        <span className="text-[12px] font-medium text-foreground/60">Click or drop</span>
+                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider block">
+                          Add files
+                        </span>
+                        <span className="text-[12px] font-medium text-foreground/60">
+                          Click or drop
+                        </span>
                       </div>
                     </button>
 
@@ -382,20 +539,33 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     {/* Response Length */}
                     <div className="relative">
                       <button
-                        onClick={() => { setShowLengthDropdown(!showLengthDropdown); setShowPromptDropdown(false); }}
+                        onClick={() => {
+                          setShowLengthDropdown(!showLengthDropdown);
+                          setShowPromptDropdown(false);
+                        }}
                         className="flex flex-col px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
                       >
-                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">Response Length</span>
+                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">
+                          Response Length
+                        </span>
                         <span className="text-[12px] font-semibold text-foreground/70 flex items-center gap-1">
-                          {responseLength} <ChevronDown className="w-3 h-3 opacity-50" />
+                          {responseLength}{" "}
+                          <ChevronDown className="w-3 h-3 opacity-50" />
                         </span>
                       </button>
                       {showLengthDropdown && (
                         <div className="absolute top-full mt-1 left-0 w-36 glass-strong rounded-xl border border-glass shadow-float overflow-hidden animate-float-in z-50">
                           {["Short", "Medium", "Long", "Detailed"].map((l) => (
-                            <button key={l} onClick={() => { setResponseLength(l); setShowLengthDropdown(false); }}
+                            <button
+                              key={l}
+                              onClick={() => {
+                                setResponseLength(l);
+                                setShowLengthDropdown(false);
+                              }}
                               className={`w-full px-4 py-2 text-[12px] text-left transition-colors ${l === responseLength ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent/50"}`}
-                            >{l}</button>
+                            >
+                              {l}
+                            </button>
                           ))}
                         </div>
                       )}
@@ -408,7 +578,10 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                     </button>
                   </div>
 
-                  <button onClick={handleSend} className="w-9 h-9 rounded-full bg-foreground flex items-center justify-center shrink-0 hover:opacity-80 transition-opacity">
+                  <button
+                    onClick={handleSend}
+                    className="w-9 h-9 rounded-full bg-foreground flex items-center justify-center shrink-0 hover:opacity-80 transition-opacity"
+                  >
                     <Send className="w-3.5 h-3.5 text-background" />
                   </button>
                 </div>
@@ -422,9 +595,6 @@ const RivinityLMMain = ({ activeFeature, onFeatureChange, initialMessage }: Prop
                 />
               </div>
             </div>
-
-
-
           </div>
 
           <div className="flex-[1] min-h-[20px]" />

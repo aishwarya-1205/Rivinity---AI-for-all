@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/platform", label: "Platform" },
@@ -60,36 +61,22 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl relative flex items-center justify-between pointer-events-auto">
         {/* Left: Logo */}
-        <div className="flex-1 flex justify-start">
-          <motion.a
-            href="/"
-            className="flex items-center gap-2.5"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="relative h-9 w-9">
-              <svg viewBox="0 0 32 32" fill="none" className="h-full w-full">
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="text-foreground"
-                />
-                <circle cx="16" cy="16" r="6" className="fill-accent" />
-                <path
-                  d="M16 2 L16 8 M16 24 L16 30 M2 16 L8 16 M24 16 L30 16"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="text-foreground"
-                />
-              </svg>
+        <div className="flex items-center gap-3 flex-1 -ml-9">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="relative h-12 w-12">
+              <Image
+                src="/logo.png"
+                alt="Rivinity Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">
+
+            <span className="text-xl font-semibold tracking-tight text-foreground">
               Rivinity
             </span>
-          </motion.a>
+          </Link>
         </div>
 
         {/* Center: Glass Nav Pill */}

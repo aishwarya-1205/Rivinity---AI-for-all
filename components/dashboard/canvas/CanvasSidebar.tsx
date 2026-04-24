@@ -6,6 +6,7 @@ import {
   Clock,
   X,
 } from "lucide-react";
+import Image from "next/image";
 
 const conversations = [
   { id: 1, title: "Build a REST API endpoint", time: "2m ago" },
@@ -27,21 +28,30 @@ interface CanvasSidebarProps {
 const CanvasSidebar = ({ onClose }: CanvasSidebarProps) => {
   return (
     <aside className="w-[260px] h-full flex flex-col shrink-0 bg-background">
-      <div className="px-5 pt-5 pb-4 flex items-center justify-between">
+      <div className="px-5 pt-5 pb-4 relative flex items-center justify-center">
+        {/* Centered Logo + Text */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl gradient-accent flex items-center justify-center">
-            <Sparkles className="w-4 h-4 text-primary-foreground" />
+          <div className="relative w-8 h-8">
+            <Image
+              src="/logo.png"
+              alt="Rivinity Logo"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
+
           <span className="font-semibold text-foreground tracking-tight text-[17px]">
             Rivinity
           </span>
         </div>
-        {/* Close button */}
+
+        {/* Close button (stays right) */}
         {onClose && (
           <button
             onClick={onClose}
             aria-label="Close sidebar"
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/50 hover:text-foreground/70 transition-all lg:hidden"
+            className="absolute right-5 w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/50 hover:text-foreground/70 transition-all lg:hidden"
           >
             <X className="w-4 h-4" />
           </button>

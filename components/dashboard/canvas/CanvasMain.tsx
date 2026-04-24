@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import {
   Send,
   Paperclip,
@@ -8,7 +8,7 @@ import {
   FileText,
   Lightbulb,
   Search,
-  Image,
+  Image as ImageIcon,
   ChevronDown,
   Plus,
   X,
@@ -25,6 +25,7 @@ import {
   BarChart3,
   BookOpen,
 } from "lucide-react";
+import Image from "next/image";
 
 interface Message {
   id: number;
@@ -334,7 +335,7 @@ const getTabIcon = (label: string) => {
     l.includes("draw") ||
     l.includes("gen")
   )
-    return Image;
+    return ImageIcon;
   if (l.includes("idea") || l.includes("think") || l.includes("brain"))
     return Lightbulb;
   if (
@@ -520,7 +521,15 @@ const CanvasMain = () => {
 
             {/* Content block */}
             <div className="w-full max-w-[660px] flex flex-col items-center">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full gradient-accent opacity-80 animate-orb mb-3 shadow-glow-accent" />
+              <div className="relative w-12 h-12 sm:w-12 sm:h-12 mb-3 shadow-glow-accent">
+                <Image
+                  src="/logo.png"
+                  alt="Rivinity Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase mb-2">
                 {new Date().toLocaleDateString("en-US", {
                   weekday: "long",
