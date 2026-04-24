@@ -7,6 +7,7 @@ import {
   Smartphone,
   FolderOpen,
 } from "lucide-react";
+import Image from "next/image";
 import { useFiles } from "../context/FileContext";
 
 const tools = [
@@ -28,10 +29,11 @@ const AppBuilderRightPanel = ({
   const { files, addFiles, removeFile } = useFiles();
   return (
     <aside
-      className={`h-full flex-col py-5 px-3 shrink-0 flex gap-5 overflow-y-auto bg-background lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${isOpen
+      className={`h-full flex-col py-5 px-3 shrink-0 flex gap-5 overflow-y-auto bg-background lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${
+        isOpen
           ? "translate-x-0 w-[220px] opacity-100"
           : "translate-x-full lg:translate-x-0 lg:w-0 lg:px-0 lg:opacity-0 pointer-events-none lg:pointer-events-auto"
-        }`}
+      }`}
     >
       <div>
         <p className="text-[10px] font-medium text-muted-foreground/35 uppercase tracking-widest mb-2 px-1">
@@ -39,8 +41,13 @@ const AppBuilderRightPanel = ({
         </p>
         <div className="rounded-xl p-3">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-7 h-7 rounded-lg gradient-accent flex items-center justify-center shrink-0">
-              <Brain className="w-3.5 h-3.5 text-primary-foreground" />
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Rivinity Logo"
+                fill
+                className="object-contain p-1"
+              />
             </div>
             <div>
               <p className="text-[12.5px] font-medium text-foreground leading-tight">
