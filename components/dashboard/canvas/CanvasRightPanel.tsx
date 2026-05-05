@@ -3,38 +3,50 @@ import {
   Zap,
   Globe,
   Layout,
-  Palette,
-  Smartphone,
+  Database,
+  Shield,
   FolderOpen,
+  AudioWaveform,
+  GraduationCap,
 } from "lucide-react";
 import Image from "next/image";
-import { useFiles } from "../context/FileContext";
+import { useRouter } from "next/navigation";
+import { useFiles } from "@/components/dashboard/context/FileContext";
 
 const tools = [
   { icon: Globe, label: "Web Search", color: "text-accent" },
-  { icon: Layout, label: "Templates", color: "text-accent" },
-  { icon: Palette, label: "Design", color: "text-accent" },
-  { icon: Smartphone, label: "Preview", color: "text-accent" },
+  {
+    icon: Layout,
+    label: "App Builder",
+    color: "text-accent",
+    route: "/dashboard/app-builder",
+  },
+  { icon: Database, label: "Database", color: "text-accent" },
+  { icon: Shield, label: "Security", color: "text-accent" },
+  {
+    icon: AudioWaveform,
+    label: "Audio Lab",
+    color: "text-accent",
+    route: "/dashboard/audio-lab",
+  },
+  {
+    icon: GraduationCap,
+    label: "RivinityLM",
+    color: "text-accent",
+    route: "/dashboard/rivinity-lm",
+  },
 ];
 
-interface AppBuilderRightPanelProps {
+interface CanvasRightPanelProps {
   isOpen?: boolean;
   onClose?: () => void;
 }
 
-const AppBuilderRightPanel = ({
-  isOpen,
-  onClose,
-}: AppBuilderRightPanelProps) => {
+const CanvasRightPanel = ({ isOpen, onClose }: CanvasRightPanelProps) => {
+  const router = useRouter();
   const { files, addFiles, removeFile } = useFiles();
   return (
-    <aside
-      className={`h-full flex-col py-5 px-3 shrink-0 flex gap-5 overflow-y-auto bg-background lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${
-        isOpen
-          ? "translate-x-0 w-[220px] opacity-100"
-          : "translate-x-full lg:translate-x-0 lg:w-0 lg:px-0 lg:opacity-0 pointer-events-none lg:pointer-events-auto"
-      }`}
-    >
+    <aside className="h-full w-full flex flex-col py-3 px-3.5 gap-4 overflow-y-auto no-scrollbar bg-background">
       <div>
         <p className="text-[10px] font-medium text-muted-foreground/35 uppercase tracking-widest mb-2 px-1">
           Model
@@ -51,7 +63,7 @@ const AppBuilderRightPanel = ({
             </div>
             <div>
               <p className="text-[12.5px] font-medium text-foreground leading-tight">
-                Rivinity Builder
+                Rivinity Core
               </p>
               <p className="text-[10px] text-muted-foreground/45">
                 v2.4 · 128k ctx
@@ -75,7 +87,8 @@ const AppBuilderRightPanel = ({
           {tools.map((t) => (
             <button
               key={t.label}
-              className={`glass flex flex-col items-center gap-1.5 p-3 rounded-xl border border-glass border-glass-hover transition-all duration-150 cursor-pointer hover:shadow-float`}
+              onClick={() => t.route && router.push(t.route)}
+              className={`glass flex flex-col items-center gap-1.5 p-3 rounded-xl border border-glass border-glass-hover transition-all duration-150 ${t.route ? "cursor-pointer hover:shadow-float" : ""}`}
             >
               <t.icon className={`w-4 h-4 ${t.color}`} />
               <span className="text-[11px] font-medium text-foreground/70">
@@ -100,7 +113,7 @@ const AppBuilderRightPanel = ({
           multiple
           accept=".pdf,.png,.jpg,.jpeg,.txt"
           className="hidden"
-          id="fileUpload-appbuilder"
+          id="fileUpload-canvas"
           onChange={(e) => {
             if (!e.target.files) return;
             addFiles(Array.from(e.target.files));
@@ -108,11 +121,10 @@ const AppBuilderRightPanel = ({
         />
 
         <label
-          htmlFor="fileUpload-appbuilder"
+          htmlFor="fileUpload-canvas"
           className="cursor-pointer flex flex-col items-center justify-center w-full"
         >
           <FolderOpen className="w-7 h-7 text-muted-foreground/40 mb-2" />
-
           <p className="text-[11px] text-muted-foreground/50">
             {files.length === 0
               ? "Drop files or click to upload"
@@ -143,4 +155,4 @@ const AppBuilderRightPanel = ({
   );
 };
 
-export default AppBuilderRightPanel;
+export default CanvasRightPanel;

@@ -57,13 +57,13 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 pt-6 px-4 pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-6 px-4 sm:px-6 pointer-events-none"
     >
       <div className="mx-auto max-w-7xl relative flex items-center justify-between pointer-events-auto">
         {/* Left: Logo */}
-        <div className="flex items-center gap-3 flex-1 -ml-9">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-12 w-12">
+        <div className="flex items-center gap-3 flex-1">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="relative h-10 w-10 sm:h-12 sm:w-12 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo.png"
                 alt="Rivinity Logo"
@@ -73,7 +73,7 @@ export function Navbar() {
               />
             </div>
 
-            <span className="text-xl font-semibold tracking-tight text-foreground">
+            <span className="text-lg sm:text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent">
               Rivinity
             </span>
           </Link>
@@ -120,7 +120,7 @@ export function Navbar() {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex-1 flex justify-end items-center gap-2">
+        <div className="flex-1 flex justify-end items-center gap-1 sm:gap-2">
           <div className="hidden md:flex items-center gap-2">
             {mounted && (
               <motion.button
@@ -167,7 +167,7 @@ export function Navbar() {
             {mounted && (
               <button
                 onClick={toggleDarkMode}
-                className="p-2.5 text-foreground rounded-full hover:bg-secondary/80 transition-colors"
+                className="p-2 text-foreground rounded-full hover:bg-secondary/80 transition-colors"
                 aria-label="Toggle dark mode"
               >
                 {isDark ? (
@@ -178,14 +178,14 @@ export function Navbar() {
               </button>
             )}
             <button
-              className="p-2.5 text-foreground rounded-full hover:bg-secondary/80 transition-colors"
+              className="p-2 text-foreground rounded-full hover:bg-secondary/80 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
               )}
             </button>
           </div>
@@ -198,7 +198,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-background/98 backdrop-blur-2xl border-t border-border pointer-events-auto"
+          className="md:hidden mt-4 mx-2 rounded-2xl bg-background/98 backdrop-blur-2xl border border-border shadow-2xl overflow-hidden pointer-events-auto"
         >
           <div className="px-4 py-6 space-y-2">
             {navLinks.map((link) => (
@@ -227,7 +227,7 @@ export function Navbar() {
               </Link>
               <Link href="/signup" className="w-full">
                 <Button
-                  className="w-full h-12 rounded-xl bg-foreground text-background font-semibold"
+                  className="w-full h-12 rounded-xl bg-foreground text-background font-semibold shadow-glow-accent"
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started

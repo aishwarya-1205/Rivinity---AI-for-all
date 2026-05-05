@@ -22,12 +22,7 @@ const AudioLabRightPanel = ({ activeFeature = "text-to-speech", isOpen, onClose 
   const showVoiceSelector = activeFeature === "text-to-speech" || activeFeature === "voice-clone";
 
   return (
-    <aside
-      className={`h-full flex-col py-6 px-4 shrink-0 flex gap-6 overflow-y-auto bg-background/50 backdrop-blur-md lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${isOpen
-          ? "translate-x-0 w-[260px] opacity-100"
-          : "translate-x-full lg:translate-x-0 lg:w-0 lg:px-0 lg:opacity-0 pointer-events-none lg:pointer-events-auto"
-        }`}
-    >
+    <aside className="h-full w-full flex flex-col py-3 px-3.5 gap-4 overflow-y-auto no-scrollbar bg-background">
       {/* Model */}
       <div>
         <p className="text-[10px] font-medium text-muted-foreground/50 uppercase tracking-widest mb-3 px-1">AI Model</p>
@@ -81,8 +76,8 @@ const AudioLabRightPanel = ({ activeFeature = "text-to-speech", isOpen, onClose 
                       setVoiceDropdownOpen(false);
                     }}
                     className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${v.id === selectedVoice.id
-                        ? "bg-accent text-foreground"
-                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                      ? "bg-accent text-foreground"
+                      : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                       }`}
                   >
                     <div className="w-8 h-8 rounded-full bg-foreground/10 flex items-center justify-center text-xs font-semibold text-foreground/70">

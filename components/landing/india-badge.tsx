@@ -10,7 +10,7 @@ export function IndiaBadge() {
       transition={{ duration: 0.5, delay: 0.2 }}
       className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#FF9933]/10 via-white/50 to-[#138808]/10 border border-[#FF9933]/20 dark:from-[#FF9933]/20 dark:via-white/10 dark:to-[#138808]/20"
     >
-      <span className="text-sm font-medium text-foreground">
+      <span className="text-xs sm:text-sm font-medium text-foreground">
         Proudly Built in
       </span>
       <div className="flex items-center gap-1">
@@ -23,7 +23,7 @@ export function IndiaBadge() {
           </div>
           <div className="flex-1 bg-[#138808]" />
         </div>
-        <span className="text-sm font-semibold text-foreground">India</span>
+        <span className="text-xs sm:text-sm font-semibold text-foreground">India</span>
       </div>
     </motion.div>
   );

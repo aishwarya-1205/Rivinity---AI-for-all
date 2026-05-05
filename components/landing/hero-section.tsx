@@ -26,31 +26,30 @@ export function HeroSection() {
     <section className="relative min-h-screen overflow-hidden pt-20 bg-background text-foreground">
       <MountainSunrise />
 
-      <div className="absolute inset-0 z-0 flex items-end translate-y-[-120px] sm:translate-y-[-180px] opacity-70">
+      <div className="absolute inset-0 z-0 flex items-end translate-y-[-60px] sm:translate-y-[-180px] opacity-70 transition-transform duration-500">
         <HeroDotMountain />
       </div>
 
-
-      <SectionWrapper className="relative z-10 pt-16 sm:pt-20 lg:pt-24" py={false}>
+      <SectionWrapper className="relative z-10 pt-10 sm:pt-20 lg:pt-24" py={false}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col items-center gap-4 mb-8"
+          className="flex flex-col items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
         >
           <IndiaBadge />
           <a
             href="#"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 dark:from-accent/20 dark:to-highlight/20 backdrop-blur-sm border border-accent/20 hover:border-accent/40 transition duration-300"
+            className="group inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-accent/10 to-highlight/10 dark:from-accent/20 dark:to-highlight/20 backdrop-blur-sm border border-accent/20 hover:border-accent/40 transition duration-300"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-accent"></span>
             </span>
-            <span className="text-sm font-medium text-foreground">
+            <span className="text-[12px] sm:text-sm font-medium text-foreground">
               Introducing Rivinity v2.0
             </span>
-            <ArrowRight className="h-4 w-4 text-accent group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
 
@@ -62,7 +61,7 @@ export function HeroSection() {
           >
             <TextGenerateEffect
               words="AI for All, from Bharat"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] font-bold tracking-tight text-foreground leading-[1.05] max-w-5xl mx-auto"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] font-bold tracking-tighter text-foreground leading-[1.1] max-w-5xl mx-auto px-4"
               duration={0.5}
             />
           </motion.div>
@@ -72,9 +71,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-6"
+            className="mt-4 sm:mt-6 px-6"
           >
-            <span className="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-gradient">
+            <span className="inline-block text-base sm:text-xl md:text-2xl font-semibold text-gradient leading-tight">
               Sovereign Intelligence. Population-Scale Impact.
             </span>
           </motion.div>
@@ -85,7 +84,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}
-          className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground text-center max-w-2xl mx-auto text-pretty leading-relaxed"
+          className="mt-4 sm:mt-6 text-sm sm:text-lg lg:text-xl text-muted-foreground text-center max-w-2xl mx-auto text-pretty leading-relaxed px-8"
         >
           Built on sovereign compute. Powered by frontier-class models.
           Delivering population-scale AI impact across Bharat and beyond.
@@ -96,7 +95,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 40, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-          className="mt-12 sm:mt-16"
+          className="mt-10 sm:mt-16"
         >
           <AIConsole />
         </motion.div>
@@ -106,9 +105,9 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-20 sm:mt-28 pb-8"
+          className="mt-16 sm:mt-28 pb-8"
         >
-          <p className="text-center text-xs sm:text-sm text-muted-foreground mb-8 uppercase tracking-[0.2em] font-medium">
+          <p className="text-center text-[10px] sm:text-sm text-muted-foreground mb-6 sm:mb-8 uppercase tracking-[0.2em] font-medium">
             India Builds with Rivinity
           </p>
           <InfiniteMovingCards

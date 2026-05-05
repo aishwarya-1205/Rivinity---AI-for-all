@@ -353,10 +353,10 @@ const RivinityLMMain = ({
 
   // Landing page
   return (
-    <div className="flex-1 flex flex-col min-w-0 min-h-0">
+    <div className="absolute inset-0 flex flex-col overflow-hidden">
       <div className="flex-1 min-h-0 overflow-y-auto">
         <div className="h-full flex flex-col items-center px-4 sm:px-6">
-          <div className="flex-[3] min-h-[20px]" />
+          <div className="flex-[5] min-h-[20px]" />
 
           <div className="w-full max-w-[740px] flex flex-col items-center">
             {/* Orb */}
@@ -396,11 +396,10 @@ const RivinityLMMain = ({
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${
-                        activeTab === tab.id
+                      className={`group relative flex items-center gap-1.5 px-3 py-2 text-[12px] font-medium transition-all duration-150 shrink-0 ${activeTab === tab.id
                           ? "bg-muted/60 text-foreground"
                           : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60"
-                      }`}
+                        }`}
                     >
                       <tab.icon className="w-3.5 h-3.5 shrink-0" />
                       <span className="hidden xs:inline truncate max-w-[90px]">
@@ -477,18 +476,18 @@ const RivinityLMMain = ({
                 />
 
                 {/* Controls bar */}
-                <div className="flex items-center justify-between px-3 pb-3 pt-1">
-                  <div className="flex items-center gap-1">
+                <div className="flex items-center justify-between px-3 pb-3 pt-1 gap-2">
+                  <div className="flex items-center gap-1 overflow-x-auto no-scrollbar flex-1 min-w-0">
                     {/* Prompt Mode */}
-                    <div className="relative">
+                    <div className="relative shrink-0">
                       <button
                         onClick={() => {
                           setShowPromptDropdown(!showPromptDropdown);
                           setShowLengthDropdown(false);
                         }}
-                        className="flex flex-col px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
+                        className="flex flex-col px-2 sm:px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
                       >
-                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">
+                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider hidden sm:block">
                           Prompt Mode
                         </span>
                         <span className="text-[12px] font-semibold text-foreground/70 flex items-center gap-1">
@@ -519,12 +518,12 @@ const RivinityLMMain = ({
                       )}
                     </div>
 
-                    <div className="w-px h-6 bg-border/30" />
+                    <div className="w-px h-6 bg-border/30 shrink-0" />
 
                     {/* File upload */}
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-muted/40 transition-all">
+                    <button className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg hover:bg-muted/40 transition-all shrink-0">
                       <Paperclip className="w-3.5 h-3.5 text-muted-foreground/40" />
-                      <div className="text-left">
+                      <div className="text-left hidden sm:block">
                         <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider block">
                           Add files
                         </span>
@@ -534,18 +533,18 @@ const RivinityLMMain = ({
                       </div>
                     </button>
 
-                    <div className="w-px h-6 bg-border/30" />
+                    <div className="w-px h-6 bg-border/30 shrink-0" />
 
                     {/* Response Length */}
-                    <div className="relative">
+                    <div className="relative shrink-0">
                       <button
                         onClick={() => {
                           setShowLengthDropdown(!showLengthDropdown);
                           setShowPromptDropdown(false);
                         }}
-                        className="flex flex-col px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
+                        className="flex flex-col px-2 sm:px-3 py-1.5 rounded-lg text-left hover:bg-muted/40 transition-all"
                       >
-                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider">
+                        <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider hidden sm:block">
                           Response Length
                         </span>
                         <span className="text-[12px] font-semibold text-foreground/70 flex items-center gap-1">
@@ -571,9 +570,9 @@ const RivinityLMMain = ({
                       )}
                     </div>
 
-                    <div className="w-px h-6 bg-border/30" />
+                    <div className="w-px h-6 bg-border/30 shrink-0" />
 
-                    <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground/35 hover:text-muted-foreground/60 hover:bg-muted/40 transition-all">
+                    <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground/35 hover:text-muted-foreground/60 hover:bg-muted/40 transition-all shrink-0">
                       <Mic className="w-[15px] h-[15px]" />
                     </button>
                   </div>
@@ -597,7 +596,7 @@ const RivinityLMMain = ({
             </div>
           </div>
 
-          <div className="flex-[1] min-h-[20px]" />
+          <div className="flex-[1.5] min-h-[20px]" />
 
           <div className="w-full flex justify-center py-4 shrink-0">
             <p className="text-[10px] text-muted-foreground/30">

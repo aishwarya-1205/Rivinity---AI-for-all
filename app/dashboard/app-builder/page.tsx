@@ -1,8 +1,8 @@
 "use client";
 
-import DashboardLayout from "@/app/dashboard/_components/shared/DashboardLayout";
-import AppBuilderMain from "@/app/dashboard/_components/app-builder/AppBuilderMain";
-import AppBuilderRightPanel from "@/app/dashboard/_components/app-builder/AppBuilderRightPanel";
+import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
+import AppBuilderMain from "@/app/dashboard/app-builder/AppBuilderMain";
+import AppBuilderRightPanel from "@/app/dashboard/app-builder/AppBuilderRightPanel";
 
 export default function AppBuilderPage() {
   return (

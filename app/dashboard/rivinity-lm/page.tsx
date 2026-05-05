@@ -2,9 +2,9 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import DashboardLayout from "@/app/dashboard/_components/shared/DashboardLayout";
-import RivinityLMMain from "@/app/dashboard/_components/rivinity-lm/RivinityLMMain";
-import RivinityLMRightPanel from "@/app/dashboard/_components/rivinity-lm/RivinityLMRightPanel";
+import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
+import RivinityLMMain from "@/app/dashboard/rivinity-lm/RivinityLMMain";
+import RivinityLMRightPanel from "@/app/dashboard/rivinity-lm/RivinityLMRightPanel";
 
 function RivinityLMContent() {
   const [activeFeature, setActiveFeature] = useState<string>("landing");

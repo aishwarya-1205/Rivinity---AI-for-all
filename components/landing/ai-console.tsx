@@ -69,7 +69,7 @@ export function AIConsole() {
   const [message, setMessage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
-    minHeight: 64,
+    minHeight: 56, // Slightly smaller on mobile
     maxHeight: 160,
   });
 
@@ -80,7 +80,7 @@ export function AIConsole() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto px-4 sm:px-0">
       {/* Main Input Container */}
       <motion.div
         className={cn(
@@ -90,7 +90,7 @@ export function AIConsole() {
             ? "border-accent/50 shadow-2xl shadow-accent/10 dark:shadow-accent/5"
             : "border-border shadow-xl",
         )}
-        whileHover={{ scale: 1.005 }}
+        whileHover={{ scale: 1.002 }}
         transition={{ duration: 0.2 }}
       >
         {/* Glow Effect */}
@@ -120,9 +120,9 @@ export function AIConsole() {
             placeholder="Ask Rivinity to build something amazing..."
             className={cn(
               "w-full px-5 py-4 resize-none border-none rounded-t-2xl",
-              "bg-transparent text-foreground text-base",
+              "bg-transparent text-foreground text-[15px] sm:text-base",
               "focus:outline-none focus:ring-0",
-              "placeholder:text-muted-foreground min-h-[64px]",
+              "placeholder:text-muted-foreground min-h-[56px] sm:min-h-[64px]",
             )}
             style={{ overflow: "hidden" }}
           />
@@ -133,7 +133,7 @@ export function AIConsole() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-secondary"
+                className="h-8 w-8 sm:h-9 sm:w-9 text-muted-foreground hover:text-foreground hover:bg-secondary"
               >
                 <Paperclip className="w-4 h-4" />
               </Button>
@@ -152,9 +152,9 @@ export function AIConsole() {
               disabled={!message.trim()}
               onClick={handleSubmit}
               className={cn(
-                "h-9 w-9 rounded-lg transition",
+                "h-8 w-8 sm:h-9 sm:w-9 rounded-lg transition",
                 message.trim()
-                  ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                  ? "bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow-accent"
                   : "bg-secondary text-muted-foreground cursor-not-allowed",
               )}
               size="icon"
@@ -166,30 +166,36 @@ export function AIConsole() {
         </div>
       </motion.div>
 
-      {/* Quick Actions */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="flex items-center justify-center flex-wrap gap-2 mt-6"
-      >
-        {quickActions.map((action) => (
-          <motion.button
-            key={action.label}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => setMessage(action.label)}
-            className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-sm transition",
-              "border border-border bg-card/50 dark:bg-card/30 backdrop-blur-sm",
-              "text-muted-foreground hover:text-foreground hover:bg-secondary hover:border-border/80",
-            )}
-          >
-            <action.icon className="w-4 h-4" />
-            <span className="text-xs font-medium">{action.label}</span>
-          </motion.button>
-        ))}
-      </motion.div>
+      {/* Quick Actions - Scrollable on mobile */}
+      <div className="relative mt-5 group">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar sm:flex-wrap sm:justify-center sm:pb-0"
+        >
+          {quickActions.map((action) => (
+            <motion.button
+              key={action.label}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setMessage(action.label)}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs transition shrink-0",
+                "border border-border bg-card/50 dark:bg-card/30 backdrop-blur-sm",
+                "text-muted-foreground hover:text-foreground hover:bg-secondary hover:border-border/80",
+              )}
+            >
+              <action.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="font-medium">{action.label}</span>
+            </motion.button>
+          ))}
+        </motion.div>
+        
+        {/* Mobile Gradient indicators for scroll */}
+        <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-background to-transparent pointer-events-none sm:hidden" />
+        <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent pointer-events-none sm:hidden" />
+      </div>
     </div>
   );
 }

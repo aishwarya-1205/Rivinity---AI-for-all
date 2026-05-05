@@ -149,8 +149,8 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                   key={s.id}
                   onClick={() => setActiveSection(s.id)}
                   className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-[12.5px] font-medium transition-all duration-150 text-left ${activeSection === s.id
-                      ? "bg-accent/10 dark:bg-accent/20 text-foreground"
-                      : "text-muted-foreground/70 hover:text-foreground/80 hover:bg-accent/10"
+                    ? "bg-accent/10 dark:bg-accent/20 text-foreground"
+                    : "text-muted-foreground/70 hover:text-foreground/80 hover:bg-accent/10"
                     }`}
                 >
                   <s.icon className={`w-4 h-4 shrink-0 transition-colors ${activeSection === s.id ? "text-accent" : "text-muted-foreground/50"}`} />
@@ -171,8 +171,8 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                           key={t.value}
                           onClick={() => handleThemeChange(t.value)}
                           className={`flex flex-col items-center gap-2 py-4 rounded-xl border transition-all duration-150 ${theme === t.value
-                              ? "border-accent/40 bg-white dark:bg-[#1a1c2e] shadow-sm text-foreground ring-1 ring-accent/20"
-                              : "border-border/10 bg-white dark:bg-[#1a1c2e]/40 text-muted-foreground/60 hover:border-border/40 hover:text-foreground/80"
+                            ? "border-accent/40 bg-white dark:bg-[#1a1c2e] shadow-sm text-foreground ring-1 ring-accent/20"
+                            : "border-border/10 bg-white dark:bg-[#1a1c2e]/40 text-muted-foreground/60 hover:border-border/40 hover:text-foreground/80"
                             }`}
                         >
                           <t.icon className={`w-5 h-5 ${theme === t.value ? "text-accent" : "text-muted-foreground/40"}`} />
@@ -191,8 +191,8 @@ const SettingsModal = ({ isOpen, onClose }: SettingsModalProps) => {
                           key={f.value}
                           onClick={() => setFontSize(f.value)}
                           className={`flex-1 py-2 rounded-xl border text-[11px] transition-all duration-150 ${fontSize === f.value
-                              ? "border-accent/40 bg-white dark:bg-[#1a1c2e] shadow-sm text-foreground font-semibold"
-                              : "border-border/10 bg-white dark:bg-[#1a1c2e]/40 text-muted-foreground/60 hover:border-border/40"
+                            ? "border-accent/40 bg-white dark:bg-[#1a1c2e] shadow-sm text-foreground font-semibold"
+                            : "border-border/10 bg-white dark:bg-[#1a1c2e]/40 text-muted-foreground/60 hover:border-border/40"
                             }`}
                         >
                           {f.label}

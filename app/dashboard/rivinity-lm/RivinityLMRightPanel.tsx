@@ -95,13 +95,7 @@ const RivinityLMRightPanel = ({
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
 
   return (
-    <aside
-      className={`h-full flex-col py-6 px-4 shrink-0 flex gap-5 overflow-y-auto scrollbar-none no-scrollbar bg-background lg:relative fixed top-0 right-0 z-40 shadow-2xl lg:shadow-none transition-all duration-300 ease-in-out ${
-        isOpen
-          ? "translate-x-0 w-[260px] opacity-100"
-          : "translate-x-full lg:translate-x-0 lg:w-0 lg:px-0 lg:opacity-0 pointer-events-none lg:pointer-events-auto"
-      }`}
-    >
+    <aside className="h-full w-full flex flex-col py-3 px-3.5 gap-4 overflow-y-auto no-scrollbar bg-background">
       {/* Model */}
       <div>
         <p className="text-[10px] font-medium text-muted-foreground/50 uppercase tracking-widest mb-3 px-1">
@@ -143,11 +137,10 @@ const RivinityLMRightPanel = ({
             <button
               key={t.id}
               onClick={() => onFeatureChange(t.id)}
-              className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition-all duration-150 ${
-                activeFeature === t.id
+              className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition-all duration-150 ${activeFeature === t.id
                   ? "glass border-accent/20 shadow-glow-accent"
                   : "border-transparent hover:glass hover:border-glass hover:shadow-float"
-              }`}
+                }`}
             >
               <t.icon className={`w-3.5 h-3.5 ${t.color}`} />
               <span className="text-[10px] font-medium text-foreground/60 leading-tight text-center">

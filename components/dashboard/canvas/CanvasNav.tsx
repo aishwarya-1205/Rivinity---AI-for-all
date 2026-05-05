@@ -15,15 +15,15 @@ interface CanvasNavProps {
   showModelSelector?: boolean;
 }
 
-const CanvasNav = ({ 
-  rightPanelOpen, 
+const CanvasNav = ({
+  rightPanelOpen,
   setRightPanelOpen,
   title,
   showModelSelector = true
 }: CanvasNavProps) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  
+
   const profileBtnRef = useRef<HTMLButtonElement>(null);
   const profilePanelRef = useRef<HTMLDivElement>(null);
 
@@ -47,8 +47,8 @@ const CanvasNav = ({
 
   return (
     <>
-      <div 
-        className="h-[52px] flex items-center justify-between px-5 shrink-0 z-10"
+      <div
+        className="h-[52px] flex items-center justify-between px-3 sm:px-5 shrink-0 z-10"
         style={{
           backdropFilter: "blur(24px)",
           WebkitBackdropFilter: "blur(24px)",
@@ -56,16 +56,8 @@ const CanvasNav = ({
           borderBottom: "1px solid rgba(255,255,255,0.05)",
         }}
       >
-        <div className="w-20 pl-4 flex items-center">
-          {title && (
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <span className="text-sm font-medium text-foreground/80 tracking-tight">
-                {title}
-              </span>
-            </div>
-          )}
-        </div>
+        {/* Left spacer — same width as right buttons area to keep center truly centered */}
+        <div className="w-10 sm:w-16 flex items-center" />
 
         {/* Center */}
         <div className="flex items-center justify-center flex-1">
@@ -79,17 +71,17 @@ const CanvasNav = ({
         </div>
 
         {/* Right */}
-        <div className="flex items-center gap-2 w-20 justify-end">
+        <div className="flex items-center gap-2 justify-end">
           {setRightPanelOpen && (
             <button
               onClick={() => setRightPanelOpen(!rightPanelOpen)}
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 mr-1 ${
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 ${
                 rightPanelOpen
                   ? "bg-accent/10 text-[#ff7a18]"
                   : "text-muted-foreground/50 hover:text-foreground/80 hover:bg-muted/60"
               }`}
             >
-              <SquareArrowRight className="w-4 h-4" />
+              <SquareArrowRight className={`w-4 h-4 transition-transform duration-300 ${rightPanelOpen ? "rotate-180" : ""}`} />
             </button>
           )}
 
@@ -153,7 +145,7 @@ const CanvasNav = ({
                 </button>
               ))}
               <div className="h-px bg-border/40 my-1.5 mx-2" />
-              <button 
+              <button
                 onClick={() => setProfileOpen(false)}
                 className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12.5px] font-medium text-red-500/80 hover:bg-red-500/10 hover:text-red-500 transition-all duration-150"
               >
