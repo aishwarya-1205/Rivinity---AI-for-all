@@ -34,14 +34,14 @@ export function CTASection() {
       />
 
       {/* Globe Background */}
-      <div className="absolute inset-0 flex justify-center pointer-events-none">
-        <div className="relative w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] lg:w-[1100px] lg:h-[1100px] opacity-50 dark:opacity-60 top-20 sm:top-28 lg:top-2">
+      <div className="absolute inset-0 flex justify-center items-center lg:items-start pointer-events-none">
+        <div className="relative w-[350px] h-[350px] sm:w-[600px] sm:h-[600px] lg:w-[1100px] lg:h-[1100px] opacity-50 dark:opacity-60 top-0 lg:top-2">
           <Globe
             className="absolute inset-0"
             config={{
               width: 1100,
               height: 1100,
-              onRender: () => {},
+              onRender: () => { },
               devicePixelRatio: 2,
               phi: 0,
               theta: 0.3,
@@ -79,7 +79,7 @@ export function CTASection() {
   relative z-10 w-full sm:mx-auto sm:max-w-7xl px-4 sm:px-8 lg:px-8
   flex flex-col items-center text-center
   justify-center min-h-[650px] gap-4
-  sm:pt-0 sm:gap-0
+  pt-12 sm:pt-20 lg:pt-0 sm:gap-0
 "
       >
         <div

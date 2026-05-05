@@ -80,7 +80,7 @@ export function Navbar() {
         </div>
 
         {/* Center: Glass Nav Pill */}
-        <nav className="hidden md:flex relative items-center">
+        <nav className="hidden lg:flex relative items-center">
           <div className="relative flex items-center gap-1 bg-background/60 dark:bg-white/[0.04] backdrop-blur-xl px-2 py-1.5 rounded-full border border-border/40 shadow-lg">
             {navLinks.map((link) => {
               const isActive = activeTab === link.label;
@@ -121,7 +121,7 @@ export function Navbar() {
 
         {/* Right: Actions */}
         <div className="flex-1 flex justify-end items-center gap-1 sm:gap-2">
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             {mounted && (
               <motion.button
                 onClick={toggleDarkMode}
@@ -163,7 +163,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Button & Dark Mode */}
-          <div className="md:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             {mounted && (
               <button
                 onClick={toggleDarkMode}
@@ -198,7 +198,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden mt-4 mx-2 rounded-2xl bg-background/98 backdrop-blur-2xl border border-border shadow-2xl overflow-hidden pointer-events-auto"
+          className="lg:hidden mt-4 mx-2 rounded-2xl bg-background/98 backdrop-blur-2xl border border-border shadow-2xl overflow-hidden pointer-events-auto"
         >
           <div className="px-4 py-6 space-y-2">
             {navLinks.map((link) => (
