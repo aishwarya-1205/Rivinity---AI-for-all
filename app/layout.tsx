@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { BackgroundPaths } from "@/components/background-paths";
+import { BackgroundPaths } from "@/components/landing/background-paths";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Rivinity" }],
   icons: {
     icon: [
-      { url: "/logo.svg", type: "image/svg+xml" }, // primary (sharp)
-      { url: "/logo.png", type: "image/png" }, // fallback
+      { url: "/logo_64x64.svg", type: "image/svg+xml" }, // primary (sharp)
+      { url: "/logo_64x64.png", type: "image/png" }, // fallback
     ],
-    apple: "/logo.png",
+    apple: "/logo_64x64.png",
   },
 };
 
@@ -59,7 +59,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased tracking-tight selection:bg-accent/20">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

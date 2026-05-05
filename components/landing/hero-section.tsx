@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { AIConsole } from "./ai-console";
 import { IndiaBadge } from "./india-badge";
-import { TextGenerateEffect } from "./ui/text-generate-effect";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
 import MountainSunrise from "./mountain-sunrise";
-import { SectionWrapper } from "./ui/section-wrapper";
-import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
+import { SectionWrapper } from "../ui/section-wrapper";
+import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 import HeroDotMountain from "./hero-dot-mountain";
 
 const trustedLogos = [

@@ -10,12 +10,12 @@ const voices = [
 ];
 
 interface Props {
-  activeFeature: string;
+  activeFeature?: string;
   isOpen?: boolean;
   onClose?: () => void;
 }
 
-const AudioLabRightPanel = ({ activeFeature, isOpen, onClose }: Props) => {
+const AudioLabRightPanel = ({ activeFeature = "text-to-speech", isOpen, onClose }: Props) => {
   const [selectedVoice, setSelectedVoice] = useState(voices[0]);
   const [voiceDropdownOpen, setVoiceDropdownOpen] = useState(false);
 

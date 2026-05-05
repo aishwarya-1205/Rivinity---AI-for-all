@@ -8,7 +8,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button as MovingBorderButton } from "@/components/ui/moving-border";
 import Link from "next/link";
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function CTASection() {
   const ref = useRef(null);

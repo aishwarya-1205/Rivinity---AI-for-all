@@ -13,16 +13,16 @@
   --primary-foreground: #fafafa;
   --secondary: #f8f9fa;
   --secondary-foreground: #0a0a0a;
-  --muted: #f1f3f5;
-  --muted-foreground: #4b4b4b;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
   --accent: #ff7a18;
   --accent-foreground: #ffffff;
   --highlight: #6c63ff;
   --highlight-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
-  --border: #e9ecef;
-  --input: #e9ecef;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
   --ring: #0a0a0a;
   --chart-1: #ff7a18;
   --chart-2: #6c63ff;
@@ -36,15 +36,15 @@
   --sidebar-primary-foreground: #fafafa;
   --sidebar-accent: #f8f9fa;
   --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: #e9ecef;
+  --sidebar-border: #e4e4e7;
   --sidebar-ring: #0a0a0a;
 
   /* Dashboard Glass Variables */
   --glass-bg: 0 0% 100% / 0.6;
   --glass-bg-strong: 0 0% 100% / 0.85;
   --glass-bg-subtle: 0 0% 100% / 0.4;
-  --glass-border: 0 0% 0% / 0.04;
-  --glass-border-hover: 0 0% 0% / 0.08;
+  --glass-border: 0 0% 0% / 0.05;
+  --glass-border-hover: 0 0% 0% / 0.1;
 }
 
 .dark {

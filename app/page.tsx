@@ -1,21 +1,21 @@
 "use client";
 
-import { SmoothScroll } from "@/components/smooth-scroll";
+import { SmoothScroll } from "@/components/landing/smooth-scroll";
 import { Navbar } from "@/components/navbar";
-import { HeroSection } from "@/components/hero-section";
-import { FeaturesSection } from "@/components/features-section";
-import { DemoShowcase } from "@/components/demo-showcase";
-import { IntegrationsSection } from "@/components/integrations-section";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { SecuritySection } from "@/components/security-section";
-import { RoadmapSection } from "@/components/roadmap-section";
-import { PricingSection } from "@/components/pricing-section";
-import { StatsSection } from "@/components/stats-section";
-import { FAQSection } from "@/components/faq-section";
-import { UpdatesSection } from "@/components/updates-section";
-import { CTASection } from "@/components/cta-section";
+import { HeroSection } from "@/components/landing/hero-section";
+import { FeaturesSection } from "@/components/landing/features-section";
+import { DemoShowcase } from "@/components/landing/demo-showcase";
+import { IntegrationsSection } from "@/components/landing/integrations-section";
+import { TestimonialsSection } from "@/components/landing/testimonials-section";
+import { SecuritySection } from "@/components/landing/security-section";
+import { RoadmapSection } from "@/components/landing/roadmap-section";
+import { PricingSection } from "@/components/landing/pricing-section";
+import { StatsSection } from "@/components/landing/stats-section";
+import { FAQSection } from "@/components/landing/faq-section";
+import { UpdatesSection } from "@/components/landing/updates-section";
+import { CTASection } from "@/components/landing/cta-section";
 import { Footer } from "@/components/footer";
-import { GlowingFeatures } from "@/components/glowing-features";
+import { GlowingFeatures } from "@/components/landing/glowing-features";
 
 export default function HomePage() {
   return (

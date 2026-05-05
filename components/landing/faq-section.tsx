@@ -38,7 +38,7 @@ const faqs = [
   },
 ];
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

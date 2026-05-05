@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import CanvasSidebar from "@/components/dashboard/canvas/CanvasSidebar";
-import CanvasTopBar from "@/components/dashboard/canvas/CanvasTopBar";
-import CanvasMain from "@/components/dashboard/canvas/CanvasMain";
-import CanvasRightPanel from "@/components/dashboard/canvas/CanvasRightPanel";
+import CanvasSidebar from "@/app/dashboard/_components/canvas/CanvasSidebar";
+import CanvasTopBar from "@/app/dashboard/_components/canvas/CanvasTopBar";
+import CanvasMain from "@/app/dashboard/_components/canvas/CanvasMain";
+import CanvasRightPanel from "@/app/dashboard/_components/canvas/CanvasRightPanel";
 import { PanelLeft } from "lucide-react";
 
 export default function DashboardPage() {

@@ -42,7 +42,7 @@ const demos = [
   },
 ];
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function DemoShowcase() {
   const [activeDemo, setActiveDemo] = useState(demos[0]);

@@ -153,7 +153,7 @@ function AnimatedCounter({
   );
 }
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function RoadmapSection() {
   return (

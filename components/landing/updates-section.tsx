@@ -29,7 +29,7 @@ const updates = [
   },
 ];
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function UpdatesSection() {
   return (

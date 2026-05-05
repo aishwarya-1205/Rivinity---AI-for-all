@@ -22,7 +22,7 @@ import {
   SiZapier,
 } from "react-icons/si";
 import { useTheme } from "next-themes";
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 const integrations = [
   { icon: SiOpenai, color: "#10A37F" },

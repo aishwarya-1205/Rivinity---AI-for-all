@@ -15,6 +15,10 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       lerp: 0.1,
     });
 
+    // Force scroll to top on mount/reload
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);

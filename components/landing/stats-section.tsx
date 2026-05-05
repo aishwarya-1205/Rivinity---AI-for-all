@@ -69,7 +69,7 @@ function AnimatedNumber({
   );
 }
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function StatsSection() {
   const ref = useRef(null);

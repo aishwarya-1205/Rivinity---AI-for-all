@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { BentoPricing } from "@/components/ui/bento-pricing";
 
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function PricingSection() {
   return (

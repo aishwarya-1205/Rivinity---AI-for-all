@@ -26,7 +26,7 @@ const certifications = [
   }
 ]
 
-import { SectionWrapper } from "./ui/section-wrapper"
+import { SectionWrapper } from "../ui/section-wrapper"
 
 export function SecuritySection() {
   return (

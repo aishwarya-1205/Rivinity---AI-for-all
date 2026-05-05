@@ -2,7 +2,7 @@
 
 import { Box, Lock, Search, Settings, Sparkles, Zap } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { SectionWrapper } from "./ui/section-wrapper";
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function GlowingFeatures() {
   return (

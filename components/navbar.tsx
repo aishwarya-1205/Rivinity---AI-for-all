@@ -206,10 +206,9 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`block text-base font-medium py-3 px-4 rounded-xl transition-colors
-                  ${
-                    pathname.startsWith(link.href)
-                      ? "text-accent bg-accent/5"
-                      : "text-foreground hover:bg-secondary/80"
+                  ${pathname.startsWith(link.href)
+                    ? "text-accent bg-accent/5"
+                    : "text-foreground hover:bg-secondary/80"
                   }`}
                 onClick={() => setIsOpen(false)}
               >
