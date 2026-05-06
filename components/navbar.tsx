@@ -63,7 +63,7 @@ export function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center gap-3 flex-1">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative h-10 w-10 sm:h-12 sm:w-12 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo.png"
                 alt="Rivinity Logo"
@@ -206,9 +206,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`block text-base font-medium py-3 px-4 rounded-xl transition-colors
-                  ${pathname.startsWith(link.href)
-                    ? "text-accent bg-accent/5"
-                    : "text-foreground hover:bg-secondary/80"
+                  ${
+                    pathname.startsWith(link.href)
+                      ? "text-accent bg-accent/5"
+                      : "text-foreground hover:bg-secondary/80"
                   }`}
                 onClick={() => setIsOpen(false)}
               >
