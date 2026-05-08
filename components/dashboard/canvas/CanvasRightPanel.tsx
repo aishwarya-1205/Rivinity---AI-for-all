@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useFiles } from "@/components/dashboard/context/FileContext";
+import { useState } from "react";
 
 const tools = [
   { icon: Globe, label: "Web Search", color: "text-accent" },
@@ -46,6 +47,9 @@ interface CanvasRightPanelProps {
 const CanvasRightPanel = ({ isOpen, onClose }: CanvasRightPanelProps) => {
   const router = useRouter();
   const { files, addFiles, removeFile } = useFiles();
+  // Add state inside CanvasRightPanel component:
+  const [activeTool, setActiveTool] = useState("Web Search");
+
   return (
     <aside className="h-full w-full flex flex-col py-3 px-3.5 gap-4 overflow-y-auto no-scrollbar bg-background">
       {/* Mobile-only close header */}
@@ -102,11 +106,22 @@ const CanvasRightPanel = ({ isOpen, onClose }: CanvasRightPanelProps) => {
           {tools.map((t) => (
             <button
               key={t.label}
-              onClick={() => t.route && router.push(t.route)}
-              className={`glass flex flex-col items-center gap-1.5 p-3 rounded-xl border border-glass border-glass-hover transition-all duration-150 ${t.route ? "cursor-pointer hover:shadow-float" : ""}`}
+              onClick={() => {
+                setActiveTool(t.label);
+                if (t.route) router.push(t.route);
+              }}
+              className={`flex flex-col items-center gap-1.5 p-3 rounded-xl border transition-all duration-150 ${
+                activeTool === t.label
+                  ? "bg-accent/10 border-accent/30 shadow-sm"
+                  : "glass border-glass hover:border-glass-hover hover:shadow-float"
+              } ${t.route ? "cursor-pointer" : ""}`}
             >
-              <t.icon className={`w-4 h-4 ${t.color}`} />
-              <span className="text-[11px] font-medium text-foreground/70">
+              <t.icon
+                className={`w-4 h-4 ${activeTool === t.label ? "text-accent" : t.color}`}
+              />
+              <span
+                className={`text-[11px] font-medium ${activeTool === t.label ? "text-accent" : "text-foreground/70"}`}
+              >
                 {t.label}
               </span>
             </button>

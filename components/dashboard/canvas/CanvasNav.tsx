@@ -6,7 +6,9 @@ import ReactDOM from "react-dom";
 import { User, Settings, Download, LogOut } from "lucide-react";
 
 const Portal = ({ children }: { children: React.ReactNode }) =>
-  typeof document !== "undefined" ? ReactDOM.createPortal(children, document.body) : null;
+  typeof document !== "undefined"
+    ? ReactDOM.createPortal(children, document.body)
+    : null;
 
 interface CanvasNavProps {
   rightPanelOpen?: boolean;
@@ -19,7 +21,7 @@ const CanvasNav = ({
   rightPanelOpen,
   setRightPanelOpen,
   title,
-  showModelSelector = true
+  showModelSelector = true,
 }: CanvasNavProps) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -59,17 +61,6 @@ const CanvasNav = ({
         {/* Left spacer — same width as right buttons area to keep center truly centered */}
         <div className="w-10 sm:w-16 flex items-center" />
 
-        {/* Center */}
-        <div className="flex items-center justify-center flex-1">
-          {showModelSelector && (
-            <button className="flex items-center gap-2 px-4 py-1.5 rounded-full hover:bg-muted/50 border border-transparent hover:border-border/40 transition-all duration-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-              <span className="text-[13px] font-medium text-foreground/80">Rivinity Core</span>
-              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground/50" />
-            </button>
-          )}
-        </div>
-
         {/* Right */}
         <div className="flex items-center gap-2 justify-end">
           {setRightPanelOpen && (
@@ -81,7 +72,9 @@ const CanvasNav = ({
                   : "text-muted-foreground/50 hover:text-foreground/80 hover:bg-muted/60"
               }`}
             >
-              <SquareArrowRight className={`w-4 h-4 transition-transform duration-300 ${rightPanelOpen ? "rotate-180" : ""}`} />
+              <SquareArrowRight
+                className={`w-4 h-4 transition-transform duration-300 ${rightPanelOpen ? "rotate-180" : ""}`}
+              />
             </button>
           )}
 
@@ -89,7 +82,9 @@ const CanvasNav = ({
             ref={profileBtnRef}
             onClick={() => setProfileOpen((v) => !v)}
             className={`w-8 h-8 rounded-xl gradient-accent flex items-center justify-center text-white text-[12px] font-bold transition-all duration-200 hover:opacity-90 shadow-sm ${
-              profileOpen ? "ring-2 ring-[#ff7a18]/30 ring-offset-1 ring-offset-background" : ""
+              profileOpen
+                ? "ring-2 ring-[#ff7a18]/30 ring-offset-1 ring-offset-background"
+                : ""
             }`}
           >
             JD
@@ -105,8 +100,12 @@ const CanvasNav = ({
             className="glass-strong border border-border/40 shadow-float overflow-hidden animate-in fade-in zoom-in-95 duration-200 rounded-xl"
             style={{
               position: "fixed",
-              top: (profileBtnRef.current?.getBoundingClientRect().bottom ?? 0) + 8,
-              right: window.innerWidth - (profileBtnRef.current?.getBoundingClientRect().right ?? 0),
+              top:
+                (profileBtnRef.current?.getBoundingClientRect().bottom ?? 0) +
+                8,
+              right:
+                window.innerWidth -
+                (profileBtnRef.current?.getBoundingClientRect().right ?? 0),
               width: 220,
               zIndex: 9999,
             }}

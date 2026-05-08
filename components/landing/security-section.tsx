@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Shield, Lock, Server, FileCheck } from "lucide-react"
+import { motion } from "framer-motion";
+import { Shield, Lock, Server, FileCheck } from "lucide-react";
 
 const certifications = [
   {
     icon: Shield,
     title: "SOC 2 Type II",
-    description: "Enterprise security certified"
+    description: "Enterprise security certified",
   },
   {
     icon: Lock,
-    title: "ISO 27001",
-    description: "Information security management"
+    title: "ISO 9001",
+    description: "Information security management",
   },
   {
     icon: Server,
-    title: "India Data Residency",
-    description: "Data stays within Bharat"
+    title: "GDPR Compliance",
+    description: "Data stays within Bharat",
   },
   {
     icon: FileCheck,
     title: "MeitY Compliant",
-    description: "Government standards certified"
-  }
-]
+    description: "Government standards certified",
+  },
+];
 
-import { SectionWrapper } from "../ui/section-wrapper"
+import { SectionWrapper } from "../ui/section-wrapper";
 
 export function SecuritySection() {
   return (
@@ -62,7 +62,9 @@ export function SecuritySection() {
               <cert.icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover:text-accent transition-colors duration-300" />
             </div>
             <h3 className="font-semibold text-foreground">{cert.title}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{cert.description}</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {cert.description}
+            </p>
           </motion.div>
         ))}
       </div>
@@ -80,8 +82,11 @@ export function SecuritySection() {
         <div className="flex flex-wrap justify-center gap-8 md:gap-12">
           {[
             { name: "Rivinity Cloud", desc: "Fully managed AI infrastructure" },
-            { name: "Private Cloud (VPC)", desc: "Your security perimeter, our scale" },
-            { name: "On-Premise", desc: "Full control, air-gapped if needed" }
+            {
+              name: "Private Cloud (VPC)",
+              desc: "Your security perimeter, our scale",
+            },
+            { name: "On-Premise", desc: "Full control, air-gapped if needed" },
           ].map((option, index) => (
             <motion.div
               key={index}

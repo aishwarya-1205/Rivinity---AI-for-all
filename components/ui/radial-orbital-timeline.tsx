@@ -7,7 +7,13 @@ import {
   useEffect,
   useMemo,
 } from "react";
-import { motion, useAnimationFrame, animate, motionValue, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useAnimationFrame,
+  animate,
+  motionValue,
+  type MotionValue,
+} from "framer-motion";
 import { ArrowRight, Link, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,7 +46,10 @@ export default function RadialOrbitalTimeline({
 
   // Use useMemo to create MotionValues for the list safely without violating hook rules
   const nodePositions = useMemo(() => {
-    const map: Record<number, { x: MotionValue<number>; y: MotionValue<number> }> = {};
+    const map: Record<
+      number,
+      { x: MotionValue<number>; y: MotionValue<number> }
+    > = {};
     timelineData.forEach((item) => {
       map[item.id] = {
         x: motionValue(0),
@@ -63,12 +72,10 @@ export default function RadialOrbitalTimeline({
   useLayoutEffect(() => {
     const updateRadius = () => {
       const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
       const containerEl = containerRef.current;
       const containerWidth = containerEl
         ? containerEl.getBoundingClientRect().width
         : screenWidth;
-      const usable = Math.min(containerWidth, screenHeight);
 
       let radius: number;
       if (screenWidth < 380) {
@@ -78,7 +85,7 @@ export default function RadialOrbitalTimeline({
       } else if (screenWidth < 768) {
         radius = Math.min(containerWidth * 0.32, 150);
       } else if (screenWidth < 1024) {
-        radius = usable * 0.3;
+        radius = Math.min(containerWidth * 0.42, 280);
       } else {
         radius = 220;
       }
@@ -87,7 +94,14 @@ export default function RadialOrbitalTimeline({
       setIsMobile(screenWidth < 768);
     };
 
+    // Run once immediately
     updateRadius();
+
+    // Run again after paint so containerRef has real dimensions
+    const rafId = requestAnimationFrame(() => {
+      updateRadius();
+    });
+
     let timeoutId: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       clearTimeout(timeoutId);
@@ -97,6 +111,7 @@ export default function RadialOrbitalTimeline({
     return () => {
       window.removeEventListener("resize", handleResize);
       clearTimeout(timeoutId);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -122,7 +137,7 @@ export default function RadialOrbitalTimeline({
           const a = angleRef.current + baseAngle;
           const targetX = cx + r * Math.cos(a);
           const targetY = cy + r * Math.sin(a);
-          
+
           nodePositions[item.id].x.set(targetX);
           nodePositions[item.id].y.set(targetY);
         }
@@ -155,7 +170,7 @@ export default function RadialOrbitalTimeline({
         pausedRef.current = false;
       }
     },
-    []
+    [],
   );
 
   const toggleItem = (id: number) => {
@@ -205,7 +220,7 @@ export default function RadialOrbitalTimeline({
 
   const activeItem =
     activeNodeId !== null
-      ? timelineData.find((i) => i.id === activeNodeId) ?? null
+      ? (timelineData.find((i) => i.id === activeNodeId) ?? null)
       : null;
 
   const nodeSize = isMobile ? 36 : 44;
@@ -269,7 +284,7 @@ export default function RadialOrbitalTimeline({
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
-            boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)"
+            boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)",
           }}
         >
           <div className="absolute w-24 h-24 rounded-full border border-accent/20 animate-ping opacity-70" />
@@ -335,11 +350,12 @@ export default function RadialOrbitalTimeline({
                   className={`
                     relative rounded-full flex items-center justify-center
                     border transition duration-300 backdrop-blur-sm
-                    ${isExpanded
-                      ? "bg-accent text-white border-accent shadow-xl scale-125"
-                      : isRelated
-                        ? "bg-highlight/50 text-white border-highlight scale-110"
-                        : "bg-card/90 text-foreground border-border hover:scale-110"
+                    ${
+                      isExpanded
+                        ? "bg-accent text-white border-accent shadow-xl scale-125"
+                        : isRelated
+                          ? "bg-highlight/50 text-white border-highlight scale-110"
+                          : "bg-card/90 text-foreground border-border hover:scale-110"
                     }
                   `}
                   style={{ width: nodeSize, height: nodeSize }}
@@ -363,108 +379,112 @@ export default function RadialOrbitalTimeline({
         })}
 
         {/* ── Detail card — sibling to nodes, never inside orbit ring ── */}
-        {activeItem && cardVisible && (() => {
-          const ft = getFloatTarget();
-          return (
-            <Card
-              className="absolute bg-card/95 backdrop-blur-xl border-border shadow-2xl shadow-accent/10 z-[100] overflow-visible"
-              style={{
-                width: cardWidth,
-                // Position below the floated node
-                left: ft.x,
-                top: ft.y + nodeSize * 0.6 + 22,
-                transform: "translateX(-50%)",
-                animation:
-                  "cardSlideDown 0.32s cubic-bezier(0.34,1.4,0.64,1) forwards",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Connector stem */}
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div className="w-px h-3 bg-accent" />
-                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-px" />
-              </div>
-
-              <CardHeader className="pb-2 px-3 pt-3">
-                <div className="flex justify-between items-center">
-                  <Badge
-                    className={`px-2 text-[10px] ${getStatusStyles(activeItem.status)}`}
-                  >
-                    {activeItem.status === "completed"
-                      ? "COMPLETE"
-                      : activeItem.status === "in-progress"
-                        ? "IN PROGRESS"
-                        : "UPCOMING"}
-                  </Badge>
-                  <span className="text-[10px] font-mono text-muted-foreground">
-                    {activeItem.date}
-                  </span>
-                </div>
-                <CardTitle className="text-sm mt-2 text-card-foreground">
-                  {activeItem.title}
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-[11px] text-muted-foreground px-3 pb-3">
-                <p>{activeItem.content}</p>
-
-                <div className="mt-3 pt-2 border-t border-border">
-                  <div className="flex justify-between items-center text-[10px] mb-1">
-                    <span className="flex items-center text-card-foreground">
-                      <Zap size={10} className="mr-1 text-accent" /> Progress
-                    </span>
-                    <span className="font-mono text-card-foreground">
-                      {activeItem.energy}%
-                    </span>
-                  </div>
-                  <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-accent to-highlight rounded-full"
-                      style={{ width: `${activeItem.energy}%` }}
-                    />
-                  </div>
+        {activeItem &&
+          cardVisible &&
+          (() => {
+            const ft = getFloatTarget();
+            return (
+              <Card
+                className="absolute bg-card/95 backdrop-blur-xl border-border shadow-2xl shadow-accent/10 z-[100] overflow-visible"
+                style={{
+                  width: cardWidth,
+                  // Position below the floated node
+                  left: ft.x,
+                  top: ft.y + nodeSize * 0.6 + 22,
+                  transform: "translateX(-50%)",
+                  animation:
+                    "cardSlideDown 0.32s cubic-bezier(0.34,1.4,0.64,1) forwards",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Connector stem */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                  <div className="w-px h-3 bg-accent" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-accent mt-px" />
                 </div>
 
-                {activeItem.relatedIds.length > 0 && (
+                <CardHeader className="pb-2 px-3 pt-3">
+                  <div className="flex justify-between items-center">
+                    <Badge
+                      className={`px-2 text-[10px] ${getStatusStyles(activeItem.status)}`}
+                    >
+                      {activeItem.status === "completed"
+                        ? "COMPLETE"
+                        : activeItem.status === "in-progress"
+                          ? "IN PROGRESS"
+                          : "UPCOMING"}
+                    </Badge>
+                    <span className="text-[10px] font-mono text-muted-foreground">
+                      {activeItem.date}
+                    </span>
+                  </div>
+                  <CardTitle className="text-sm mt-2 text-card-foreground">
+                    {activeItem.title}
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="text-[11px] text-muted-foreground px-3 pb-3">
+                  <p>{activeItem.content}</p>
+
                   <div className="mt-3 pt-2 border-t border-border">
-                    <div className="flex items-center mb-2">
-                      <Link size={10} className="text-muted-foreground mr-1" />
-                      <h4 className="text-[10px] uppercase tracking-wider font-medium text-muted-foreground">
-                        Connected
-                      </h4>
+                    <div className="flex justify-between items-center text-[10px] mb-1">
+                      <span className="flex items-center text-card-foreground">
+                        <Zap size={10} className="mr-1 text-accent" /> Progress
+                      </span>
+                      <span className="font-mono text-card-foreground">
+                        {activeItem.energy}%
+                      </span>
                     </div>
-                    <div className="flex flex-wrap gap-1">
-                      {activeItem.relatedIds.map((relatedId: number) => {
-                        const relatedItem = timelineData.find(
-                          (i) => i.id === relatedId
-                        );
-                        return (
-                          <Button
-                            key={relatedId}
-                            variant="outline"
-                            size="sm"
-                            className="flex items-center h-6 px-2 py-0 text-[10px] border-border bg-transparent hover:bg-accent/10 text-card-foreground hover:text-accent transition"
-                            onClick={(e: React.MouseEvent) => {
-                              e.stopPropagation();
-                              toggleItem(relatedId);
-                            }}
-                          >
-                            {relatedItem?.title}
-                            <ArrowRight
-                              size={8}
-                              className="ml-1 text-muted-foreground"
-                            />
-                          </Button>
-                        );
-                      })}
+                    <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-accent to-highlight rounded-full"
+                        style={{ width: `${activeItem.energy}%` }}
+                      />
                     </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-          );
-        })()}
 
+                  {activeItem.relatedIds.length > 0 && (
+                    <div className="mt-3 pt-2 border-t border-border">
+                      <div className="flex items-center mb-2">
+                        <Link
+                          size={10}
+                          className="text-muted-foreground mr-1"
+                        />
+                        <h4 className="text-[10px] uppercase tracking-wider font-medium text-muted-foreground">
+                          Connected
+                        </h4>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {activeItem.relatedIds.map((relatedId: number) => {
+                          const relatedItem = timelineData.find(
+                            (i) => i.id === relatedId,
+                          );
+                          return (
+                            <Button
+                              key={relatedId}
+                              variant="outline"
+                              size="sm"
+                              className="flex items-center h-6 px-2 py-0 text-[10px] border-border bg-transparent hover:bg-accent/10 text-card-foreground hover:text-accent transition"
+                              onClick={(e: React.MouseEvent) => {
+                                e.stopPropagation();
+                                toggleItem(relatedId);
+                              }}
+                            >
+                              {relatedItem?.title}
+                              <ArrowRight
+                                size={8}
+                                className="ml-1 text-muted-foreground"
+                              />
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })()}
       </div>
     </>
   );

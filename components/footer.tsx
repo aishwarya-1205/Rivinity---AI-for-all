@@ -124,6 +124,66 @@ export function Footer() {
                     <span className="text-sm">support@rivinity.in</span>
                   </a>
                 </div>
+                <div className="flex items-center gap-3 flex-wrap">
+                  {/* ISO 9001:2015 */}
+                  <div
+                    className="flex items-center justify-center w-14 h-14 rounded-full border-2 border-accent/30 bg-card"
+                    title="ISO 9001:2015"
+                  >
+                    <div className="text-center leading-none">
+                      <div className="text-[8px] font-extrabold text-accent tracking-tight">
+                        ISO
+                      </div>
+                      <div className="text-[7px] font-bold text-foreground tracking-tight mt-0.5">
+                        9001
+                      </div>
+                      <div className="text-[5px] text-muted-foreground tracking-tight mt-0.5">
+                        :2015
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* GDPR */}
+                  <div
+                    className="flex items-center justify-center w-14 h-14 rounded-full bg-[#003399]"
+                    title="GDPR Compliant"
+                  >
+                    <div className="text-center leading-none">
+                      <div className="flex justify-center mb-0.5">
+                        {[...Array(6)].map((_, i) => (
+                          <svg
+                            key={i}
+                            className="h-1.5 w-1.5 -mx-px fill-[#FFCC00]"
+                            viewBox="0 0 10 10"
+                          >
+                            <path d="M5 0l1.2 3.5H10L7 5.7l1.2 3.5L5 7l-3.2 2.2L3 5.7 0 3.5h3.8z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <div className="text-[9px] font-extrabold text-white tracking-tight">
+                        GDPR
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* SOC 2 */}
+                  <div
+                    className="flex items-center justify-center w-14 h-14 rounded-full bg-foreground"
+                    title="SOC 2 Type II"
+                  >
+                    <div className="text-center leading-none">
+                      <div className="text-[6px] font-bold text-background/60 tracking-[0.1em]">
+                        AICPA
+                      </div>
+                      <div className="text-[10px] font-extrabold text-background tracking-tight mt-0.5">
+                        SOC
+                      </div>
+                      <div className="text-[8px] font-bold text-accent tracking-tight">
+                        2
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Link columns */}
@@ -190,7 +250,7 @@ export function Footer() {
           }}
         >
           <p className="text-sm text-muted-foreground font-medium tracking-wide">
-            © 2026 BharatTech Technoecosystem Pvt. Ltd. All Rights Reserved.
+            © 2026 BharatTech Origin Pvt. Ltd. All Rights Reserved.
           </p>
         </div>
       </div>

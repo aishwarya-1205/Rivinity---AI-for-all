@@ -116,7 +116,7 @@ const RivinityLMRightPanel = ({
         <p className="text-[10px] font-medium text-muted-foreground/50 uppercase tracking-widest mb-3 px-1">
           AI Model
         </p>
-        <div className="glass rounded-2xl p-4 border border-glass shadow-float">
+        <div className="glass rounded-2xl p-4">
           <div className="flex items-center gap-2.5 mb-2.5">
             <div className="relative w-10 h-10 rounded-xl overflow-hidden">
               <Image

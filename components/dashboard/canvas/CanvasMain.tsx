@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import {
   Send,
   Paperclip,
@@ -39,12 +39,12 @@ interface Tab {
 }
 
 const defaultTabs: Tab[] = [
-  { id: 1, icon: Search, label: "Smart Paper Search" },
+  { id: 1, icon: Search, label: "Prompt Enhancer" },
   { id: 2, icon: FileText, label: "Smart Summarization" },
   { id: 3, icon: Lightbulb, label: "Citation Generator" },
 ];
 const tabTemplates = [
-  { icon: Search, label: "Smart Paper Search" },
+  { icon: Search, label: "Prompt Enhancer" },
   { icon: FileText, label: "Smart Summarization" },
   { icon: Lightbulb, label: "Citation Generator" },
   { icon: BarChart3, label: "Deep Analysis" },
@@ -386,6 +386,25 @@ const CanvasMain = () => {
 
   const isEmpty = messages.length === 0;
 
+  // Add to your useState imports at the top of CanvasMain component:
+  const [modelDropdownOpen, setModelDropdownOpen] = useState(false);
+  const [incognitoMode, setIncognitoMode] = useState(false);
+  const modelDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Add this useEffect for outside click (put it after your refs):
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (
+        modelDropdownRef.current &&
+        !modelDropdownRef.current.contains(e.target as Node)
+      ) {
+        setModelDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
   const inputArea = (
     <div className="w-full max-w-[660px]">
       <div className="border border-border/60 rounded-2xl shadow-float input-glow transition-all duration-200 overflow-hidden bg-background">
@@ -494,12 +513,105 @@ const CanvasMain = () => {
             <button className="w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground/35 hover:text-muted-foreground/60 hover:bg-muted/40 transition-all">
               <Mic className="w-3.5 h-3.5" />
             </button>
-            <button className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-lg text-[11px] font-medium text-muted-foreground/50 hover:bg-muted/40 transition-all ml-1">
-              <span className="w-3.5 h-3.5 rounded-full gradient-accent flex items-center justify-center">
-                <Sparkles className="w-2 h-2 text-white" />
-              </span>
-              arc-1a <ChevronDown className="w-2.5 h-2.5 opacity-60" />
-            </button>
+            <div
+              className="relative hidden sm:block ml-1"
+              ref={modelDropdownRef}
+            >
+              <button
+                onClick={() => setModelDropdownOpen((v) => !v)}
+                className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                  modelDropdownOpen
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground/50 hover:bg-muted/40"
+                }`}
+              >
+                <span
+                  className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${incognitoMode ? "bg-purple-500" : "gradient-accent"}`}
+                >
+                  {incognitoMode ? (
+                    <svg
+                      className="w-2 h-2 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <Sparkles className="w-2 h-2 text-white" />
+                  )}
+                </span>
+                {incognitoMode ? "Incognito" : "arc-1a"}
+                <ChevronDown
+                  className={`w-2.5 h-2.5 opacity-60 transition-transform duration-200 ${modelDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {modelDropdownOpen && (
+                <div className="absolute bottom-full left-0 mb-2 w-48 rounded-xl border border-border/50 bg-background shadow-float overflow-hidden z-50">
+                  {/* arc-1a option */}
+                  <button
+                    onClick={() => {
+                      setIncognitoMode(false);
+                      setModelDropdownOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-[12px] transition-all hover:bg-muted/50 ${!incognitoMode ? "text-accent" : "text-foreground/70"}`}
+                  >
+                    <span className="w-5 h-5 rounded-full gradient-accent flex items-center justify-center shrink-0">
+                      <Sparkles className="w-2.5 h-2.5 text-white" />
+                    </span>
+                    <div className="text-left">
+                      <p className="font-medium">arc-1a</p>
+                      <p className="text-[10px] text-muted-foreground/50">
+                        Standard mode
+                      </p>
+                    </div>
+                    {!incognitoMode && (
+                      <Check className="w-3 h-3 ml-auto text-accent" />
+                    )}
+                  </button>
+
+                  <div className="h-px bg-border/30 mx-2" />
+
+                  {/* Incognito option */}
+                  <button
+                    onClick={() => {
+                      setIncognitoMode(true);
+                      setModelDropdownOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-[12px] transition-all hover:bg-muted/50 ${incognitoMode ? "text-purple-400" : "text-foreground/70"}`}
+                  >
+                    <span className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
+                      <svg
+                        className="w-2.5 h-2.5 text-purple-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path
+                          fillRule="evenodd"
+                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                    <div className="text-left">
+                      <p className="font-medium">Incognito</p>
+                      <p className="text-[10px] text-muted-foreground/50">
+                        No chat history saved
+                      </p>
+                    </div>
+                    {incognitoMode && (
+                      <Check className="w-3 h-3 ml-auto text-purple-400" />
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <button
             onClick={handleSend}

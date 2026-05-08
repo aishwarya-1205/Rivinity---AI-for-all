@@ -278,21 +278,19 @@ export const ChatDemo = memo(function ChatDemo() {
               {/* Avatar */}
               <div
                 style={{
-                  width: 28,
-                  height: 28,
+                  width: 30,
+                  height: 30,
                   borderRadius: "50%",
-                  background:
-                    "linear-gradient(135deg, var(--accent), var(--highlight))",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                   flexShrink: 0,
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: "white",
+                  overflow: "hidden",
+                  border: "1px solid var(--border)",
                 }}
               >
-                R
+                <img
+                  src="/logo.png"
+                  alt="Rivinity"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </div>
 
               {/* Bubble */}
