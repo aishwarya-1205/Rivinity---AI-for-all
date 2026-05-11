@@ -86,8 +86,8 @@ const CanvasRightPanel = ({ isOpen, onClose }: CanvasRightPanelProps) => {
           Model
         </p>
         <div className={cn(
-          "rounded-xl p-3 transition-colors",
-          incognitoMode ? "bg-purple-950/10 border border-purple-500/10" : "bg-muted/30"
+          "rounded-xl p-3 px-1 transition-colors",
+          incognitoMode ? "bg-purple-950/10 border border-purple-500/10" : "bg-transparent"
         )}>
           <div className="flex items-center gap-2 mb-2">
             <div className={cn(

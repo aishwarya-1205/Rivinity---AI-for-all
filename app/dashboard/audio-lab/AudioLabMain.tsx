@@ -73,8 +73,8 @@ const AudioLabMain = ({ activeFeature, onFeatureChange }: Props) => {
       </div>
 
       {/* Active view */}
-      <div className="flex-1 overflow-hidden px-3 sm:px-6 py-3 sm:py-4">
-        <div className="animate-float-in h-full">{renderView()}</div>
+      <div className="flex-1 overflow-y-auto px-3 sm:px-6 py-3 sm:py-4 no-scrollbar">
+        <div className="animate-float-in min-h-full">{renderView()}</div>
       </div>
     </div>
   );

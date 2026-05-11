@@ -7,17 +7,21 @@ import { Paperclip, ArrowUp, Sparkles, RotateCcw } from "lucide-react";
    CONSTANTS — defined outside component, never re-created
 ───────────────────────────────────────────────────────── */
 const PROMPT =
-  "Build me a SaaS landing page with animated hero and pricing section";
+  "How do modern AI models understand and generate human-like responses?";
 
 const RESPONSE_LINES = [
-  "Sure! Here's what I'll create for you:",
+  "Modern AI systems use Large Language Models (LLMs) trained on massive amounts of text, code, and structured knowledge.",
   "",
-  "→  Animated hero with gradient headline + CTA button",
-  "→  3-tier pricing cards with monthly/annual toggle",
-  "→  Smooth scroll transitions between sections",
-  "→  Mobile-responsive layout out of the box",
+  "→  Transformer architectures help AI understand context, relationships, and intent within conversations",
+  "→  Tokenization and embeddings convert human language into machine-readable representations",
+  "→  Neural networks analyze billions of parameters to predict and generate meaningful responses",
+  "→  Retrieval-Augmented Generation (RAG) enables AI to access external knowledge in real time",
+  "→  Fine-tuning and reinforcement learning improve domain-specific accuracy and conversational quality",
+  "→  Multimodal AI can process text, images, audio, and documents within a unified intelligence system",
   "",
-  "Starting generation now — this will take about 3 seconds.",
+  "These technologies power next-generation AI applications across research, automation, coding, enterprise systems, and intelligent search.",
+  "",
+  "Would you like to explore model architectures, AI agents, or real-time inference systems?",
 ];
 
 const RESPONSE_TEXT = RESPONSE_LINES.join("\n");

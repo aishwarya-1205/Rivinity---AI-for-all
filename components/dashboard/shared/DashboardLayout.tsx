@@ -135,7 +135,7 @@ function DashboardLayoutInner({
             <motion.div
               className={cn(
                 "z-40 transition-all duration-500 overflow-hidden shrink-0",
-                incognitoMode ? "bg-[#0a0510] border-l border-purple-500/10" : "bg-background border-l border-border/40",
+                incognitoMode ? "bg-[#0a0510] border-l border-purple-500/10" : "bg-background",
                 isMobile
                   ? "fixed right-0 top-0 bottom-0 shadow-2xl"
                   : "relative h-full",

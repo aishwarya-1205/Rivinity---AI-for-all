@@ -48,10 +48,10 @@ const AudioLabRightPanel = ({
         <p className="text-[10px] font-medium text-muted-foreground/50 uppercase tracking-widest mb-3 px-1">
           AI Model
         </p>
-        <div className="glass rounded-2xl p-4">
+        <div className="bg-transparent rounded-2xl p-4 px-1">
           <div className="flex items-center gap-2.5 mb-2.5">
             <div className="w-8 h-8 rounded-xl gradient-accent flex items-center justify-center">
-              <Brain className="w-4 h-4 text-primary-foreground" />
+              {/* Image will be added here by user */}
             </div>
             <div>
               <p className="text-sm font-medium text-foreground">

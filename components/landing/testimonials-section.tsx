@@ -5,58 +5,58 @@ import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 const testimonials = [
   {
-    text: "Rivinity has transformed how we handle customer support. Response quality improved by 60% while cutting costs. The Hindi language support is exceptional.",
+    text: "Finally, an AI platform that truly understands multilingual Indian users. We launched our conversational AI product in record time.",
     image: "RK",
-    name: "Rajesh Kumar",
-    role: "CTO at TechMahindra",
+    name: "Arjun Dev",
+    role: "Founder at NeuralSphere",
   },
   {
-    text: "Finally, an AI platform that truly understands Indian context. Built our entire voice AI product on Rivinity in just 2 weeks. Game changer.",
+    text: "Rivinity’s retrieval and reasoning capabilities significantly improved our enterprise search accuracy and response quality.",
     image: "PS",
-    name: "Priya Sharma",
-    role: "Founder at AIStartup",
+    name: "Ira Malhotra",
+    role: "AI Product Lead at Quantara Systems",
   },
   {
-    text: "The API design is beautiful. Type-safe, well-documented, and incredibly fast. Best DX I've experienced with any AI platform.",
+    text: "The infrastructure is incredibly scalable. We deployed AI agents across multiple workflows without worrying about latency.",
     image: "AV",
-    name: "Amit Verma",
-    role: "Lead Engineer at Flipkart",
+    name: "Vivaan Rao",
+    role: "VP Engineering at Nexovate Labs",
   },
   {
-    text: "Impressed by the quality of Rivinity's multilingual models. Outperforms GPT-4 on Telugu and Kannada benchmarks by a significant margin.",
+    text: "The developer experience feels modern and production-ready. Clean APIs, fast inference, and seamless integrations.",
     image: "SR",
-    name: "Sneha Reddy",
-    role: "ML Engineer at Google",
+    name: "Keshav Nair",
+    role: "Lead Engineer at Synexis AI",
   },
   {
-    text: "Deployed Rivinity agents across 500+ retail stores. Real-time inventory predictions with 95% accuracy. The on-premise option sealed the deal.",
+    text: "We evaluated several global AI platforms, but Rivinity’s multilingual intelligence for Indian languages stood out immediately.",
     image: "VS",
-    name: "Vikram Singh",
-    role: "Data Scientist at Reliance",
+    name: "Anika Reddy",
+    role: "ML Researcher at Veltrix Systems",
   },
   {
-    text: "Our food recommendation engine powered by Rivinity increased order value by 23%. The regional language understanding is unmatched.",
+    text: "Building our RAG pipeline and knowledge retrieval system became dramatically easier using Rivinity’s AI stack.",
     image: "AP",
-    name: "Ananya Patel",
-    role: "Product Manager at Swiggy",
+    name: "Reyansh Kapoor",
+    role: "CTO at AetherMind Technologies",
   },
   {
-    text: "Rivinity's fraud detection models caught 40% more suspicious transactions than our previous system. India-specific training data makes all the difference.",
+    text: "Our AI search engine became noticeably smarter after integrating Rivinity’s contextual retrieval architecture.",
     image: "KM",
-    name: "Karthik Menon",
-    role: "VP Engineering at Razorpay",
+    name: "Tanvi Mehra",
+    role: "Product Architect at Infiniq Labs",
   },
   {
-    text: "Collaborating with Rivinity on constitutional AI for Indian legal context. Their commitment to responsible AI development is exemplary.",
-    image: "MI",
-    name: "Meera Iyer",
-    role: "Research Lead at IIT Bombay",
+    text: "The autonomous coding agents reduced debugging and development time across our engineering workflows.",
+    image: "DS",
+    name: "Dhruv Sen",
+    role: "Engineering Manager at CodeMatrix AI",
   },
   {
-    text: "Building on Rivinity's infrastructure has reduced our AI deployment costs by 60% while maintaining enterprise-grade security and India compliance.",
-    image: "AP",
-    name: "Amit Patel",
-    role: "VP Engineering at Infosys AI Labs",
+    text: "Rivinity helped us scale globally while still delivering localized AI experiences optimized for Bharat.",
+    image: "MK",
+    name: "Myra Kulkarni",
+    role: "Director of AI Solutions at Omnira Tech",
   },
 ];
 
@@ -79,8 +79,6 @@ export function TestimonialsSection() {
         viewport={{ once: true }}
         className="flex flex-col items-center justify-center max-w-[600px] mx-auto text-center"
       >
-
-
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground text-balance">
           What our <span className="text-gradient">users</span> say
         </h2>
