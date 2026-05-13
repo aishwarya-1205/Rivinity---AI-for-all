@@ -39,11 +39,18 @@ const POEM_LINES: PoemLine[] = [
   { text: "my Father, let my country awake.", start: 18.2, end: 22.5 },
 ];
 
+const JUNGLE_LYRICS: PoemLine[] = [
+  { text: "Tropical jungle ambience with", start: 0.0, end: 2.8 },
+  { text: "diverse toucan and parrot chirps,", start: 2.8, end: 5.5 },
+  { text: "soft wind through leaves,", start: 5.5, end: 8.2 },
+  { text: "and distant forest air.", start: 8.2, end: 11.5 },
+];
+
 const BAR_HEIGHTS: number[] = [3, 5, 9, 15, 21, 26, 28, 26, 21, 15, 9, 5, 3];
 const DOT_COUNT = 9;
 
 /* ─── SIDE CARDS DATA ─────────────────────────────────────────── */
-const SIDE_CARDS: SideCard[] = [
+const SIDE_CARDS: (SideCard & { lyrics: PoemLine[] })[] = [
   {
     id: "character",
     category: "Character",
@@ -52,6 +59,7 @@ const SIDE_CARDS: SideCard[] = [
     audioSrc: CHARACTER_SRC,
     imageSrc: "/texture-white.jpg",
     bgStyle: { background: "linear-gradient(160deg, #c8885a 0%, #b07248 35%, #956040 65%, #7a4c30 100%)" },
+    lyrics: JUNGLE_LYRICS,
   },
   {
     id: "companion",
@@ -61,14 +69,15 @@ const SIDE_CARDS: SideCard[] = [
     audioSrc: COMPANION_SRC,
     imageSrc: "/concrete.jpg",
     bgStyle: { background: "linear-gradient(160deg, #d87090 0%, #c05878 35%, #a84068 65%, #8c2c52 100%)" },
+    lyrics: POEM_LINES,
   },
 ];
 
 /* ─── ACTIVE LINE HELPER ──────────────────────────────────────── */
-function getActiveIdx(t: number): number {
+function getActiveIdx(t: number, lines: PoemLine[]): number {
   let idx = -1;
-  for (let i = 0; i < POEM_LINES.length; i++) {
-    if (t >= POEM_LINES[i].start) idx = i; else break;
+  for (let i = 0; i < lines.length; i++) {
+    if (t >= lines[i].start) idx = i; else break;
   }
   return idx;
 }
@@ -124,68 +133,8 @@ const PlayButton = memo(function PlayButton({
   );
 });
 
-/* ─── LYRICS PANEL — rAF-gated, only setState on line change ───── */
-const LyricsPanel = memo(function LyricsPanel({ audioRef, accentColor, label }: LyricsPanelProps) {
-  const [activeIdx, setActiveIdx] = useState(-1);
-  const rafRef = useRef<number | null>(null);
-  const lastIdxRef = useRef(-1);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-
-  useEffect(() => {
-    let detach = () => { };
-
-    const attach = (audio: HTMLAudioElement) => {
-      const onTime = () => {
-        if (rafRef.current !== null) return;
-        rafRef.current = requestAnimationFrame(() => {
-          rafRef.current = null;
-          const idx = getActiveIdx(audio.currentTime);
-          if (idx !== lastIdxRef.current) {
-            lastIdxRef.current = idx;
-            setActiveIdx(idx);
-          }
-        });
-      };
-      const onReset = () => {
-        if (rafRef.current !== null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
-        lastIdxRef.current = -1;
-        setActiveIdx(-1);
-      };
-      audio.addEventListener("timeupdate", onTime);
-      audio.addEventListener("ended", onReset);
-      audio.addEventListener("pause", onReset);
-      detach = () => {
-        audio.removeEventListener("timeupdate", onTime);
-        audio.removeEventListener("ended", onReset);
-        audio.removeEventListener("pause", onReset);
-        if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-      };
-    };
-
-    if (audioRef.current) {
-      attach(audioRef.current);
-    } else {
-      const id = setInterval(() => {
-        if (audioRef.current) { clearInterval(id); attach(audioRef.current); }
-      }, 50);
-      detach = () => clearInterval(id);
-    }
-    return () => detach();
-  }, [audioRef]);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    const activeLine = lineRefs.current[activeIdx];
-    if (container && activeLine) {
-      const targetScroll = activeLine.offsetTop - container.offsetHeight / 2 + activeLine.offsetHeight / 2;
-      container.scrollTo({
-        top: targetScroll,
-        behavior: "smooth"
-      });
-    }
-  }, [activeIdx]);
-
+/* ─── LYRICS PANEL — Static display ───── */
+const LyricsPanel = memo(function LyricsPanel({ accentColor, label, lines }: { accentColor: string; label: string; lines: PoemLine[] }) {
   return (
     <div style={lyricsPanelOuter}>
       <div style={{
@@ -195,25 +144,18 @@ const LyricsPanel = memo(function LyricsPanel({ audioRef, accentColor, label }: 
       }}>
         {label}
       </div>
-      <div ref={scrollRef} style={lyricsScrollStyle}>
-        {POEM_LINES.map((line, i) => {
-          const isActive = i === activeIdx;
-          const isPast = i < activeIdx;
-          return (
-            <p key={i} ref={(el) => { lineRefs.current[i] = el; }} style={{
-              margin: "0 0 5px", lineHeight: 1.45,
-              fontSize: isActive ? 13 : 11.5,
-              fontWeight: isActive ? 700 : 400,
-              color: isActive ? "rgba(255,255,255,0.98)" : isPast ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.55)",
-              transition: "color 0.3s ease, transform 0.3s ease, font-size 0.2s ease",
-              transform: isActive ? "translateX(4px)" : "translateX(0)",
-              willChange: "transform",
-            }}>
-              {isActive && <span style={{ color: accentColor, marginRight: 5, opacity: 0.9 }}>▸</span>}
-              {line.text}
-            </p>
-          );
-        })}
+      <div style={lyricsScrollStyle}>
+        {lines.map((line, i) => (
+          <p key={i} style={{
+            margin: "0 0 5px", lineHeight: 1.45,
+            fontSize: 11.5,
+            fontWeight: 400,
+            color: "rgba(255,255,255,0.7)",
+            transition: "color 0.3s ease",
+          }}>
+            {line.text}
+          </p>
+        ))}
       </div>
     </div>
   );
@@ -291,7 +233,7 @@ function VoiceCloneCard() {
           </div>
         </div>
         <div style={{ flex: 1, minHeight: 0 }}>
-          <LyricsPanel audioRef={top.ref} accentColor="rgba(220,210,200,1)" label="Text to Speech" />
+          <LyricsPanel audioRef={top.ref} accentColor="rgba(220,210,200,1)" label="Text to Speech" lines={POEM_LINES} />
         </div>
         <div style={cardFooterRow}>
           <div>
@@ -319,7 +261,7 @@ function VoiceCloneCard() {
           </div>
         </div>
         <div style={{ flex: 1, minHeight: 0 }}>
-          <LyricsPanel audioRef={bot.ref} accentColor="rgba(160,200,255,1)" label="Voice Cloning" />
+          <LyricsPanel audioRef={bot.ref} accentColor="rgba(160,200,255,1)" label="Voice Cloning" lines={POEM_LINES} />
         </div>
         <div style={cardFooterRow}>
           <div>
@@ -342,7 +284,7 @@ const SideVoiceCard = memo(function SideVoiceCard({ card }: SideVoiceCardProps) 
   const toggle = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     if (!card.audioSrc) return;
-    
+
     const a = audio.get();
     if (playing) {
       a.pause();
@@ -396,9 +338,9 @@ const SideVoiceCard = memo(function SideVoiceCard({ card }: SideVoiceCardProps) 
             <Waveform visible={hovered || playing} playing={playing} />
           </div>
         </div>
-        
+
         <div style={{ flex: 1, minHeight: 0 }}>
-          <LyricsPanel audioRef={audio.ref} accentColor="rgba(255,255,255,0.9)" label="Live Lyrics" />
+          <LyricsPanel audioRef={audio.ref} accentColor="rgba(255,255,255,0.9)" label="Live Lyrics" lines={card.lyrics} />
         </div>
 
         <div style={cardFooterRow}>
@@ -461,7 +403,7 @@ export const VoiceDemo = memo(function VoiceDemo() {
       <div className="flex flex-col h-full px-5 pt-4 pb-5 gap-3">
         <p style={headingStyle}>AI Voice but this time, it&apos;s alive.</p>
 
-        <div style={{ display: "flex", gap: 16, flex: 1, minHeight: 0 }}>
+        <div style={{ display: "flex", gap: 20, flex: 1, minHeight: 0 }}>
           <div className="voice-card-col" style={colStyle}>
             <SideVoiceCard card={SIDE_CARDS[0]} />
           </div>

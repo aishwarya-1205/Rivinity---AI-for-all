@@ -333,17 +333,7 @@ export const ChatDemo = memo(function ChatDemo() {
                       gap: 6,
                       animation: "rivFadeIn 0.4s ease both",
                     }}
-                  >
-                    <Sparkles
-                      size={11}
-                      style={{ color: "var(--accent)", flexShrink: 0 }}
-                    />
-                    <span
-                      style={{ fontSize: 11, color: "var(--muted-foreground)" }}
-                    >
-                      Ready to generate — click to preview
-                    </span>
-                  </div>
+                  ></div>
                 )}
               </div>
             </div>
