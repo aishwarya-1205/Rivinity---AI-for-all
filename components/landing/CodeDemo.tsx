@@ -1,7 +1,7 @@
 "use client";
 
 import { memo, useState, useEffect, useRef, useCallback } from "react";
-import { Paperclip, ArrowUp, Sparkles, RotateCcw, Code2, Terminal, Check, Copy } from "lucide-react";
+import { Paperclip, ArrowUp, Sparkles, RotateCcw, Code2, Terminal, Check, Copy, Download } from "lucide-react";
 
 /* ─────────────────────────────────────────────────────────
    CONSTANTS
@@ -102,11 +102,30 @@ export const CodeDemo = memo(function CodeDemo() {
   const [promptChars, setPromptChars] = useState(0);
   const [respChars, setRespChars] = useState(0);
   const [codeChars, setCodeChars] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const rafRef = useRef<number>(0);
   const stateRef = useRef({ phase: "idle" as Phase, promptChars: 0, respChars: 0, codeChars: 0 });
 
   stateRef.current = { phase, promptChars, respChars, codeChars };
+
+  const handleDownload = useCallback(() => {
+    const blob = new Blob([CODE_SNIPPET], { type: "text/typescript" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "AnimatedCard.tsx";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, []);
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(CODE_SNIPPET);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, []);
 
   const runDemo = useCallback(() => {
     cancelAnimationFrame(rafRef.current);
@@ -298,9 +317,13 @@ export const CodeDemo = memo(function CodeDemo() {
                       background: "rgba(0,0,0,0.02)",
                     }}>
                       <span style={{ fontSize: 10, fontWeight: 600, opacity: 0.5 }}>AnimatedCard.tsx</span>
-                      <div style={{ display: "flex", gap: 8 }}>
-                        <Terminal size={12} style={{ opacity: 0.3 }} />
-                        <Copy size={12} style={{ opacity: 0.3 }} />
+                      <div style={{ display: "flex", gap: 10 }}>
+                        <button onClick={handleDownload} title="Download Source" style={{ border: "none", background: "none", cursor: "pointer", display: "flex", alignItems: "center" }}>
+                          <Download size={12} className="text-muted-foreground hover:text-accent transition-colors" />
+                        </button>
+                        <button onClick={handleCopy} title="Copy Code" style={{ border: "none", background: "none", cursor: "pointer", display: "flex", alignItems: "center" }}>
+                          {copied ? <Check size={12} className="text-accent" /> : <Copy size={12} className="text-muted-foreground hover:text-accent transition-colors" />}
+                        </button>
                       </div>
                     </div>
                     <pre style={{
