@@ -17,14 +17,7 @@ const footerLinks: Record<string, FooterLink[]> = {
     { label: "Careers", href: "#" },
     { label: "Research", href: "#" },
   ],
-  Solutions: [
-    { label: "Security", href: "#" },
-    { label: "CLOS-AI", href: "#" },
-    { label: "Governance", href: "#" },
-    { label: "Deepfake Detection", href: "#" },
-    { label: "Compliance", href: "#" },
-    { label: "Post Your Ad", href: "/advertise" },
-  ],
+
   Tools: [
     { label: "Web Search", href: "#" },
     { label: "App Builder", href: "/dashboard/app-builder" },
@@ -33,6 +26,15 @@ const footerLinks: Record<string, FooterLink[]> = {
     { label: "Audio Lab", href: "/dashboard/audio-lab" },
     { label: "RivinityLM", href: "/dashboard/rivinity-lm" },
     { label: "Image Enhancer", href: "/dashboard/image-enhancer" },
+  ],
+  Solutions: [
+    { label: "Security", href: "#" },
+    { label: "CLOS-AI", href: "#" },
+    { label: "Governance", href: "#" },
+    { label: "Deepfake Detection", href: "#" },
+    { label: "Compliance", href: "#" },
+    { label: "Post Your Ad", href: "/advertise" },
+    { label: "Agent as a Platform", href: "#" },
   ],
   "Other Links": [
     { label: "Documentation", href: "#" },
