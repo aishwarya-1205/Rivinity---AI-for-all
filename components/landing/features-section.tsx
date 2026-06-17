@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import type { MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { Globe, Shield, Layers } from "lucide-react";
 import Image from "next/image";
@@ -31,9 +30,9 @@ const features = [
   },
 ];
 
-// The three logo images, stacked exactly on top of one another.
-// Each one fades IN as you scroll and then stays visible (no fade-out),
-// so by the end of the section all three are layered on top of each other.
+// The three logo layers, stacked exactly on top of one another. Each one
+// fades in once (in sync with its corresponding feature's text) and then
+// stays visible — never fading out — so they build up into the full logo.
 const logos = [
   "/rivinity-logo1.png",
   "/rivinity-logo2.png",
@@ -54,9 +53,9 @@ function StackedLogos({ logoOpacity }: { logoOpacity: MotionValue<number>[] }) {
           <Image
             src={src}
             alt={`Rivinity logo layer ${index + 1}`}
-            width={120}
-            height={120}
-            className="object-contain w-36 h-36 lg:w-28 lg:h-28"
+            width={400}
+            height={400}
+            className="object-contain w-64 h-64 lg:w-80 lg:h-80"
             priority={index === 0}
           />
         </motion.div>
@@ -78,12 +77,13 @@ export function FeaturesSection() {
   const opacity2 = useTransform(scrollYProgress, [0.33, 0.5, 0.66], [0, 1, 0]);
   const opacity3 = useTransform(scrollYProgress, [0.66, 0.8, 1], [0, 1, 1]);
   const textOpacity = [opacity1, opacity2, opacity3];
-
-  // Logos fade IN only, and never fade back out — they accumulate/stack.
-  // Logo 1 appears first, then logo 2 layers on top, then logo 3.
-  const logoOpacity1 = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const logoOpacity2 = useTransform(scrollYProgress, [0.33, 0.48], [0, 1]);
-  const logoOpacity3 = useTransform(scrollYProgress, [0.66, 0.81], [0, 1]);
+  // Logos appear progressively, exactly in sync with each feature's text.
+  // Each logo fades in once (matching the point its feature's text becomes
+  // fully visible) and then stays visible — so they stack up: logo 1 alone,
+  // then logo 1+2, then logo 1+2+3, never fading back out.
+  const logoOpacity1 = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const logoOpacity2 = useTransform(scrollYProgress, [0.33, 0.43], [0, 1]);
+  const logoOpacity3 = useTransform(scrollYProgress, [0.66, 0.76], [0, 1]);
   const logoOpacity = [logoOpacity1, logoOpacity2, logoOpacity3];
 
   return (
@@ -132,9 +132,9 @@ export function FeaturesSection() {
                 </motion.div>
               ))}
             </div>
-            {/* VISUAL SIDE — all 3 logos stacked exactly on top of each other */}
+            {/* VISUAL SIDE — logos stack on one by one, in sync with the text, no card/box background */}
             <div className="flex justify-center items-center">
-              <div className="relative w-full max-w-[420px] aspect-square rounded-3xl border border-border bg-gradient-to-br from-accent/10 to-transparent overflow-hidden">
+              <div className="relative w-full max-w-[420px] aspect-square">
                 <StackedLogos logoOpacity={logoOpacity} />
               </div>
             </div>
@@ -154,13 +154,13 @@ export function FeaturesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col gap-6"
             >
-              <div className="w-full aspect-[4/3] rounded-2xl border border-border bg-gradient-to-br from-accent/10 to-transparent overflow-hidden flex items-center justify-center">
+              <div className="w-full aspect-[4/3] flex items-center justify-center">
                 <Image
                   src={logos[index]}
                   alt={`Rivinity logo layer ${index + 1}`}
-                  width={280}
-                  height={280}
-                  className="object-contain w-36 h-36"
+                  width={400}
+                  height={400}
+                  className="object-contain w-48 h-48"
                 />
               </div>
               <div>
