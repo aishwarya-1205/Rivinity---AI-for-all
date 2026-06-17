@@ -52,13 +52,14 @@ const ImageEnhancerMain = ({ activeFeature, onFeatureChange }: Props) => {
         </p>
       </div>
 
-      <div className="flex items-center justify-center gap-2 overflow-x-auto max-w-full no-scrollbar">
+      {/* Tabs: removed justify-center, added px-6 so tabs scroll within the content padding on mobile */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-6 sm:justify-center sm:px-0">
         {features.map((f) => (
           <button
             key={f.id}
             onClick={() => onFeatureChange(f.id)}
             className={cn(
-              "flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 whitespace-nowrap",
+              "flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 whitespace-nowrap shrink-0",
               activeFeature === f.id
                 ? incognitoMode
                   ? "bg-slate-500/20 border border-slate-500/40 text-slate-100 shadow-[0_0_15px_rgba(148,163,184,0.1)]"

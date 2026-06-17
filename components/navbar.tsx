@@ -73,7 +73,7 @@ export function Navbar() {
               />
             </div>
 
-            <span className="text-lg sm:text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent">
+            <span className="text-lg sm:text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
               Rivinity
             </span>
           </Link>

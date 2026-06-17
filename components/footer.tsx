@@ -14,8 +14,12 @@ const footerLinks: Record<string, FooterLink[]> = {
   About: [
     { label: "Our Story", href: "#" },
     { label: "Team", href: "#" },
-    { label: "Careers", href: "#" },
+    {
+      label: "Careers",
+      href: "https://hrm.bharat-tech.org/recruitment/open-recruitments",
+    },
     { label: "Research", href: "#" },
+    { label: "Blog", href: "#" },
   ],
 
   Tools: [

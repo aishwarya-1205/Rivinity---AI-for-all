@@ -10,7 +10,9 @@ import {
   Linkedin,
   Twitter,
   Sparkles,
+  Mail,
 } from "lucide-react";
+import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -78,14 +80,9 @@ const leadership = [
 ];
 
 const offices = [
-  { city: "Bangalore", type: "HQ", address: "Koramangala, Bangalore 560034" },
-  { city: "Mumbai", type: "Office", address: "BKC, Mumbai 400051" },
-  { city: "Delhi NCR", type: "Office", address: "Gurugram, Haryana 122002" },
-  {
-    city: "Hyderabad",
-    type: "Office",
-    address: "HITEC City, Hyderabad 500081",
-  },
+  { city: "Kanpur", type: "HQ", address: "Kanpur, 111111" },
+  { city: "Lucknow", type: "Office", address: "Lucknow, 222222" },
+  { city: "Noida", type: "Office", address: "Noida, 333333" },
 ];
 
 // Timeline data — title is the sticky year, content is the rich card
@@ -98,7 +95,7 @@ const timelineData = [
           Founded
         </p>
         <h3 className="text-2xl font-bold text-foreground mb-3">
-          Founded in Bangalore
+          Founded in Kanpur
         </h3>
         <p className="text-muted-foreground leading-relaxed">
           Started with a vision to build sovereign AI for India. A small team of
@@ -417,7 +414,7 @@ export default function AboutPage() {
                         href="#"
                         className="text-muted-foreground hover:text-accent transition-colors"
                       >
-                        <Twitter className="w-4 h-4" />
+                        <Mail className="w-4 h-4" />
                       </a>
                     </div>
                   </div>
@@ -442,11 +439,11 @@ export default function AboutPage() {
               Our Offices
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Headquartered in Bangalore with offices across India
+              Headquartered in Kanpur with offices across India
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {offices.map((office, index) => (
               <motion.div
                 key={office.city}
@@ -454,7 +451,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-6 border border-border"
+                className="bg-card rounded-2xl p-6 border border-border justify-between flex flex-col"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="w-5 h-5 text-accent" />
@@ -494,13 +491,19 @@ export default function AboutPage() {
               operators who want to make AI work for everyone.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                size="lg"
-                className="h-14 px-8 text-base bg-foreground text-background hover:bg-foreground/90 rounded-full"
+              <Link
+                href="https://hrm.bharat-tech.org/recruitment/open-recruitments"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                View Open Positions
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+                <Button
+                  size="lg"
+                  className="h-14 px-8 text-base bg-foreground text-background hover:bg-foreground/90 rounded-full"
+                >
+                  View Open Positions
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Button
                 size="lg"
                 variant="outline"

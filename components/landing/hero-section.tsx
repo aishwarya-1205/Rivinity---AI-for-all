@@ -30,7 +30,10 @@ export function HeroSection() {
         <HeroDotMountain />
       </div>
 
-      <SectionWrapper className="relative z-10 pt-10 sm:pt-20 lg:pt-24" py={false}>
+      <SectionWrapper
+        className="relative z-10 pt-10 sm:pt-20 lg:pt-24"
+        py={false}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,7 +50,7 @@ export function HeroSection() {
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-accent"></span>
             </span>
             <span className="text-[12px] sm:text-sm font-medium text-foreground">
-              Introducing Rivinity v2.0
+              Introducing Rivinity v1.0
             </span>
             <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent group-hover:translate-x-1 transition-transform" />
           </a>
