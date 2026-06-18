@@ -37,17 +37,17 @@ interface RadialOrbitalTimelineProps {
 }
 
 // The 3 logo layers, stacked, forming the full Rivinity mandala mark.
-// Reused here as a single scaled-up border ring around the center core.
+// Reused here as the center core itself, with a soft purple glow behind it.
 const logoLayers = [
   "/rivinity-logo1.png",
   "/rivinity-logo2.png",
   "/rivinity-logo3.png",
 ];
 
-// One full mandala mark (all 3 layers combined/overlapped), scaled up so
-// its outer ring traces around the AI core's circumference — the logo
-// itself IS the border, not a repeated pattern. Spins slowly as one piece.
-function MandalaBorder({
+// One full mandala mark (all 3 layers combined/overlapped), scaled up to
+// be the entire visual center — no separate circle/text sits on top of
+// it anymore. Spins slowly as one piece.
+function MandalaCore({
   coreSize,
   scale = 2.3,
 }: {
@@ -325,7 +325,8 @@ export default function RadialOrbitalTimeline({
           />
         </div>
 
-        {/* ── Center core ── */}
+        {/* ── Center core: just the mandala mark, with a soft purple
+              glow behind it — no separate solid circle or "AI" text ── */}
         <div
           className="absolute flex items-center justify-center z-10"
           style={{
@@ -336,21 +337,22 @@ export default function RadialOrbitalTimeline({
             transform: "translate(-50%, -50%)",
           }}
         >
-          {/* Mandala border: a single full logo scaled up so it traces
-              around the core's edge, spinning slowly as one piece
-              (replaces the old blurred glow rings) */}
-          <MandalaBorder coreSize={coreSize} />
-
+          {/* Soft glow sitting behind the mandala, using the same accent/
+              highlight purple that was already part of the design */}
           <div
-            className="absolute inset-0 rounded-full bg-gradient-to-br from-accent via-highlight to-accent flex items-center justify-center"
+            className="absolute rounded-full pointer-events-none"
             style={{
-              boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)",
+              width: coreSize * 1.6,
+              height: coreSize * 1.6,
+              background:
+                "radial-gradient(circle, color-mix(in srgb, var(--highlight) 35%, transparent) 0%, color-mix(in srgb, var(--accent) 18%, transparent) 45%, transparent 75%)",
+              filter: "blur(6px)",
             }}
-          >
-            <div className="w-10 h-10 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center">
-              <span className="text-xs font-bold text-foreground">AI</span>
-            </div>
-          </div>
+          />
+
+          {/* Mandala mark: a single full logo scaled up, spinning slowly
+              as one piece — this IS the center, no circle/text on top */}
+          <MandalaCore coreSize={coreSize} />
         </div>
 
         {timelineData.map((item) => {
