@@ -14,6 +14,7 @@ import {
   motionValue,
   type MotionValue,
 } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Link, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,54 @@ interface TimelineItem {
 
 interface RadialOrbitalTimelineProps {
   timelineData: TimelineItem[];
+}
+
+// The 3 logo layers, stacked, forming the full Rivinity mandala mark.
+// Reused here as a single scaled-up border ring around the center core.
+const logoLayers = [
+  "/rivinity-logo1.png",
+  "/rivinity-logo2.png",
+  "/rivinity-logo3.png",
+];
+
+// One full mandala mark (all 3 layers combined/overlapped), scaled up so
+// its outer ring traces around the AI core's circumference — the logo
+// itself IS the border, not a repeated pattern. Spins slowly as one piece.
+function MandalaBorder({
+  coreSize,
+  scale = 2.3,
+}: {
+  coreSize: number;
+  scale?: number;
+}) {
+  const size = coreSize * scale;
+
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{
+        width: size,
+        height: size,
+        left: "50%",
+        top: "50%",
+        x: "-50%",
+        y: "-50%",
+      }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+    >
+      {logoLayers.map((src) => (
+        <Image
+          key={src}
+          src={src}
+          alt=""
+          width={size}
+          height={size}
+          className="absolute inset-0 object-contain"
+        />
+      ))}
+    </motion.div>
+  );
 }
 
 export default function RadialOrbitalTimeline({
@@ -225,6 +274,7 @@ export default function RadialOrbitalTimeline({
 
   const nodeSize = isMobile ? 36 : 44;
   const cardWidth = isMobile ? 220 : 280;
+  const coreSize = isMobile ? 48 : 64;
 
   // Where the active node floats to: top-center of the container
   const getFloatTarget = (): { x: number; y: number } => {
@@ -277,23 +327,29 @@ export default function RadialOrbitalTimeline({
 
         {/* ── Center core ── */}
         <div
-          className="absolute rounded-full bg-gradient-to-br from-accent via-highlight to-accent animate-pulse flex items-center justify-center z-10"
+          className="absolute flex items-center justify-center z-10"
           style={{
-            width: isMobile ? 48 : 64,
-            height: isMobile ? 48 : 64,
+            width: coreSize,
+            height: coreSize,
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
-            boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)",
           }}
         >
-          <div className="absolute w-24 h-24 rounded-full border border-accent/20 animate-ping opacity-70" />
+          {/* Mandala border: a single full logo scaled up so it traces
+              around the core's edge, spinning slowly as one piece
+              (replaces the old blurred glow rings) */}
+          <MandalaBorder coreSize={coreSize} />
+
           <div
-            className="absolute w-28 h-28 rounded-full border border-highlight/20 animate-ping opacity-50"
-            style={{ animationDelay: "0.5s" }}
-          />
-          <div className="w-10 h-10 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center">
-            <span className="text-xs font-bold text-foreground">AI</span>
+            className="absolute inset-0 rounded-full bg-gradient-to-br from-accent via-highlight to-accent flex items-center justify-center"
+            style={{
+              boxShadow: "0 0 20px var(--accent), 0 0 40px var(--highlight)",
+            }}
+          >
+            <div className="w-10 h-10 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center">
+              <span className="text-xs font-bold text-foreground">AI</span>
+            </div>
           </div>
         </div>
 

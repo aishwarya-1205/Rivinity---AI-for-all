@@ -19,7 +19,7 @@ const footerLinks: Record<string, FooterLink[]> = {
       href: "https://hrm.bharat-tech.org/recruitment/open-recruitments",
     },
     { label: "Research", href: "#" },
-    { label: "Blog", href: "#" },
+    { label: "Blog", href: "/blog" },
   ],
 
   Tools: [

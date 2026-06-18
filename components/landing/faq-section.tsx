@@ -41,7 +41,8 @@ const faqs = [
 import { SectionWrapper } from "../ui/section-wrapper";
 
 export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  // No FAQ item is open by default — all start collapsed.
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <SectionWrapper className="bg-background" id="faq">
@@ -52,8 +53,6 @@ export function FAQSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-
-
         <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
           Frequently Asked <span className="text-gradient">Questions</span>
         </h2>
@@ -62,7 +61,10 @@ export function FAQSection() {
         </p>
       </motion.div>
 
-      <div className="space-y-4 max-w-4xl mx-auto" style={{ transform: "translateZ(0)" }}>
+      <div
+        className="space-y-4 max-w-4xl mx-auto"
+        style={{ transform: "translateZ(0)" }}
+      >
         {faqs.map((faq, index) => (
           <motion.div
             key={index}

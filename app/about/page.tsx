@@ -504,13 +504,15 @@ export default function AboutPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-14 px-8 text-base rounded-full"
-              >
-                Our Culture
-              </Button>
+              <Link href="/blog?post=our-culture">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-14 px-8 text-base rounded-full"
+                >
+                  Our Culture
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
