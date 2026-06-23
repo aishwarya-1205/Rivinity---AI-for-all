@@ -3,14 +3,12 @@ const nextConfig = {
   devIndicators: {
     appIsrStatus: false,
     buildActivity: false,
-    buildActivityPosition: 'bottom-right',
+    buildActivityPosition: "bottom-right",
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-}
 
-export default nextConfig
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+};
+
+export default nextConfig;
