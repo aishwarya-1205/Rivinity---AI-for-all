@@ -147,7 +147,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground font-medium px-4 rounded-full"
+                className="hover:bg-sidebar-border text-muted-foreground hover:text-foreground font-medium px-4 rounded-full"
               >
                 Sign in
               </Button>

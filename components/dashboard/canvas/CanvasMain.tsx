@@ -24,31 +24,38 @@ import {
   Pencil,
   BarChart3,
   BookOpen,
+  Wand2,
 } from "lucide-react";
 import Image from "next/image";
+import WriteAnythingStudio from "./WriteAnythingStudio";
 
 interface Message {
   id: number;
   role: "user" | "ai";
   content: string;
 }
+type TabKind = "chat" | "write";
+
 interface Tab {
   id: number;
   icon: typeof Search;
   label: string;
+  kind?: TabKind;
 }
 
 const defaultTabs: Tab[] = [
-  { id: 1, icon: Search, label: "Prompt Enhancer" },
-  { id: 2, icon: FileText, label: "Smart Summarization" },
-  { id: 3, icon: Lightbulb, label: "Citation Generator" },
+  { id: 1, icon: Search, label: "Prompt Enhancer", kind: "chat" },
+  { id: 2, icon: FileText, label: "Smart Summarization", kind: "chat" },
+  { id: 3, icon: Lightbulb, label: "Citation Generator", kind: "chat" },
+  { id: 4, icon: Wand2, label: "Write Anything", kind: "write" },
 ];
 const tabTemplates = [
-  { icon: Search, label: "Prompt Enhancer" },
-  { icon: FileText, label: "Smart Summarization" },
-  { icon: Lightbulb, label: "Citation Generator" },
-  { icon: BarChart3, label: "Deep Analysis" },
-  { icon: BookOpen, label: "Literature Review" },
+  { icon: Search, label: "Prompt Enhancer", kind: "chat" as TabKind },
+  { icon: FileText, label: "Smart Summarization", kind: "chat" as TabKind },
+  { icon: Lightbulb, label: "Citation Generator", kind: "chat" as TabKind },
+  { icon: BarChart3, label: "Deep Analysis", kind: "chat" as TabKind },
+  { icon: BookOpen, label: "Literature Review", kind: "chat" as TabKind },
+  { icon: Wand2, label: "Write Anything", kind: "write" as TabKind },
 ];
 const suggestions = [
   { icon: Code, label: "Write code" },
@@ -366,6 +373,13 @@ const QuickCardsCarousel = ({
 
 const getTabIcon = (label: string) => {
   const l = label.toLowerCase();
+  if (
+    l.includes("write") ||
+    l.includes("wand") ||
+    l.includes("author") ||
+    l.includes("studio")
+  )
+    return Wand2;
   if (l.includes("code") || l.includes("dev") || l.includes("script"))
     return Code;
   if (l.includes("search") || l.includes("find") || l.includes("look"))
@@ -387,6 +401,18 @@ const getTabIcon = (label: string) => {
   )
     return FileText;
   return Search;
+};
+
+const getTabKind = (label: string): TabKind => {
+  const l = label.toLowerCase();
+  if (
+    l.includes("write") ||
+    l.includes("wand") ||
+    l.includes("author") ||
+    l.includes("studio")
+  )
+    return "write";
+  return "chat";
 };
 
 import { useSafeMode } from "@/lib/safe-mode-context";
@@ -476,6 +502,7 @@ const CanvasMain = () => {
                                 ...t,
                                 label: editingName.trim(),
                                 icon: getTabIcon(editingName.trim()),
+                                kind: getTabKind(editingName.trim()),
                               }
                             : t,
                         ),
@@ -493,6 +520,7 @@ const CanvasMain = () => {
                                   ...t,
                                   label: editingName.trim(),
                                   icon: getTabIcon(editingName.trim()),
+                                  kind: getTabKind(editingName.trim()),
                                 }
                               : t,
                           ),
@@ -587,6 +615,7 @@ const CanvasMain = () => {
                         id: Date.now(),
                         icon: getTabIcon(newTabName.trim()),
                         label: newTabName.trim(),
+                        kind: getTabKind(newTabName.trim()),
                       };
                       setTabs((p) => [...p, tab]);
                       setActiveTab(tab.id);
@@ -613,6 +642,7 @@ const CanvasMain = () => {
                       id: Date.now(),
                       icon: template.icon,
                       label: template.label,
+                      kind: template.kind,
                     };
                     setTabs((p) => [...p, tab]);
                     setActiveTab(tab.id);
@@ -777,6 +807,233 @@ const CanvasMain = () => {
       </div>
     </div>
   );
+
+  const activeTabObj = tabs.find((t) => t.id === activeTab);
+  const isWriteMode = activeTabObj?.kind === "write";
+
+  if (isWriteMode) {
+    return (
+      <div
+        className={cn(
+          "absolute inset-0 flex flex-col overflow-hidden transition-colors duration-500",
+          incognitoMode ? "bg-[#0c0a09]" : "bg-background",
+        )}
+      >
+        {/* Top tab bar matching original styling */}
+        <div
+          className={cn(
+            "border-b transition-colors duration-500 flex flex-col shrink-0 z-30",
+            incognitoMode ? "border-slate-500/10 bg-[#141414]/40" : "border-border/40 bg-background/40",
+          )}
+        >
+          <div className="flex items-center overflow-x-auto scrollbar-none gap-0.5 px-4 py-2">
+            {tabs.map((tab) => (
+              <div
+                key={tab.id}
+                className={cn(
+                  "group relative flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium transition-all duration-150 rounded-lg shrink-0 cursor-pointer",
+                  activeTab === tab.id
+                    ? incognitoMode
+                      ? "bg-slate-500/20 text-slate-200"
+                      : "bg-muted/60 text-foreground"
+                    : incognitoMode
+                      ? "text-slate-400/40 hover:text-slate-300 hover:bg-slate-500/10"
+                      : "text-muted-foreground/50 hover:text-muted-foreground hover:bg-muted/60",
+                )}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                <tab.icon className="w-3 h-3 shrink-0" />
+                {editingTabId === tab.id ? (
+                  <input
+                    autoFocus
+                    value={editingName}
+                    onChange={(e) => setEditingName(e.target.value)}
+                    onBlur={() => {
+                      if (editingName.trim()) {
+                        setTabs((p) =>
+                          p.map((t) =>
+                            t.id === tab.id
+                              ? {
+                                  ...t,
+                                  label: editingName.trim(),
+                                  icon: getTabIcon(editingName.trim()),
+                                  kind: getTabKind(editingName.trim()),
+                                }
+                              : t,
+                          ),
+                        );
+                      }
+                      setEditingTabId(null);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        if (editingName.trim()) {
+                          setTabs((p) =>
+                            p.map((t) =>
+                              t.id === tab.id
+                                ? {
+                                    ...t,
+                                    label: editingName.trim(),
+                                    icon: getTabIcon(editingName.trim()),
+                                    kind: getTabKind(editingName.trim()),
+                                  }
+                                : t,
+                            ),
+                          );
+                        }
+                        setEditingTabId(null);
+                      }
+                    }}
+                    className="bg-transparent outline-none w-24"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                ) : (
+                  <>
+                    <span
+                      className="truncate max-w-[120px]"
+                      onDoubleClick={(e) => {
+                        e.stopPropagation();
+                        setEditingTabId(tab.id);
+                        setEditingName(tab.label);
+                      }}
+                    >
+                      {tab.label}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <Pencil
+                        className="w-2.5 h-2.5 opacity-0 group-hover:opacity-40 hover:!opacity-100 transition-opacity"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingTabId(tab.id);
+                          setEditingName(tab.label);
+                        }}
+                      />
+                      {tabs.length > 1 && (
+                        <X
+                          className="w-2.5 h-2.5 shrink-0 opacity-0 group-hover:opacity-40 hover:!opacity-100 transition-opacity"
+                          onClick={(e) => closeTab(tab.id, e)}
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+            <button
+              onClick={() => setIsAddingTab(!isAddingTab)}
+              className={cn(
+                "px-3 py-2 flex items-center gap-1 text-[12px] font-medium transition-all shrink-0",
+                isAddingTab
+                  ? incognitoMode
+                    ? "text-slate-400 bg-slate-500/10"
+                    : "bg-accent/10 text-accent"
+                  : incognitoMode
+                    ? "text-slate-400/40 hover:text-slate-300 hover:bg-slate-500/10"
+                    : "text-muted-foreground/40 hover:text-muted-foreground/70 hover:bg-muted/60",
+              )}
+            >
+              <Plus
+                className={`w-3 h-3 transition-transform duration-300 ${isAddingTab ? "rotate-45" : ""}`}
+              />
+              <span className="sr-only">New Tab</span>
+            </button>
+          </div>
+
+          {/* Template Selection Grid */}
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${isAddingTab ? "max-h-[400px] opacity-100 border-b border-border/40" : "max-h-0 opacity-0"}`}
+          >
+            <div
+              className={cn(
+                "p-4",
+                incognitoMode ? "bg-slate-950/10" : "bg-muted/20",
+              )}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <p
+                  className={cn(
+                    "text-[11px] font-bold uppercase tracking-widest px-1",
+                    incognitoMode
+                      ? "text-slate-400/30"
+                      : "text-muted-foreground/40",
+                  )}
+                >
+                  Research Tools
+                </p>
+                <div className="flex items-center gap-2">
+                  <input
+                    value={newTabName}
+                    onChange={(e) => setNewTabName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && newTabName.trim()) {
+                        const tab = {
+                          id: Date.now(),
+                          icon: getTabIcon(newTabName.trim()),
+                          label: newTabName.trim(),
+                          kind: getTabKind(newTabName.trim()),
+                        };
+                        setTabs((p) => [...p, tab]);
+                        setActiveTab(tab.id);
+                        setIsAddingTab(false);
+                        setNewTabName("");
+                      }
+                    }}
+                    className={cn(
+                      "border rounded-lg px-3 py-1 text-[11px] outline-none transition-all w-36",
+                      incognitoMode
+                        ? "bg-slate-950/20 border-slate-500/20 focus:border-slate-500/40 text-slate-100"
+                        : "bg-background/50 border-border/40 focus:border-accent/40",
+                    )}
+                    placeholder="Custom name..."
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                {tabTemplates.map((template) => (
+                  <button
+                    key={template.label}
+                    onClick={() => {
+                      const tab = {
+                        id: Date.now(),
+                        icon: template.icon,
+                        label: template.label,
+                        kind: template.kind,
+                      };
+                      setTabs((p) => [...p, tab]);
+                      setActiveTab(tab.id);
+                      setIsAddingTab(false);
+                    }}
+                    className={cn(
+                      "flex items-center w-full h-11 px-4 rounded-xl border border-transparent transition-all group",
+                      incognitoMode
+                        ? "hover:border-slate-500/20 hover:bg-slate-500/5"
+                        : "hover:border-accent/20 bg-background/0 hover:bg-background/40 hover:shadow-sm",
+                    )}
+                  >
+                    <p
+                      className={cn(
+                        "text-[14px] font-medium transition-all group-hover:pl-2",
+                        incognitoMode
+                          ? "text-slate-100/60 group-hover:text-slate-400"
+                          : "text-foreground/60 group-hover:text-accent",
+                      )}
+                    >
+                      {template.label}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Studio Content */}
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          <WriteAnythingStudio />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
