@@ -1,25 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Syne, DM_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BackgroundPaths } from "@/components/landing/background-paths";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+// Inter — the exact font used throughout the Rivinity product UI
+// Covers all weight levels visible in the screenshot: light labels → bold headings
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const syne = Syne({
+// Inter also drives display/heading role (no separate display font in Rivinity UI)
+const interDisplay = Inter({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
-const dmMono = DM_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
   variable: "--font-mono",
@@ -65,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${syne.variable} ${dmMono.variable}`}
+      className={`${inter.variable} ${interDisplay.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased tracking-tight selection:bg-accent/20">
