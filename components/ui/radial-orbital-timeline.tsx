@@ -345,7 +345,7 @@ export default function RadialOrbitalTimeline({
               width: coreSize * 1.6,
               height: coreSize * 1.6,
               background:
-                "radial-gradient(circle, color-mix(in srgb, var(--highlight) 35%, transparent) 0%, color-mix(in srgb, var(--accent) 18%, transparent) 45%, transparent 75%)",
+                "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)",
               filter: "blur(6px)",
             }}
           />
